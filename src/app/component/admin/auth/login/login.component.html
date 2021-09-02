@@ -1,0 +1,67 @@
+<div class="login-body pt-4">
+    <div class="container">
+        <div class="row m-0 justify-content-between align-items-center pb-4">
+            <div class="col-3">
+                <img src="./assets/img/login_logo.png" class="w-100">
+            </div>
+            <div class="col-12 col-md-4 signup_text">
+                <p>Don’t have an account? <a href="registration.html">Sign Up</a></p>
+            </div>
+        </div>
+        <div class="row justify-content-center align-items-center">
+            <div class="authfy-container col-xs-12 col-sm-10 col-md-8 col-lg-8 shadow-lg p-0">
+                <div class="row m-0">
+                    <div class="col-sm-6 authfy-panel-left order-md-1 order-2">
+                        <div class="brand-col">
+                            <div class="headline text-center">
+                                <div class="brand-logo text-center pt-5">
+                                    <img src="./assets/img/illustrator1.jpg" class="w-100">
+
+                                    <p class="text-muted">Or you can join with</p>
+                                    <div class="joining-option">
+                                        <button><img src="./assets/img/google.png" alt=""></button>
+                                        <button><img src="./assets/img/facebook (1).png" alt=""></button>
+                                        <button><img src="./assets/img/twitter.png" alt=""></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 authfy-panel-right order-1 order-md-2">
+                        <div class="authfy-login">
+                            <h3>Login
+                                <small class="d-block text-muted">Enter your email address and password to access the account</small>
+                            </h3>
+                            <form #loginForm="ngForm" (ngSubmit)="submitForm(loginForm)">
+                                <div class="form-group">
+                                    <label for="inputEmail">Email address</label>
+                                    <input type="email" class="form-control" id="inputEmail" name="username" #username="ngModel" ngModel tabindex="1" placeholder="Enter your email" required [ngClass]="{'is-invalid': username?.invalid && username?.touched}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword">
+                                        <span class="d-flex nm-jcb nm-aic">
+                                            Password
+                                            <a class="nm-lu nm-ct" href="forget_password.html">Forgot Password?</a>
+                                        </span>
+                                    </label>
+                                    <input type="password" class="form-control" tabindex="2" name="password" #password="ngModel" ngModel placeholder="Enter your password" id="inputPassword" required [ngClass]="{'is-invalid': password?.invalid && password?.touched}">
+                                </div>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                                    <label class="form-check-label nm-check" for="rememberMe">Remember me</label>
+                                </div>
+                                <div class="form-group">
+                                    <span class="text-danger">{{errorMessage}}</span>
+                                </div>
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-brand nm-hvr nm-btn-1"> Log In <i class="fas fa-sign-in-alt ml-2"></i></button>
+                                    <!-- <button type="submit" class="btn btn-brand nm-hvr nm-btn-1"> Log In <i class="fas fa-sign-in-alt ml-2"></i></button> -->
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

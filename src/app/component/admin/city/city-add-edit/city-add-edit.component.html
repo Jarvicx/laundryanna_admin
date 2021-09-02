@@ -1,0 +1,34 @@
+<div class="dashboard-body-content">
+    <h5>City {{formType}}</h5>
+    <hr>
+    <form class="edit-form" #cityForm="ngForm" (ngSubmit)="submitCityForm(cityForm)">
+        <h5 class="text-blue">Basic Information</h5>
+        <div class="row m-0 pt-3">
+            <div class="col-lg-4">
+                <div class="form-group edit-box">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" #name="ngModel" [ngModel]="cityData.name" class="form-control" id="name" required [ngClass]="{'is-invalid': name?.invalid && name?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group edit-box">
+                <label for="email">State</label>
+                <input type="text" id="state" class="form-control" name="state" #state="ngModel" [ngModel]="cityData.state" required [ngClass]="{'is-invalid': state?.invalid && state?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group edit-box">
+                <label for="email">Code</label>
+                <input type="text" id="code" class="form-control" name="code" #code="ngModel" [ngModel]="cityData.code" required [ngClass]="{'is-invalid': code?.invalid && code?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="text-danger">{{errorMessage}}</span>
+            </div>
+        </div>
+        
+        <div class="form-group d-flex justify-content-end">
+            <button type="submit" class="actionbutton">SAVE</button>
+        </div>
+    </form>
+</div>

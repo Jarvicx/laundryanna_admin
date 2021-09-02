@@ -1,0 +1,67 @@
+<div class="dashboard-body-content">
+    <div class="row d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom row-header">
+        <div class="col-lg-8 d-flex justify-content-start align-items-center">
+            <h5>City List</h5>
+        </div>
+        <div class="col-lg-4 d-flex justify-content-end align-items-center">
+        <button class="actionbutton btn btn-sm ml-3" routerLink="/admin/city/add">Add City</button>
+        </div>
+    </div>
+    <div class="table-responsive edit-table">
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th>Sl No.</th>
+                    <th>Name</th>
+                    <th>State</th>
+                    <th>Code</th>
+                    <th>Status</th>
+                    <th style="width: 150px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let city of cityList; let i = index;">
+                    <td>{{i+1}}</td>
+                    <td>{{city.name}}</td>
+                    <td>{{city.state}}</td>
+                    <td>{{city.code}}</td>
+                    <td>{{city.status}}</td>
+                    <td>
+                        <a href="javascript:void(0);" routerLink="/admin/city/edit/{{city._id}}"><i class="far fa-edit" title="Edit"></i></a>
+                        <a href="javascript:void(0);" data-toggle="modal" data-placement="left" data-target="#exampleModal"><i class="far fa-trash-alt" title="Delete"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <nav class="pagination-container">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-double-left previous-img"></i></a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link active" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-double-right next-img"></i></a></li>
+        </ul>
+    </nav>
+</div>
+
+<!-- category delete modal-->
+<div class="delete-modal modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel"><i class="far fa-trash-alt text-danger"></i> Delete Confirmation</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <p>Are you sure you want to permanently delete this category?You <b>CAN NOT</b> view this category in your list</p>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn close-button" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn delete-button">Delete permanently</button>
+		</div>
+	  </div>
+	</div>
+</div>

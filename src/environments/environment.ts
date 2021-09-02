@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  basePath: '/',
+  dasboardPath: '/dashboard',
+  projectPath : '/login',
+  apiUrl : 'http://3.139.70.149:3100/'
 };
 
 /*

@@ -1,15 +1,20 @@
-<div class="customer-details-container">
-  <div class="row">
+<ngx-ui-loader loaderId="loader"></ngx-ui-loader>
+<div class="customer-details-container" *ngIf="showHeaderSidebar; else noSidebarHeaderBlock;">
+    <div class="row">
       <!-- sidebar -->
-      <app-sidebar></app-sidebar>
-      <div class="dashboard-body" id="content">
-          <div class="dashboard-content">
-              <!-- header -->
-              <app-header></app-header>
-              <hr>
-              <!-- content -->
-              <app-dashboard></app-dashboard>
-          </div>
-      </div>
-  </div>
+        <app-sidebar></app-sidebar>
+        <div class="dashboard-body" id="content">
+            <div class="dashboard-content">
+                <!-- header -->
+                <app-header></app-header>
+                <hr>
+                <!-- content -->
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
 </div>
+
+<ng-template #noSidebarHeaderBlock>
+    <router-outlet></router-outlet>
+</ng-template>
