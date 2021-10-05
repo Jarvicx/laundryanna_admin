@@ -1,0 +1,47 @@
+<div class="dashboard-body-content">
+    <div class="row d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom row-header"> 
+        <div class="col-lg-8 d-flex justify-content-start align-items-center">
+            <h5>Sub Category List</h5>
+        </div>
+        <div class="col-lg-4 d-flex justify-content-end align-items-center">
+            <button class="actionbutton btn btn-sm ml-3" routerLink="/admin/sub-category/add">Add Sub Category</button>
+        </div>
+    </div>
+    <div class="row m-0">
+        <div class="col-12 col-md-3 ml-auto mb-4">
+            <div class="input-group ">
+                
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive edit-table card-body pt-0 pb-0">
+        <table class="table table-sm table-hover brand-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Small Description</th>
+                    <th>Status</th>
+                    <th style="width:80px" class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let subCategory of subCategoryList; let i = index">
+                    <td>{{subCategory.name}}</td>
+                    <td><img src="{{(subCategory.image) || ''}}" alt="subCategory Img"></td>                    
+                    <td>{{subCategory.category.name}}</td>
+                    <td>{{subCategory.createdAt | date}}</td>
+                    <td>{{subCategory.smallDesc}}</td>
+                    <td class="text-center"><span class="badge badge-success">{{subCategory.status}}</span></td>
+                    <td class="text-center">
+                        <a routerLink="/admin/sub-category/edit/{{subCategory._id}}"><i class="far fa-eye"></i></a>
+                        <a href="javascript:void(0);" class="ml-2" (click)="deletesubCategory(subCategory._id)"><i class="far fa-trash-alt text-danger"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

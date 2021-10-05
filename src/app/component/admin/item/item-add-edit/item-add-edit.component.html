@@ -1,1 +1,67 @@
-<p>item-add-edit works!</p>
+<div class="dashboard-body-content">
+                        
+    <div class="row m-0">
+        <div class="add-header">
+            <h5>{{formType}} Items</h5>
+        </div>
+        <form class="edit-form" class="w-100" [formGroup]="itemForm" (ngSubmit)="submitItemForm(itemForm)">
+           <div class="row m-0">
+                <div class="col-lg-2 mt-3">
+                    <div class="brand-wrapper">
+                        <input type="file" class="brand-file">
+                    </div>
+                </div>
+                <div class="col-lg-10 mt-3">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="name">Item Name</label>
+                                <input type="text"  placeholder="Enter item name" formControlName = "name" class="form-control  w-100" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.name.errors.required">Item Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="desc">Description</label>
+                                <textarea name="desc" class="form-control w-100" formControlName = "desc" placeholder="Enter item descriptions" [ngClass]="{ 'is-invalid': submitted && f.desc.errors }"></textarea>
+                                <div *ngIf="submitted && f.desc.errors" class="invalid-feedback">
+                                    <div *ngIf="f.desc.errors.required">Description is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="smallDesc">Small Descriptions</label>
+                                <input type="text" name="smallDesc" class="form-control w-100" formControlName = "smallDesc"  placeholder="Enter small descriptions" [ngClass]="{ 'is-invalid': submitted && f.smallDesc.errors }">
+                                <div *ngIf="submitted && f.smallDesc.errors" class="invalid-feedback">
+                                    <div *ngIf="f.smallDesc.errors.required">Small description is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="companyId">Company</label>
+                                <select class="form-control w-100" name="companyId"  formControlName = "companyId" required [ngClass]="{'is-invalid':submitted && f.companyId.errors}">
+                                    <option *ngFor="let company of companyList; let i = index" [value]="company._id">
+                                        {{company.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 d-flex justify-content-end">
+                            <button class="actionbutton btn btn-sm ml-3">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,102 @@
+<div class="dashboard-body-content">
+    <div class="d-block">
+        <div class="float-left">
+            <h5>Customers</h5>
+        </div>
+        <div class="float-right">
+            
+            <a href="javascript:void(0);" routerLink='/admin/customer/add' class="orderbtn btn btn-sm">Add Customer</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <hr>
+    <!-- <div class="row m-0 justify-content-end align-items-center">
+        <div class="input-group col-md-3 plr-2 mt-2">
+            <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary searchbtn" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        <div class="col-md-2 plr-2 mt-2">
+            <select name="" id="" class="mr-3 form-control">
+                <option value="all">All</option>
+                <option value="today">Today</option>
+                <option value="7days">Last 7 days</option>
+                <option value="1month">Last 1 month</option>
+                <option value="1year">Last 1 year</option>
+            </select>
+        </div>						
+        <div>
+            
+            <button class="actionbutton btn btn-sm ml-3 mt-2">Export Data</button>
+            <button class="actionbutton btn btn-sm ml-3 mt-2">View Partners</button>
+        </div>
+    </div> -->
+    <div class="row m-0">
+        <div class="col-12 col-md-3 ml-auto mb-4">
+            <div class="input-group ">
+                
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive edit-table">
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Mobile No.</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Wallet Balance</th>
+                    <!-- <th>Orders</th> -->
+                    <th style="width: 150px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let customer of allCustomer">
+                    <!-- <td>
+                        <div class="id">45987</div>
+                        <div class="verification text-green"><b>Verified user</b></div>
+                    </td> -->
+                    <td>{{customer.name}}</td>
+                    <td>{{customer.phone}}</td>
+                    <td>{{customer.email}}</td>
+                    <td>{{customer.gender}}</td>
+                    <td>{{customer.wallet}}</td>
+                    <td class="text-center">
+                        <a routerLink="/admin/customer/edit/{{customer._id}}"><i class="fa fa-address-card"></i></a>
+                        <a routerLink="/admin/customer/edit/{{customer._id}}"><i class="far fa-eye"></i></a>
+                        <a href="javascript:void(0);" class="ml-2" (click)="deleteCustomer(customer._id)"><i class="far fa-trash-alt text-danger"></i></a>
+                    </td>
+                    <!-- <td>
+                        <a href=""><i class="fa fa-truck"  data-placement="left" data-toggle="tooltip" title="Pickup request" ></i></a>
+                        <a href=""><i class="far fa-edit"  data-placement="left" data-toggle="tooltip" title="Edit wallet" ></i></a>
+                        <a href=""><i class="fas fa-list-ol"  data-placement="left" data-toggle="tooltip" title="Order list" ></i></a>
+                        <a href="#"><i class="fas fa-wallet"  data-placement="left" data-toggle="tooltip" title="Add to wallet" ></i></a>
+                        <a href="javascript:void(0);" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v" data-placement="left" data-toggle="tooltip" title="More Action" ></i></a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#"><i class="fa fa-address-card mr-1"  data-placement="left" data-toggle="tooltip" title="Add user address" ></i> Add user address</a>
+                            <a class="dropdown-item" href="#"><i class="fa fa-list mr-1"  data-placement="left" data-toggle="tooltip" title="User address list" ></i> User address list</a>
+                            <a class="dropdown-item" href="#"><i class="fa fa-user mr-1"  data-placement="left" data-toggle="tooltip" title="Active user" ></i> Active user</a>
+                            <a class="dropdown-item" href="#"><i class="fa fa-first-order mr-1"  data-placement="left" data-toggle="tooltip" title="Quick order" ></i> Quick order</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-eraser mr-1"  data-placement="left" data-toggle="tooltip" title="Deduct from wallet" ></i> Deduct from wallet</a>
+                            <a class="dropdown-item" href="#"><i class="far fa-trash-alt mr-1"  data-placement="left" data-toggle="tooltip" title="Delete" ></i> Delete</a>
+                            
+                        </div>								
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- <nav class="pagination-container">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#"><i
+                        class="fa fa-angle-double-left previous-img"></i></a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link active" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#"><i
+                        class="fa fa-angle-double-right next-img"></i></a></li>
+        </ul>
+    </nav> -->
+</div>

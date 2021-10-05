@@ -1,0 +1,52 @@
+<div class="dashboard-body-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5>Company List</h5>
+        <a routerLink="/admin/company/add" class="actionbutton btn btn-sm">Add Company</a>
+    </div>
+    <hr>
+    
+    <div class="table-responsive edit-table">
+        <table class="table table-sm table-hover category-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email_id</th>
+                    <th>Company Image</th>
+                    <th>Country</th>
+                    <th>State</th>
+                    <th>Address line1</th>
+                    <th>Address line2</th>
+                    <th>Phone</th>
+                    <th style="width:100px" class="text-center">Status</th>
+                    <th style="width:80px" class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let com of companyList">
+                    <td>{{com.name}}</td>
+                    <td>{{com.email}}</td>
+                    <td><img src="{{(com.image)}}" alt="Company Img"></td>
+                    <td>{{com.country}}</td>
+                    <td>{{com.state}}</td>
+                    <td>{{com.addressLine1}}</td>
+                    <td>{{com.addressLine2}}</td>
+                    <td>{{com.phone}}</td>
+                    <td class="text-center">
+                        <span *ngIf="com.status=='active'; else inactive">
+                            <span class="badge badge-success">{{com.status}}</span>
+                        </span>
+                        <ng-template #inactive>
+                            <span class="badge badge-danger">{{com.status}}</span>
+                        </ng-template>
+                    </td>
+                    <td class="text-center">
+                        <a routerLink="/admin/time-slot/list/{{com._id}}"><i class="fa fa-clock-o"></i></a>
+                        <a routerLink="/admin/company/edit/{{com._id}}"><i class="far fa-edit"></i></a>
+                        <a href="javascript:void(0);" class="ml-2" (click)="deleteCompany(com._id)"><i class="far fa-trash-alt text-danger"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

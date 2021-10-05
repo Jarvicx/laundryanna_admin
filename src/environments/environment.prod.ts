@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl : 'https://laundryanna.herokuapp.com/api',
+  dasboardPath: '/dashboard',
+  projectPath : '/login'
 };

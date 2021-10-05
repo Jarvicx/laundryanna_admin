@@ -35,21 +35,21 @@
                             <form #loginForm="ngForm" (ngSubmit)="submitForm(loginForm)">
                                 <div class="form-group">
                                     <label for="inputEmail">Email address</label>
-                                    <input type="email" class="form-control" id="inputEmail" name="username" #username="ngModel" ngModel tabindex="1" placeholder="Enter your email" required [ngClass]="{'is-invalid': username?.invalid && username?.touched}">
+                                    <input type="email" class="form-control" id="inputEmail" name="email" #email="ngModel" ngModel tabindex="1" placeholder="Enter your email" required [ngClass]="{'is-invalid': email?.invalid && email?.touched}">
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword">
                                         <span class="d-flex nm-jcb nm-aic">
                                             Password
-                                            <a class="nm-lu nm-ct" href="forget_password.html">Forgot Password?</a>
+                                            <!-- <a class="nm-lu nm-ct" href="forget_password.html">Forgot Password?</a> -->
                                         </span>
                                     </label>
                                     <input type="password" class="form-control" tabindex="2" name="password" #password="ngModel" ngModel placeholder="Enter your password" id="inputPassword" required [ngClass]="{'is-invalid': password?.invalid && password?.touched}">
                                 </div>
-                                <div class="form-group form-check">
+                                <!-- <div class="form-group form-check">
                                     <input type="checkbox" class="form-check-input" id="rememberMe">
                                     <label class="form-check-label nm-check" for="rememberMe">Remember me</label>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <span class="text-danger">{{errorMessage}}</span>
                                 </div>

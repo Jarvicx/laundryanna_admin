@@ -1,0 +1,76 @@
+<div class="dashboard-body-content">
+                        
+    <div class="row m-0">
+        <div class="add-header">
+            <h5>Update Settings</h5>
+        </div>
+        <form class="edit-form" class="w-100" [formGroup]="settingsForm" (ngSubmit)="submitSettingsForm()">
+            <div class="row m-0">
+                <div class="col-lg-2 mt-3">
+                    <div class="brand-wrapper">
+                        <input type="file" class="brand-file">
+                    </div>
+                </div>
+                <div class="col-lg-10 mt-3">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="name">Name</label>
+                                <input type="text"  placeholder="Enter name" formControlName = "name" class="form-control  w-100" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.name.errors.required">Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="email">Email</label>
+                                <input type="email" placeholder="Enter email" class="form-control" formControlName = "email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.required">Email-id is required</div>
+                                    <div *ngIf="f.email.errors.pattern">Enter a valid email-id</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="phone"> Phone </label>
+                                <input type="number" placeholder="Enter phone number" class="form-control" formControlName = "phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+                                <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">  
+                                    <div *ngIf="f.phone.errors.required">Phone is required.</div>  
+                                    <div *ngIf="f.phone.errors.pattern">Please enter 10 digit phone number.</div>  
+                                </div>  
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="adress">Address</label>
+                                <textarea name="addrees" class="form-control w-100" formControlName = "addrees" placeholder="Enter Address" [ngClass]="{ 'is-invalid': submitted && f.addrees.errors }"></textarea>
+                                <div *ngIf="submitted && f.addrees.errors" class="invalid-feedback">
+                                    <div *ngIf="f.addrees.errors.required">Address is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="desc">Description</label>
+                                <textarea name="desc" class="form-control w-100" formControlName = "desc" placeholder="Enter sub-category descriptions" [ngClass]="{ 'is-invalid': submitted && f.desc.errors }"></textarea>
+                                <div *ngIf="submitted && f.desc.errors" class="invalid-feedback">
+                                    <div *ngIf="f.desc.errors.required">Description is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                      
+                    </div>                                               
+                </div>
+                <div class="form-group d-flex justify-content-end">
+                    <button type="submit" class="actionbutton" (click)="cancel()">Cancel</button>
+                    <button type="submit" class="actionbutton">SAVE</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+        

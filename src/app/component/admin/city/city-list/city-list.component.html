@@ -8,33 +8,33 @@
         </div>
     </div>
     <div class="table-responsive edit-table">
-        <table class="table table-sm table-hover">
-            <thead>
-                <tr>
-                    <th>Sl No.</th>
-                    <th>Name</th>
-                    <th>State</th>
-                    <th>Code</th>
-                    <th>Status</th>
-                    <th style="width: 150px;">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let city of cityList; let i = index;">
-                    <td>{{i+1}}</td>
-                    <td>{{city.name}}</td>
-                    <td>{{city.state}}</td>
-                    <td>{{city.code}}</td>
-                    <td>{{city.status}}</td>
-                    <td>
-                        <a href="javascript:void(0);" routerLink="/admin/city/edit/{{city._id}}"><i class="far fa-edit" title="Edit"></i></a>
-                        <a href="javascript:void(0);" data-toggle="modal" data-placement="left" data-target="#exampleModal"><i class="far fa-trash-alt" title="Delete"></i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+      <table class="table table-sm table-hover">
+          <thead>
+              <tr>
+                  <th>Sl No.</th>
+                  <th>Name</th>
+                  <th>State</th>
+                  <th>Code</th>
+                  <th>Status</th>
+                  <th style="width: 150px;">Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let city of cityList; let i = index;">
+                  <td>{{i+1}}</td>
+                  <td>{{city.name}}</td>
+                  <td>{{city.state}}</td>
+                  <td>{{city.code}}</td>
+                  <td>{{city.status}}</td>
+                  <td>
+                      <a href="javascript:void(0);" routerLink="/admin/city/edit/{{city._id}}"><i class="far fa-edit" title="Edit"></i></a>
+                      <a href="javascript:void(0);" (click) = "deleteCity(city._id)"><i class="far fa-trash-alt" title="Delete"></i></a>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
     </div>
-    <nav class="pagination-container">
+    <!-- <nav class="pagination-container">
         <ul class="pagination">
             <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-double-left previous-img"></i></a></li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -42,7 +42,7 @@
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-double-right next-img"></i></a></li>
         </ul>
-    </nav>
+    </nav> -->
 </div>
 
 <!-- category delete modal-->

@@ -1,1 +1,67 @@
-<p>category-list works!</p>
+<div class="dashboard-body-content">
+    <div class="row d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom row-header">
+        <div class="col-lg-8 d-flex justify-content-start align-items-center">
+            <h5>Category List</h5>
+        </div>
+        <div class="col-lg-4 d-flex justify-content-end align-items-center">
+            <button class="actionbutton btn btn-sm ml-3" routerLink="/admin/category/add">Add Category</button>
+        </div>
+    </div>
+    <div class="table-responsive edit-table">
+      <table class="table table-sm table-hover">
+          <thead>
+              <tr>
+                  <th>Sl No.</th>
+                  <th>Name</th>
+                  <th>Image</th>
+                  <th>Regular Delivery in days</th>
+                  <th>Regular Delivery Description</th>
+                  <th>Regular Delivery Charge</th>
+                  <th>Express Delivery in days</th>
+                  <th>Express Delivery Description</th>
+                  <th>Express Delivery Charge</th>
+                  <th style="width: 150px;">Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let category of categoryList; let i = index;">
+                  <td>{{i+1}}</td>
+                  <td>{{category.name}}</td>
+                  <td><img src="{{(category.image)}}" alt="Category Img"></td>
+                  <td>{{category.deliveryDuration}}</td>
+                  <td>{{category.deliveryDurationText}}</td>
+                  <td>{{category.deliveryCharge}}</td>
+                  <td>{{category.expressDeliveryDuration}}</td>
+                  <td>{{category.expressDeliveryDurationText}}</td>
+                  <td>{{category.expressDeliveryCharge}}</td>
+                  <td> 
+                    <a href="javascript:void(0);" routerLink="/admin/category/edit/{{category._id}}"><i class="far fa-edit" title="Edit"></i></a>
+                    <!-- <a href="javascript:void(0);" data-toggle="modal" data-placement="left" data-target="#exampleModal"><i class="far fa-trash-alt" title="Delete"></i></a> -->
+                    <a href="javascript:void(0);" (click) = "deleteModal(category._id)"><i class="far fa-trash-alt" title="Delete"></i></a>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+</div>
+
+<!-- category delete modal-->
+<!-- <div class="delete-modal modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+	<div class="modal-dialog" *ngIf="modalopen">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel"><i class="far fa-trash-alt text-danger"></i> Delete Confirmation</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <p>Are you sure you want to permanently delete this category?You <b>CAN NOT</b> view this category in your list</p>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn close-button" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn delete-button">Delete permanently</button>
+		</div>
+	  </div>
+	</div>
+<!-- </div> -->

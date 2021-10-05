@@ -1,0 +1,106 @@
+<div class="dashboard-body-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5>Customer Details</h5>
+    </div>
+    <hr>
+    <h5 class="text-blue">Basic Information</h5>
+    <form class="edit-form" [formGroup]="customerForm" (ngSubmit)="submitCustomer()">
+        <!-- <div class="col-lg-2">
+            <div class="brand-wrapper">
+                <!-- <input type="file" class="brand-file"> -->
+                <!-- <input type="file" #image="ngModel" ngModel name="image" id="image" (change)="fileProgress($event)" />
+                <img [src]="previewUrl" height="100" />  
+            </div> 
+        </div> -->
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="name">Customer Name</label>
+                        <input type="text"  placeholder="Enter customer name" formControlName = "name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                            <div *ngIf="f.name.errors.required">Customer Name is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" *ngIf="formType=='Add'">
+                    <div class="form-group edit-box">
+                        <label for="email">Email</label>
+                        <input type="email" placeholder="Enter email" class="form-control" formControlName = "email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">Email-id is required</div>
+                            <div *ngIf="f.email.errors.pattern">Enter a valid email-id</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" *ngIf="formType=='Add'">
+                    <div class="form-group edit-box">
+                        <label for="password">Password</label>
+                        <input [type]="hide ? 
+                        'password' : 'text'" placeholder="Enter password" formControlName = "password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                        <!-- <i [class]="show_eye ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showPassword()"></i> -->
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                            <div *ngIf="f.password.errors.required">Password is required</div>
+                            <div *ngIf="f.password.errors.pattern">Password must be have at least 8 characters long 1 uppercase, 1 lowercase, 1 special character & 1 number</div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" *ngIf="formType=='Add'">
+                    <div class="form-group edit-box">
+                        <label for="conFirmpassword">Confirm Password</label>
+                        <input type="password" placeholder="Enter confirm password" formControlName = "conFirmpassword" [ngClass]="{ 'is-invalid': submitted && f.conFirmpassword.errors }">
+                        <div *ngIf="submitted && f.conFirmpassword.errors" class="invalid-feedback">
+                            <div *ngIf="f.conFirmpassword.errors.required">Confirm Password is required</div>
+                            <div *ngIf="f.conFirmpassword.errors.confirmedValidator">Password does not match.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="phone"> Phone </label>
+                        <input type="number" placeholder="Enter phone number" class="form-control" formControlName = "phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+                        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">  
+                            <div *ngIf="f.phone.errors.required">Phone is required.</div>  
+                            <div *ngIf="f.phone.errors.pattern">Please enter 10 digit phone number.</div>  
+                        </div>  
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <label>Select Gender</label>
+                    <label>
+                        <input id="male" type="radio" value="male" name="gender" formControlName="gender">
+                        <span>Male</span>
+                    </label>
+                    <label>
+                        <input id="female" type="radio" value="female" name="gender" formControlName="gender">
+                        <span>Female</span>
+                    </label>
+                    <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                        <div *ngIf="f.gender.errors.required">Gender is required</div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="age"> Age  </label>
+                        <input type="number" placeholder="Enter age" class="form-control" formControlName = "age" [ngClass]="{ 'is-invalid': submitted && f.age.errors }" />
+                        <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+                            <div *ngIf="f.age.errors.required">Age is required</div>
+                            <div *ngIf="f.age.errors.pattern">Age must be 2digit</div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="wallet"> Wallet  </label>
+                        <input type="text" placeholder="Enter wallet" class="form-control" formControlName = "wallet" [ngClass]="{ 'is-invalid': submitted && f.wallet.errors }" />
+                    </div>
+                </div>
+            </div>                                               
+        </div>
+        <div class="form-group d-flex justify-content-end">
+            <button type="submit" class="actionbutton" (click)="cancel()">Cancel</button>
+            <button type="submit" class="actionbutton">SAVE</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,33 @@
+<div class="dashboard-body-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5>Time List</h5>
+        <a class="actionbutton btn btn-sm" (click)=addTime()>Add Time Slot</a>
+    </div>
+    <hr>
+    
+    <div class="table-responsive edit-table">
+        <table class="table table-sm table-hover category-table">
+            <thead>
+                <tr>
+                    <th>Company ID</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th style="width:80px" class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let time of timeData">
+                    <td>{{time.companyId}}</td>
+                    <td>{{time.startTime}}</td>
+                    <td>{{time.endTime}}</td>
+                    <td class="text-center">
+                        <a routerLink="/admin/time-slot/edit/{{time.companyId}}/{{time._id}}"><i class="far fa-edit"></i></a>
+                        <a href="javascript:void(0);" class="ml-2" (click)="deleteTime(time._id)"><i class="far fa-trash-alt text-danger"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

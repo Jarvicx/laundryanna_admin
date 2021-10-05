@@ -5,6 +5,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule , ReactiveFormsModule, FormControl} from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   NgxUiLoaderModule,
   NgxUiLoaderConfig,
@@ -58,6 +59,20 @@ import { CategoryListComponent } from './component/admin/category/category-list/
 import { CategoryAddEditComponent } from './component/admin/category/category-add-edit/category-add-edit.component';
 import { LoginComponent } from './component/admin/auth/login/login.component';
 import { RegistrationComponent } from './component/admin/auth/registration/registration.component';
+import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogService } from './service/confirmation-dialog.service';
+import { CompanyListComponent } from './component/admin/company/company-list/company-list.component';
+import { CompanyAddEditComponent } from './component/admin/company/company-add-edit/company-add-edit.component';
+import { SubCategoryListComponent } from './component/admin/sub_category/sub-category-list/sub-category-list.component';
+import { SubCategoryAddEditComponent } from './component/admin/sub_category/sub-category-add-edit/sub-category-add-edit.component';
+import { CustomerListComponent } from './component/admin/customer/customer-list/customer-list.component';
+import { CustomerAddEditComponent } from './component/admin/customer/customer-add-edit/customer-add-edit.component';
+import { CustomerAddressComponent } from './component/admin/customer/customer-address/customer-address.component';
+import { CompanySettingsComponent } from './component/admin/master/company-settings/company-settings.component';
+import { SettingUpdateComponent } from './component/admin/master/setting-update/setting-update.component';
+import { TimeSlotListComponent } from './component/admin/company/time-slot-list/time-slot-list.component';
+import { TimeSlotAddEditComponent } from './component/admin/company/time-slot-add-edit/time-slot-add-edit.component';
+import { CustomerAddressListComponent } from './component/admin/customer/customer-address-list/customer-address-list.component';
 
 @NgModule({
   declarations: [
@@ -72,12 +87,26 @@ import { RegistrationComponent } from './component/admin/auth/registration/regis
     CategoryListComponent,
     CategoryAddEditComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ConfirmationDialogComponent,
+    CompanyListComponent,
+    CompanyAddEditComponent,
+    SubCategoryListComponent,
+    SubCategoryAddEditComponent,
+    CustomerListComponent,
+    CustomerAddEditComponent,
+    CustomerAddressComponent,
+    CompanySettingsComponent,
+    SettingUpdateComponent,
+    TimeSlotListComponent,
+    TimeSlotAddEditComponent,
+    CustomerAddressListComponent
   ],
   imports: [
     BrowserModule,AppRoutingModule,CommonModule,FormsModule,ReactiveFormsModule,HttpClientModule,BrowserAnimationsModule,NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    NgbModule
   ],
-  providers: [],
+  providers: [ConfirmationDialogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

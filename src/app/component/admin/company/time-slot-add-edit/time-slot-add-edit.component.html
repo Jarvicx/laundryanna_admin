@@ -1,0 +1,35 @@
+<div class="dashboard-body-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5>{{formType}} Time Slot</h5>
+    </div>
+    <hr>
+    <form class="edit-form" [formGroup]="timeslotForm" (ngSubmit)="submitTimeSlot()">
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="startTime">Start Time</label>
+                        <input type="time" id="startTime" placeholder="Choose Start Time Slot" formControlName = "startTime" class="form-control" mdbInput [ngClass]="{ 'is-invalid': submitted && f.startTime.errors }" />
+                        <div *ngIf="submitted && f.startTime.errors" class="invalid-feedback">
+                            <div *ngIf="f.startTime.errors.required">Start Time is required</div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="endTime"> End Time </label>
+                        <input type="time" id="endTime" placeholder="Choose End Time Slot" formControlName = "endTime" class="form-control" mdbInput [ngClass]="{ 'is-invalid': submitted && f.endTime.errors }" />
+                        <div *ngIf="submitted && f.endTime.errors" class="invalid-feedback">  
+                            <div *ngIf="f.endTime.errors.required">End Time is required.</div>  
+                        </div>  
+                    </div>
+                </div>
+            </div>                                               
+        </div>
+        <div class="form-group d-flex justify-content-end">
+            <button type="submit" class="actionbutton" (click)="cancel()">Cancel</button>
+            <button type="submit" class="actionbutton">SAVE</button>
+        </div>
+    </form>
+</div>
+

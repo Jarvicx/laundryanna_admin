@@ -1,1 +1,98 @@
-<p>category-add-edit works!</p>
+<div class="dashboard-body-content">
+    <h5>{{formType}} category</h5>
+    <hr>
+    <form class="edit-category-form" #categoryForm="ngForm" (ngSubmit)="submitCategoryForm(categoryForm)">
+        <div class="row m-0 pt-3">
+            <div class="col-lg-2">
+                <!-- <div class="brand-wrapper"> -->
+                    <!-- <input type="file" class="brand-file"> -->
+                    <input type="file" #image="ngModel" ngModel name="image" id="image" (change)="fileProgress($event)" />
+                    <img [src]="previewUrl" height="100" />  
+                <!-- </div> -->
+            </div>
+            <div class="col-lg-10">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group edit-box">
+                            <label for="name">Category Name</label>
+                            <input type="text" name="name" id="name" #name="ngModel" [(ngModel)]="categoryData.name" class="form-control" required [ngClass]="{'is-invalid':name?.invalid && name?.touched}">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group edit-box">
+                            <label for="desc">Description</label>
+                            <textarea #desc="ngModel" name="desc" id="desc" [(ngModel)]="categoryData.desc" placeholder="Enter category description" class="form-control" required [ngClass]="{'is-invalid':desc?.invalid && desc?.touched}"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group edit-box">
+                            <label for="smallDesc"> Short Description</label>
+                            <input type="text" #smallDesc="ngModel" name="smallDesc" id="smallDesc" [(ngModel)]="categoryData.smallDesc" placeholder="Enter category short description" class="form-control" required [ngClass]="{'is-invalid':smallDesc?.invalid && smallDesc?.touched}">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group edit-box">
+                            <label for="deliveryCharge"> Regular Delivery Charge </label>
+                            <input type="number" #deliveryCharge="ngModel" name="deliveryCharge" id="deliveryCharge" [(ngModel)]="categoryData.deliveryCharge" placeholder="Enter regular delivery charge" class="form-control" required [ngClass]="{'is-invalid':deliveryCharge?.invalid && deliveryCharge?.touched}">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group edit-box">
+                            <label for="deliveryDuration"> Regular Delivery Duration</label>
+                            <input type="number" #deliveryDuration="ngModel" name="deliveryDuration" [(ngModel)]="categoryData.deliveryDuration" id="deliveryDuration" placeholder="Enter regular delivery duration in days" class="form-control" required [ngClass]="{'is-invalid':deliveryDuration?.invalid && deliveryDuration?.touched}">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group edit-box">
+                            <label for="deliveryDurationText"> Regular Delivery Duration Text</label>
+                            <input type="text" #deliveryDurationText="ngModel" [(ngModel)]="categoryData.deliveryDurationText" name="deliveryDurationText" id="deliveryDurationText" placeholder="Enter regular delivery duration text" class="form-control" required [ngClass]="{'is-invalid':deliveryDurationText?.invalid && deliveryDurationText?.touched}">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group edit-box">
+                            <label for="expressDeliveryCharge"> Express Delivery Charge </label>
+                            <input type="number" #expressDeliveryCharge="ngModel" [(ngModel)]="categoryData.expressDeliveryCharge" name="expressDeliveryCharge" id="expressDeliveryCharge" placeholder="Enter express delivery charge" class="form-control" required [ngClass]="{'is-invalid':expressDeliveryCharge?.invalid && expressDeliveryCharge?.touched}">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group edit-box">
+                            <label for="expressDeliveryDuration"> Express Delivery Duration</label>
+                            <input type="number" #expressDeliveryDuration="ngModel" [(ngModel)]="categoryData.expressDeliveryDuration" name="expressDeliveryDuration" id="expressDeliveryDuration" placeholder="Enter express delivery duration in days" class="form-control" required [ngClass]="{'is-invalid':expressDeliveryDuration?.invalid && expressDeliveryDuration?.touched}">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group edit-box">
+                            <label for="expressDeliveryDurationText"> Express Delivery Duration Text</label>
+                            <input type="text" #expressDeliveryDurationText="ngModel" [(ngModel)]="categoryData.expressDeliveryDurationText" name="expressDeliveryDurationText" id="expressDeliveryDurationText" placeholder="Enter express delivery duration text" class="form-control" required [ngClass]="{'is-invalid':expressDeliveryDurationText?.invalid && expressDeliveryDurationText?.touched}">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group edit-box">
+                            <label for="companyId">Company</label>
+                            <select class="form-control" #companyId="ngModel" [ngModel]="companyId" name="companyId" required [ngClass]="{'is-invalid':companyId?.invalid && companyId?.touched}">
+                                <option *ngFor="let company of companyList; let i = index" [value]="company._id">
+                                    {{company.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group edit-box">
+                            <label for="name">City</label>
+                            <select class="form-control" #city="ngModel" [ngModel]='city' name="city" required [ngClass]="{'is-invalid':city?.invalid && city?.touched}">
+                                <option *ngFor="let city of cityList" [value]="city._id">
+                                    {{city.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>                                               
+            </div>
+        </div>
+        <span class="text-danger">{{errorMessage}}</span>
+            <div class="form-group d-flex justify-content-end">
+            <button type="submit" class="actionbutton" (click)="cancel()">Cancel</button>
+            <button type="submit" class="actionbutton">SAVE</button>
+        </div>
+    </form>
+</div>
