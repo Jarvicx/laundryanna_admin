@@ -5,9 +5,8 @@
 export const environment = {
   production: false,
   basePath: '/',
-  dasboardPath: '/dashboard',
+  dasboardPath: '/admin/dashboard',
   projectPath : '/login',
-  // apiUrl : 'http://3.139.70.149:3100/'
   apiUrl : 'https://laundryanna.herokuapp.com/api'
 };
 

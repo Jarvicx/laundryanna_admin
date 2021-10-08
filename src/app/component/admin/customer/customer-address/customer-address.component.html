@@ -1,1 +1,93 @@
-<p>customer-address works!</p>
+<div class="dashboard-body-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5>{{formType}} Customer Address</h5>
+    </div>
+    <hr>
+    <form class="edit-form" [formGroup]="addressForm" (ngSubmit)="submitAddress()">
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="addressLine1">Address Line 1</label>
+                        <input type="text" id="addressLine1" placeholder="Enter Address Line 1" formControlName = "addressLine1" class="form-control" mdbInput [ngClass]="{ 'is-invalid': submitted && f.addressLine1.errors }" />
+                        <div *ngIf="submitted && f.addressLine1.errors" class="invalid-feedback">
+                            <div *ngIf="f.addressLine1.errors.required">Address Line1 is required</div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="addressLine2"> Address Line 2 </label>
+                        <input type="text" placeholder="Enter Address Line 2" class="form-control" formControlName = "addressLine2" [ngClass]="{ 'is-invalid': submitted && f.addressLine2.errors }" />
+                        <div *ngIf="submitted && f.addressLine2.errors" class="invalid-feedback">  
+                            <div *ngIf="f.addressLine2.errors.required">Address Line2 is required.</div>  
+                        </div>  
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="country"> Country </label>
+                        <input type="text" placeholder="Enter Country" class="form-control" formControlName = "country" [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
+                        <div *ngIf="submitted && f.country.errors" class="invalid-feedback">  
+                            <div *ngIf="f.country.errors.required">Country is required.</div>  
+                        </div>  
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="state"> State </label>
+                        <input type="text" placeholder="Enter State" class="form-control" formControlName = "state" [ngClass]="{ 'is-invalid': submitted && f.state.errors }" />
+                        <div *ngIf="submitted && f.state.errors" class="invalid-feedback">  
+                            <div *ngIf="f.state.errors.required">State is required.</div>  
+                        </div>  
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="city"> City </label>
+                        <input type="text" placeholder="Enter City" class="form-control" formControlName = "city" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+                        <div *ngIf="submitted && f.city.errors" class="invalid-feedback">  
+                            <div *ngIf="f.city.errors.required">City is required.</div>  
+                        </div>  
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="pin"> Pin </label>
+                        <input type="number" placeholder="Enter Pin" class="form-control" formControlName = "pin" [ngClass]="{ 'is-invalid': submitted && f.pin.errors }" />
+                        <div *ngIf="submitted && f.pin.errors" class="invalid-feedback">  
+                            <div *ngIf="f.pin.errors.required">Pin is required.</div>  
+                            <div *ngIf="f.pin.errors.pattern">Please enter 7 digit pin.</div>  
+                        </div>  
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="lat"> Latitude </label>
+                        <input type="number" placeholder="Enter Latitude" class="form-control" formControlName = "lat" [ngClass]="{ 'is-invalid': submitted && f.lat.errors }" />
+                        <div *ngIf="submitted && f.lat.errors" class="invalid-feedback">  
+                            <div *ngIf="f.lat.errors.required">Latitude is required.</div>  
+                        </div>  
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="lon"> Longitude </label>
+                        <input type="number" placeholder="Enter Longitude" class="form-control" formControlName = "lon" [ngClass]="{ 'is-invalid': submitted && f.lon.errors }" />
+                        <div *ngIf="submitted && f.lon.errors" class="invalid-feedback">  
+                            <div *ngIf="f.lon.errors.required">Longitude is required.</div>  
+                        </div>  
+                    </div>
+                </div>
+            </div>                                               
+        </div>
+        <div class="form-group d-flex justify-content-end">
+            <button type="submit" class="actionbutton" (click)="cancel()">Cancel</button>
+            <button type="submit" class="actionbutton">SAVE</button>
+        </div>
+    </form>
+</div>
+
+
+            
+

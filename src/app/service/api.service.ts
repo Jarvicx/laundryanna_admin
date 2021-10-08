@@ -33,6 +33,7 @@ export class ApiService {
     localStorage.setItem('accessToken', data.data[1].accessToken);
     localStorage.setItem('userInfo',JSON.stringify(data.data[0]));
     window.location.href = environment.dasboardPath;
+    location.reload();
     // this._router.navigate([(routeIntended) ? routeIntended : '/admin/dashboard']);
   }
 
@@ -45,6 +46,7 @@ export class ApiService {
   logoutUser():void{
     localStorage.clear();
     window.location.href = environment.projectPath;
+    location.reload();
   }
 
   // Checking the Authentication for User
@@ -60,6 +62,9 @@ export class ApiService {
   //auth
   adminLoginApi(formData : any) {
     return this._http.post<any>(_apiUrl + '/admin/login', formData, {headers: this.header});
+  }
+  adminRegisterApi(formData : any) {
+    return this._http.post<any>(_apiUrl + '/admin/create', formData, {headers: this.header});
   }
 
   // *************  City Api  ***************************//
@@ -168,6 +173,19 @@ export class ApiService {
   getCustomerAddressList(cust_id : any){
     return this._http.get<any>(_apiUrl + '/address/list-by-user/' + cust_id);
   }
+  createAddress(formvalue : any){
+    return this._http.post<any>(_apiUrl + '/address/create',formvalue, {headers : this.header})
+  }
+  getCustomerAddressById(address_id : any){
+    return this._http.get<any>(_apiUrl + '/address/detail/' + address_id);
+  }
+  updateAddress(address_id : any, formvalue : any){
+    return this._http.patch<any>(_apiUrl + '/address/update/' + address_id, formvalue,{headers:this.header});
+  }
+  deleteAddress(addressId : any){
+    return this._http.delete<any>(_apiUrl + '/address/delete/' + addressId, {headers:this.header});
+  }
+
 
 
    // ************* Settings ***************************//

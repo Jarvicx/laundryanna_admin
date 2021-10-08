@@ -16,6 +16,8 @@ import { SubCategoryListComponent } from './component/admin/sub_category/sub-cat
 import { SubCategoryAddEditComponent } from './component/admin/sub_category/sub-category-add-edit/sub-category-add-edit.component';
 import { CustomerListComponent } from './component/admin/customer/customer-list/customer-list.component';
 import { CustomerAddEditComponent } from './component/admin/customer/customer-add-edit/customer-add-edit.component';
+import { CustomerAddressListComponent } from './component/admin/customer/customer-address-list/customer-address-list.component';
+import { CustomerAddressComponent } from "./component/admin/customer/customer-address/customer-address.component";
 import { CompanySettingsComponent } from './component/admin/master/company-settings/company-settings.component';
 import { SettingUpdateComponent } from './component/admin/master/setting-update/setting-update.component';
 import { TimeSlotListComponent } from './component/admin/company/time-slot-list/time-slot-list.component';
@@ -24,6 +26,7 @@ import { TimeSlotAddEditComponent } from './component/admin/company/time-slot-ad
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthCheckService] },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegistrationComponent },
   { path: 'admin', canActivate: [AuthCheckService], children: [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'city', children: [
@@ -56,6 +59,11 @@ const routes: Routes = [
       { path: 'add', component: CustomerAddEditComponent },
       { path: 'edit/:customerId', component: CustomerAddEditComponent },
     ]},
+    { path: 'customer-address', children: [
+      { path: 'list/:customerId', component: CustomerAddressListComponent },
+      { path: 'add/:customerId', component: CustomerAddressComponent },
+      { path: 'edit/:customerId/:addressId', component: CustomerAddressComponent },
+    ]},
     { path: 'master-settings', component: CompanySettingsComponent },
     { path: 'master-settings/edit/:settingsId', component: SettingUpdateComponent },
 
@@ -74,7 +82,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

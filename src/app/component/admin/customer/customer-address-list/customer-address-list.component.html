@@ -1,1 +1,50 @@
-<p>customer-address-list works!</p>
+<div class="dashboard-body-content">
+    <div class="d-block">
+        <div class="float-left">
+            <h5>Customer Address</h5>
+        </div>
+        <div class="float-right">
+            <a href="javascript:void(0);" (click)="add()" class="orderbtn btn btn-sm">Add Customer Adress</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="row m-0">
+        <div class="col-12 col-md-3 ml-auto mb-4">
+            <div class="input-group ">
+                
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive edit-table">
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th>Customer Id</th>
+                    <th>Country</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>Address</th>
+                    <th>Pin</th>
+                    <th style="width: 150px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let address of addressListing">
+                    <td>{{address.customerId}}</td>
+                    <td>{{address.country}}</td>
+                    <td>{{address.state}}</td>
+                    <td>{{address.city}}</td>
+                    <td>{{address.addressLine1}} {{address.addressLine2}}</td>
+                    <td>{{address.pin}}</td>
+                    <td class="text-center">
+                        <a routerLink="/admin/customer-address/edit/{{address.customerId}}/{{address._id}}"><i class="far fa-eye"></i></a>
+                        <a href="javascript:void(0);" class="ml-2" (click)="deleteAddress(address._id)"><i class="far fa-trash-alt text-danger"></i></a>
+                    </td>
+                   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  
+</div>
+

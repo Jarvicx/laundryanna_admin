@@ -44,13 +44,9 @@ export class LoginComponent implements OnInit {
               icon: 'success',
               title: 'Logged in successful'
             })
-            console.log('res',res);
-            
             this._api.storeUserLocally(res);
-            this._loader.stopLoader('loader');
-  
+            this._loader.stopLoader('loader');  
           }, err => {
-            console.log('err1',err);
             if (err.error.error === true && err.error.message === 'wrong password!') {
               this.errorMessage = 'Passwors is wrong.';
               this._loader.stopLoader('loader');

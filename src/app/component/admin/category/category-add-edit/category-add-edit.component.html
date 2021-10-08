@@ -1,13 +1,16 @@
 <div class="dashboard-body-content">
     <h5>{{formType}} category</h5>
     <hr>
-    <form class="edit-category-form" #categoryForm="ngForm" (ngSubmit)="submitCategoryForm(categoryForm)">
+    <form class="edit-category-form" [formGroup]="categoryForm" (ngSubmit)="submitCategoryForm()">
         <div class="row m-0 pt-3">
             <div class="col-lg-2">
                 <!-- <div class="brand-wrapper"> -->
                     <!-- <input type="file" class="brand-file"> -->
-                    <input type="file" #image="ngModel" ngModel name="image" id="image" (change)="fileProgress($event)" />
-                    <img [src]="previewUrl" height="100" />  
+                    <input type="file" formControlName="image" (change)="fileProgress($event)" />
+                    <img [src]="previewUrl" height="100" /> 
+                    <!-- <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+                        <div *ngIf="f.image.errors.required">Please choose an image</div>
+                    </div>  -->
                 <!-- </div> -->
             </div>
             <div class="col-lg-10">
@@ -15,75 +18,108 @@
                     <div class="col-lg-6">
                         <div class="form-group edit-box">
                             <label for="name">Category Name</label>
-                            <input type="text" name="name" id="name" #name="ngModel" [(ngModel)]="categoryData.name" class="form-control" required [ngClass]="{'is-invalid':name?.invalid && name?.touched}">
+                            <input type="text" placeholder="Enter category name" formControlName = "name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">Category Name is required</div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group edit-box">
                             <label for="desc">Description</label>
-                            <textarea #desc="ngModel" name="desc" id="desc" [(ngModel)]="categoryData.desc" placeholder="Enter category description" class="form-control" required [ngClass]="{'is-invalid':desc?.invalid && desc?.touched}"></textarea>
+                            <textarea placeholder="Enter category description" formControlName = "desc" class="form-control" [ngClass]="{'is-invalid': submitted && f.desc.errors}"></textarea>
+                            <div *ngIf="submitted && f.desc.errors" class="invalid-feedback">
+                                <div *ngIf="f.desc.errors.required">Description is required</div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group edit-box">
                             <label for="smallDesc"> Short Description</label>
-                            <input type="text" #smallDesc="ngModel" name="smallDesc" id="smallDesc" [(ngModel)]="categoryData.smallDesc" placeholder="Enter category short description" class="form-control" required [ngClass]="{'is-invalid':smallDesc?.invalid && smallDesc?.touched}">
+                            <input type="text" formControlName="smallDesc" placeholder="Enter category short description" class="form-control" [ngClass]="{'is-invalid':submitted && f.smallDesc.errors}" />
+                            <div *ngIf="submitted && f.smallDesc.errors" class="invalid-feedback">
+                                <div *ngIf="f.smallDesc.errors.required">Short Description is required</div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group edit-box">
                             <label for="deliveryCharge"> Regular Delivery Charge </label>
-                            <input type="number" #deliveryCharge="ngModel" name="deliveryCharge" id="deliveryCharge" [(ngModel)]="categoryData.deliveryCharge" placeholder="Enter regular delivery charge" class="form-control" required [ngClass]="{'is-invalid':deliveryCharge?.invalid && deliveryCharge?.touched}">
+                            <input type="number" formControlName="deliveryCharge" placeholder="Enter regular delivery charge" class="form-control" [ngClass]="{'is-invalid':submitted && f.deliveryCharge.errors}" />
+                            <div *ngIf='submitted && f.deliveryCharge.errors' class="invalid-feedback">
+                                <div *ngIf="f.deliveryCharge.errors.required">Delivery Charge is required</div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group edit-box">
                             <label for="deliveryDuration"> Regular Delivery Duration</label>
-                            <input type="number" #deliveryDuration="ngModel" name="deliveryDuration" [(ngModel)]="categoryData.deliveryDuration" id="deliveryDuration" placeholder="Enter regular delivery duration in days" class="form-control" required [ngClass]="{'is-invalid':deliveryDuration?.invalid && deliveryDuration?.touched}">
+                            <input type="number" formControlName="deliveryDuration" placeholder="Enter regular delivery duration in days" class="form-control" [ngClass]="{'is-invalid': submitted && f.deliveryDuration.errors}">
+                            <div *ngIf="submitted && f.deliveryDuration.errors" class="invalid-feedback">
+                                <div *ngIf="f.deliveryDuration.errors.required">Delivery Duration is required</div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group edit-box">
                             <label for="deliveryDurationText"> Regular Delivery Duration Text</label>
-                            <input type="text" #deliveryDurationText="ngModel" [(ngModel)]="categoryData.deliveryDurationText" name="deliveryDurationText" id="deliveryDurationText" placeholder="Enter regular delivery duration text" class="form-control" required [ngClass]="{'is-invalid':deliveryDurationText?.invalid && deliveryDurationText?.touched}">
+                            <input type="text" formControlName="deliveryDurationText" placeholder="Enter regular delivery duration text" class="form-control" [ngClass]="{'is-invalid': submitted && f.deliveryDurationText.errors}">
+                            <div *ngIf="submitted && f.deliveryDurationText.errors" class="invalid-feedback">
+                                <div *ngIf="f.deliveryDurationText.errors.required">Delivery Duration Text is required</div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group edit-box">
                             <label for="expressDeliveryCharge"> Express Delivery Charge </label>
-                            <input type="number" #expressDeliveryCharge="ngModel" [(ngModel)]="categoryData.expressDeliveryCharge" name="expressDeliveryCharge" id="expressDeliveryCharge" placeholder="Enter express delivery charge" class="form-control" required [ngClass]="{'is-invalid':expressDeliveryCharge?.invalid && expressDeliveryCharge?.touched}">
+                            <input type="number" formControlName="expressDeliveryCharge" placeholder="Enter express delivery charge" class="form-control" [ngClass]="{'is-invalid': submitted && f.expressDeliveryCharge.errors}">
+                            <div *ngIf="submitted && f.expressDeliveryCharge.errors" class="invalid-feedback">
+                                <div *ngIf="f.expressDeliveryCharge.errors.required">Express Delivery Charge is required</div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group edit-box">
                             <label for="expressDeliveryDuration"> Express Delivery Duration</label>
-                            <input type="number" #expressDeliveryDuration="ngModel" [(ngModel)]="categoryData.expressDeliveryDuration" name="expressDeliveryDuration" id="expressDeliveryDuration" placeholder="Enter express delivery duration in days" class="form-control" required [ngClass]="{'is-invalid':expressDeliveryDuration?.invalid && expressDeliveryDuration?.touched}">
+                            <input type="number" formControlName="expressDeliveryDuration" placeholder="Enter express delivery duration in days" class="form-control" [ngClass]="{'is-invalid':submitted && f.expressDeliveryDuration.errors}">
+                        </div>
+                        <div *ngIf="submitted && f.expressDeliveryDuration.errors" class="invalid-feedback">
+                            <div *ngIf="f.expressDeliveryDuration.errors.required">Express Delivery Duration is required</div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group edit-box">
                             <label for="expressDeliveryDurationText"> Express Delivery Duration Text</label>
-                            <input type="text" #expressDeliveryDurationText="ngModel" [(ngModel)]="categoryData.expressDeliveryDurationText" name="expressDeliveryDurationText" id="expressDeliveryDurationText" placeholder="Enter express delivery duration text" class="form-control" required [ngClass]="{'is-invalid':expressDeliveryDurationText?.invalid && expressDeliveryDurationText?.touched}">
+                            <input type="text" formControlName="expressDeliveryDurationText" placeholder="Enter express delivery duration text" class="form-control" [ngClass]="{'is-invalid':submitted && f.expressDeliveryDurationText.errors}">
+                        </div>
+                        <div *ngIf="submitted && f.expressDeliveryDurationText.errors" class="invalid-feedback">
+                            <div *ngIf="f.expressDeliveryDurationText.errors.required">Express Delivery Duration Text is required</div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group edit-box">
                             <label for="companyId">Company</label>
-                            <select class="form-control" #companyId="ngModel" [ngModel]="companyId" name="companyId" required [ngClass]="{'is-invalid':companyId?.invalid && companyId?.touched}">
+                            <select class="form-control" formControlName="companyId" placeholder="Select Company" class="form-control"  [ngClass]="{'is-invalid':submitted && f.companyId.errors}">
                                 <option *ngFor="let company of companyList; let i = index" [value]="company._id">
                                     {{company.name}}
                                 </option>
                             </select>
                         </div>
+                        <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                            <div *ngIf="f.companyId.errors.required">Select a company</div>
+                        </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group edit-box">
                             <label for="name">City</label>
-                            <select class="form-control" #city="ngModel" [ngModel]='city' name="city" required [ngClass]="{'is-invalid':city?.invalid && city?.touched}">
+                            <select class="form-control" formControlName='city' placeholder="Select City" class="form-control" [ngClass]="{'is-invalid':submitted && f.city.errors}">
                                 <option *ngFor="let city of cityList" [value]="city._id">
                                     {{city.name}}
                                 </option>
                             </select>
+                            <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                                <div *ngIf="f.city.errors.required">Select a city</div>
+                            </div>
                         </div>
                     </div>
                 </div>                                               
