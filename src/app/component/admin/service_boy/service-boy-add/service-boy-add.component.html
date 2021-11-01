@@ -1,10 +1,10 @@
 <div class="dashboard-body-content">
     <div class="d-flex justify-content-between align-items-center">
-        <h5>Customer Details</h5>
+        <h5>{{formType}} Service Boys</h5>
     </div>
     <hr>
-    <h5 class="text-blue">Basic Information</h5>
-    <form class="edit-form" [formGroup]="customerForm" (ngSubmit)="submitCustomer()">
+    
+    <form class="edit-form" [formGroup]="serviceBoyform" (ngSubmit)="submitServiceBoy()">
         <!-- <div class="col-lg-2">
             <div class="brand-wrapper">
                 <!-- <input type="file" class="brand-file"> -->
@@ -16,8 +16,8 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group edit-box">
-                        <label for="name">Customer Name</label>
-                        <input type="text"  placeholder="Enter customer name" formControlName = "name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                        <label for="name">Service Boy Name</label>
+                        <input type="text"  placeholder="Enter service boy name" formControlName = "name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
                         <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                             <div *ngIf="f.name.errors.required">Customer Name is required</div>
                         </div>
@@ -36,8 +36,9 @@
                 <div class="col-lg-6" *ngIf="formType=='Add'">
                     <div class="form-group edit-box">
                         <label for="password">Password</label>
-                        <input [type]="hide ? 
-                        'password' : 'text'" id="real-password" id="real-password" autocomplete="new-password" placeholder="Enter password" formControlName = "password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                        <!-- <input [type]="hide ? 
+                        'password' : 'text'" placeholder="Enter password" formControlName = "password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"> -->
+                        <input type="password" placeholder="Enter password" formControlName = "password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
                         <!-- <i [class]="show_eye ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showPassword()"></i> -->
                         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                             <div *ngIf="f.password.errors.required">Password is required</div>
@@ -48,7 +49,7 @@
                 <div class="col-lg-6" *ngIf="formType=='Add'">
                     <div class="form-group edit-box">
                         <label for="conFirmpassword">Confirm Password</label>
-                        <input type="password" placeholder="Enter confirm password" formControlName = "conFirmpassword" [ngClass]="{ 'is-invalid': submitted && f.conFirmpassword.errors }">
+                        <input type="password" placeholder="Enter confirm password" autocomplete="new-conFirmpassword" formControlName = "conFirmpassword" [ngClass]="{ 'is-invalid': submitted && f.conFirmpassword.errors }">
                         <div *ngIf="submitted && f.conFirmpassword.errors" class="invalid-feedback">
                             <div *ngIf="f.conFirmpassword.errors.required">Confirm Password is required</div>
                             <div *ngIf="f.conFirmpassword.errors.confirmedValidator">Password does not match.</div>
@@ -92,8 +93,14 @@
             
                 <div class="col-lg-6">
                     <div class="form-group edit-box">
-                        <label for="wallet"> Wallet  </label>
-                        <input type="text" placeholder="Enter wallet" class="form-control" formControlName = "wallet" [ngClass]="{ 'is-invalid': submitted && f.wallet.errors }" />
+                        <label for="wallet"> Service Boy Type  </label>
+                        <select formControlName="boy_type">
+                            <!-- <option disabled>Select Service Boy Type</option> -->
+                            <option *ngFor="let serviceBoy of serviceBoyType">{{serviceBoy}}</option>
+                        </select>
+                        <div *ngIf="submitted && f.boy_type.errors" class="invalid-feedback">
+                            <div *ngIf="f.boy_type.errors.required">Select a service boy type</div>
+                        </div>
                     </div>
                 </div>
             </div>                                               

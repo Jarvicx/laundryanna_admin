@@ -4,13 +4,15 @@
     <form class="edit-category-form" [formGroup]="categoryForm" (ngSubmit)="submitCategoryForm()">
         <div class="row m-0 pt-3">
             <div class="col-lg-2">
+                <div class="form-group edit-box">
                 <!-- <div class="brand-wrapper"> -->
                     <!-- <input type="file" class="brand-file"> -->
-                    <input type="file" formControlName="image" (change)="fileProgress($event)" />
+                    <input type="file" formControlName="image" (change)="fileProgress($event)"  [ngClass]="{ 'is-invalid': submitted && f.image.errors }" >
                     <img [src]="previewUrl" height="100" /> 
-                    <!-- <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
-                        <div *ngIf="f.image.errors.required">Please choose an image</div>
-                    </div>  -->
+                    <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+                        <div *ngIf="f.image.errors.required">Please select an image</div>
+                    </div> 
+                </div>
                 <!-- </div> -->
             </div>
             <div class="col-lg-10">
@@ -82,18 +84,18 @@
                         <div class="form-group edit-box">
                             <label for="expressDeliveryDuration"> Express Delivery Duration</label>
                             <input type="number" formControlName="expressDeliveryDuration" placeholder="Enter express delivery duration in days" class="form-control" [ngClass]="{'is-invalid':submitted && f.expressDeliveryDuration.errors}">
-                        </div>
-                        <div *ngIf="submitted && f.expressDeliveryDuration.errors" class="invalid-feedback">
-                            <div *ngIf="f.expressDeliveryDuration.errors.required">Express Delivery Duration is required</div>
+                            <div *ngIf="submitted && f.expressDeliveryDuration.errors" class="invalid-feedback">
+                                <div *ngIf="f.expressDeliveryDuration.errors.required">Express Delivery Duration is required</div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group edit-box">
                             <label for="expressDeliveryDurationText"> Express Delivery Duration Text</label>
                             <input type="text" formControlName="expressDeliveryDurationText" placeholder="Enter express delivery duration text" class="form-control" [ngClass]="{'is-invalid':submitted && f.expressDeliveryDurationText.errors}">
-                        </div>
-                        <div *ngIf="submitted && f.expressDeliveryDurationText.errors" class="invalid-feedback">
-                            <div *ngIf="f.expressDeliveryDurationText.errors.required">Express Delivery Duration Text is required</div>
+                            <div *ngIf="submitted && f.expressDeliveryDurationText.errors" class="invalid-feedback">
+                                <div *ngIf="f.expressDeliveryDurationText.errors.required">Express Delivery Duration Text is required</div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -104,9 +106,9 @@
                                     {{company.name}}
                                 </option>
                             </select>
-                        </div>
-                        <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
-                            <div *ngIf="f.companyId.errors.required">Select a company</div>
+                            <div *ngIf="submitted && f.companyId.errors" class="invalid-feedback">
+                                <div *ngIf="f.companyId.errors.required">Select a company</div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -126,7 +128,7 @@
             </div>
         </div>
         <span class="text-danger">{{errorMessage}}</span>
-            <div class="form-group d-flex justify-content-end">
+        <div class="form-group d-flex justify-content-end">
             <button type="submit" class="actionbutton" (click)="cancel()">Cancel</button>
             <button type="submit" class="actionbutton">SAVE</button>
         </div>

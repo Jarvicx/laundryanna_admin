@@ -1,0 +1,144 @@
+<div class="dashboard-body-content">
+    <div class="d-block">
+        <div class="float-left">
+            <h5>Pickup List</h5>
+        </div>
+        <div class="float-right">
+            <!-- <a href="javascript:void(0);" class="orderbtn btn btn-sm" data-toggle="modal" data-target="#exportModal">Export Data</a>
+            <a href="javascript:void(0);" class="orderbtn btn btn-sm">Cancelled Orders</a>
+            <a href="javascript:void(0);" class="orderbtn btn btn-sm">Create pickup for B2B users</a> -->
+            <a href="javascript:void(0);" routerLink="/admin/pick_up/add" class="orderbtn btn btn-sm">Add Pick Up</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <hr>
+    <!-- <div class="row m-0">
+        <div class="col-12 col-md-9 ml-auto mb-4 row m-0 d-flex justify-content-end p-0">
+            <div class="col-12 col-md-3 plr-2">
+                <input type="text" class="form-control" placeholder="Name/mobile.address/order id..." aria-label="Recipient's username" aria-describedby="button-addon2">
+            </div>
+            <div class="col-12 col-md-3 plr-2">
+                <input type="date" class="form-control">
+            </div>
+            <div class="col-12 col-md-3 plr-2">
+                <select class="form-control">
+                    
+                    <option>All</option>
+                    <option>Today</option>
+                    <option>Last 7 days</option>
+                    <option>Last 30 days</option>
+                    <option>Last 1 year</option>
+                </select>
+            </div>
+            <div class="col-12 col-md-1 pl-2 pr-0 d-flex justify-content-end align-items-center">
+                <a href="javascript:void(0);" class="orderbtn btn btn-sm" data-toggle="modal" data-target="#showModal">Show</a>
+            </div>
+                <!-- <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary searchbtn" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+            </div> 
+        </div>
+    </div> -->
+    <div class="table-responsive edit-table card-body p-0">
+        <table class="table table-sm table-hover brand-table">
+            <thead>
+                <tr>
+                    <th>Pickup Id</th>
+                    <th>Pickup Date</th>
+                    <th>Pickup Time</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                    <th style="width:80px" class="text-center" colspan="3">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let pick of pickUp">
+                    <!-- <td><input type="checkbox" class="form-check-input" id="exampleCheck2"></td> -->
+                    <td>{{pick._id}}</td>
+                    <td>{{pick.pickup_date}}</td>
+                    <td>{{pick.pickup_time}}</td>
+                    <td>{{pick.customerId.name}}</td>
+                    <td>{{pick.addressId.city}}</td>
+                    <td><span class="badge badge-warning" (click)="openModalWithClass(template,pick._id)">{{pick.status}}</span></td>
+                    <td class="text-center">
+                        <a href="javascript:void(0);" routerLink="/admin/pick_up/edit/{{pick._id}}"><i class="far fa-edit"  data-placement="left" data-toggle="tooltip" title="Edit Boy" ></i></a>
+                        <!-- <a href=""><i class="fas fa-cart-plus"  data-placement="left" data-toggle="tooltip" title="Create Order" ></i></a>
+                        <a href=""><i class="fas fa-truck-pickup"  data-placement="left" data-toggle="tooltip" title="Order Picked" ></i></a>
+                        <a href=""><i class="fa fa-window-close"  data-placement="left" data-toggle="tooltip" title="Cancel Order" ></i></a> -->
+                        <a href="javascript:void(0);" (click)="deletePickUp(pick._id)"><i class="far fa-trash-alt"  data-placement="left" data-toggle="tooltip" title="Delete Order" ></i></a>
+                        
+                    </td>
+
+                </tr>
+               
+              
+            </tbody>
+        </table>
+    </div>
+    <!-- <nav class="pagination-container mt-3">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-double-left previous-img"></i></a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link active" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-double-right next-img"></i></a></li>
+        </ul>
+    </nav> -->
+</div>
+
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form  #addressForm="ngForm" (ngSubmit)="updateStatus(addressForm)">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closebutton>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- <div class="modal-body">
+                <label for="">Address Line 1 <span class="text-danger">*</span></label>
+                <input type="text" name="addressLine1" id="addressLine1" class="form-control" placeholder="Address line 1" #addressLine1="ngModel" [ngModel]="addressData.addressLine1" required [ngClass]="{'is-invalid': addressLine1?.invalid && addressLine1?.touched}">
+                
+                <label for="">Address Line 2 <span class="text-danger">*</span></label>
+                <input type="text" name="addressLine2" id="addressLine2" class="form-control" placeholder="Address line 2" #addressLine2="ngModel" [ngModel]="addressData.addressLine2" required [ngClass]="{'is-invalid': addressLine2?.invalid && addressLine2?.touched}">
+                
+               
+                <span class="text-danger">{{errorMessage}}</span>
+            </div> 
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="save-button">Save Address</button>
+            </div>
+        </form>
+      </div>
+    </div>
+</div> -->
+
+<ng-template #template>  
+    <div class="modal-header">  
+        <h4 class="modal-title pull-left">Status Update</h4>  
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">  
+            <span aria-hidden="true">×</span>  
+        </button>  
+    </div>
+        <form class="edit-form" [formGroup]="statusForm" (ngSubmit)="submitStatus()">   
+            <div class="modal-body">  
+                <div class="form-group edit-box">
+                    <label for="status">Status change</label>
+                    <select class="form-control w-100" name="status"  formControlName = "status" required [ngClass]="{'is-invalid':submitted && f.status.errors}">
+                        <option *ngFor="let status of allStatus; let i = index" [value]="status">
+                            {{status}}
+                        </option>
+                    </select>
+                </div>
+                <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                    <div *ngIf="f.status.errors.required">Select any status</div>
+                </div>             
+            </div>  
+        <div class="modal-footer">  
+            <button type="submit" class="btn btn-default">Save</button>  
+            <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>  
+        </div>  
+    </form>
+</ng-template>  

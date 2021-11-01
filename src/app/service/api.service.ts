@@ -212,5 +212,44 @@ export class ApiService {
   deleteTimeSlot(timeId : any){
     return this._http.delete<any>(_apiUrl + '/slot/delete/' + timeId, {headers:this.header})
   }
+
+  // ************* Service boy ***************************//
+  getServiceBoyList() {
+    return this._http.get<any>(_apiUrl + '/service-boys/list');
+  }
+  addServiceBoy(formData:any){
+    return this._http.post<any>(_apiUrl + '/service-boys/create',formData, {headers:this.header});
+  }
+  getServiceBoyById(serviceBoyId:any){
+    return this._http.get<any>(_apiUrl + '/service-boys/detail/'+ serviceBoyId, {headers:this.header});
+  }
+
+  updateServiceBoy(serviceBoyId:any, formData:any){
+    return this._http.patch<any>(_apiUrl + '/service-boys/update/'+ serviceBoyId,formData, {headers:this.header});
+  }
+  
+  deleteServiceBoy(s_id:any){
+    return this._http.delete<any>(_apiUrl + '/service-boys/delete/'+ s_id, {headers:this.header});
+  }
+
+  // ************* Pick up ***************************//
+  getPickUpList(){
+    return this._http.get<any>(_apiUrl + '/pickup/list');
+  }
+  addPickUp(frmData:any){
+    return this._http.post<any>(_apiUrl + '/pickup/create', frmData, {headers:this.header});
+  }
+  getPickID(pick_id:any){
+    return this._http.get<any>(_apiUrl + '/pickup/detail/' + pick_id) //, {headers:this.header});
+  }
+  updatePickUp(pickUpId:any,formData:any){
+    return this._http.patch<any>(_apiUrl + '/pickup/update/' + pickUpId, formData, {headers:this.header});
+  }
+  deletePickUp(pick_id:any){
+    return this._http.delete<any>(_apiUrl + '/pickup/delete/' + pick_id, {headers:this.header});
+  }
+  updateStatus(pick_id:any, statusData:any){
+    return this._http.patch<any>(_apiUrl + '/pickup/change-status/'+ pick_id, statusData, {headers:this.header});
+  }
 }
 

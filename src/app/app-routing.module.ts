@@ -22,6 +22,10 @@ import { CompanySettingsComponent } from './component/admin/master/company-setti
 import { SettingUpdateComponent } from './component/admin/master/setting-update/setting-update.component';
 import { TimeSlotListComponent } from './component/admin/company/time-slot-list/time-slot-list.component';
 import { TimeSlotAddEditComponent } from './component/admin/company/time-slot-add-edit/time-slot-add-edit.component';
+import { ServiceBoyListComponent } from "./component/admin/service_boy/service-boy-list/service-boy-list.component";
+import { ServiceBoyAddComponent  } from "./component/admin/service_boy/service-boy-add/service-boy-add.component";
+import { PickUpListComponent } from "./component/admin/pickUp/pick-up-list/pick-up-list.component";
+import { PickUpAddEditComponent } from "./component/admin/pickUp/pick-up-add-edit/pick-up-add-edit.component";
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthCheckService] },
@@ -71,6 +75,16 @@ const routes: Routes = [
       { path: 'list/:companyId', component: TimeSlotListComponent },
       { path: 'add/:companyId', component: TimeSlotAddEditComponent },
       { path: 'edit/:companyId/:timeId', component: TimeSlotAddEditComponent },
+    ]},
+    { path: 'service-boy', children: [
+      { path: 'list', component: ServiceBoyListComponent },
+      { path: 'add', component: ServiceBoyAddComponent },
+      { path: 'edit/:serviceBoyId', component: ServiceBoyAddComponent },
+    ]},
+    { path: 'pick_up', children: [
+      { path: 'list', component: PickUpListComponent },
+      { path: 'add', component: PickUpAddEditComponent },
+      { path: 'edit/:pickUpId', component: PickUpAddEditComponent },
     ]},
     // { path: 'customer-address',children:[
     //   {path: 'list/:customerID', component:''}

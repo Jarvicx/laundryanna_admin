@@ -76,7 +76,7 @@ export class CategoryAddEditComponent implements OnInit {
       expressDeliveryCharge:  new FormControl('',Validators.required),
       expressDeliveryDuration:  new FormControl('',Validators.required),
       expressDeliveryDurationText:  new FormControl('',Validators.required),
-      image: new FormControl(''),
+      image: new FormControl('',Validators.required),
     })
     
   }
@@ -131,6 +131,7 @@ export class CategoryAddEditComponent implements OnInit {
     // formData.append('image', this.fileData);
     console.log('this.categoryForm',this.categoryForm);
     console.log('value',this.categoryForm.value);
+    this.submitted = true;
     
     if (this.categoryForm.valid) {
       this._loader.startLoader('loader');
@@ -168,7 +169,7 @@ export class CategoryAddEditComponent implements OnInit {
         )
       }
     } else {
-      this.errorMessage = 'Please fill out all the details';
+      // this.errorMessage = 'Please fill out all the details';
       this._loader.stopLoader('loader');
       return;
     }

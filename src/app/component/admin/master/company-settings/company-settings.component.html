@@ -31,9 +31,10 @@
                     <td>{{settings.phone}}</td>
                     <td>{{settings.email}}</td>
                     <td>{{settings.desc}}</td>
-                    <td><img src="{{(settings.logo) || ''}}" alt="settings Img"></td>                    
+                    <!-- <td><img src="{{(settings.logo) || ''}}" alt="settings Img"></td>                     -->
+                    <td><img src="../../../../../assets/img/blank-ticket.png" alt="settings Img"></td>                    
                     <td class="text-center">
-                        <a routerLink="/admin/master-settings/edit/{{settings._id}}"><i class="far fa-eye"></i></a>
+                        <a routerLink="/admin/master-settings/edit/{{settings._id}}"><i class="far fa-edit"></i></a>
                     </td>
                 </tr>
             </tbody>

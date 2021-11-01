@@ -10,8 +10,11 @@ import  Swal  from "sweetalert2";
 })
 export class CompanyListComponent implements OnInit {
   public companyList : any = [];
+  changeText : boolean;
 
-  constructor( private _api : ApiService,private _loader : NgxUiLoaderService) { }
+  constructor( private _api : ApiService,private _loader : NgxUiLoaderService) {
+    this.changeText = false;
+   }
 
   ngOnInit(): void {
     this.companyListing();

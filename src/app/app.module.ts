@@ -6,6 +6,7 @@ import { FormsModule , ReactiveFormsModule, FormControl} from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalModule } from 'ngx-bootstrap/modal'; 
 import {
   NgxUiLoaderModule,
   NgxUiLoaderConfig,
@@ -73,6 +74,10 @@ import { SettingUpdateComponent } from './component/admin/master/setting-update/
 import { TimeSlotListComponent } from './component/admin/company/time-slot-list/time-slot-list.component';
 import { TimeSlotAddEditComponent } from './component/admin/company/time-slot-add-edit/time-slot-add-edit.component';
 import { CustomerAddressListComponent } from './component/admin/customer/customer-address-list/customer-address-list.component';
+import { ServiceBoyListComponent } from './component/admin/service_boy/service-boy-list/service-boy-list.component';
+import { ServiceBoyAddComponent } from './component/admin/service_boy/service-boy-add/service-boy-add.component';
+import { PickUpListComponent } from './component/admin/pickUp/pick-up-list/pick-up-list.component';
+import { PickUpAddEditComponent } from './component/admin/pickUp/pick-up-add-edit/pick-up-add-edit.component';
 
 @NgModule({
   declarations: [
@@ -100,11 +105,16 @@ import { CustomerAddressListComponent } from './component/admin/customer/custome
     SettingUpdateComponent,
     TimeSlotListComponent,
     TimeSlotAddEditComponent,
-    CustomerAddressListComponent
+    CustomerAddressListComponent,
+    ServiceBoyListComponent,
+    ServiceBoyAddComponent,
+    PickUpListComponent,
+    PickUpAddEditComponent
   ],
   imports: [
     BrowserModule,AppRoutingModule,CommonModule,FormsModule,ReactiveFormsModule,HttpClientModule,BrowserAnimationsModule,NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
-    NgbModule
+    NgbModule,
+    ModalModule.forRoot()
   ],
   providers: [ConfirmationDialogService],
   bootstrap: [AppComponent]

@@ -14,8 +14,7 @@
                     <th>Company Image</th>
                     <th>Country</th>
                     <th>State</th>
-                    <th>Address line1</th>
-                    <th>Address line2</th>
+                    <th>Address</th>
                     <th>Phone</th>
                     <th style="width:100px" class="text-center">Status</th>
                     <th style="width:80px" class="text-center">Action</th>
@@ -28,8 +27,7 @@
                     <td><img src="{{(com.image)}}" alt="Company Img"></td>
                     <td>{{com.country}}</td>
                     <td>{{com.state}}</td>
-                    <td>{{com.addressLine1}}</td>
-                    <td>{{com.addressLine2}}</td>
+                    <td>{{com.addressLine1}} {{com.addressLine2}}</td>
                     <td>{{com.phone}}</td>
                     <td class="text-center">
                         <span *ngIf="com.status=='active'; else inactive">
@@ -40,8 +38,12 @@
                         </ng-template>
                     </td>
                     <td class="text-center">
-                        <a routerLink="/admin/time-slot/list/{{com._id}}"><i class="fa fa-clock-o"></i></a>
-                        <a routerLink="/admin/company/edit/{{com._id}}"><i class="far fa-edit"></i></a>
+                        <a routerLink="/admin/time-slot/list/{{com._id}}"><i class="fa fa-clock-o"></i>
+                            <!-- <span *ngIf="!changeText">Hide</span>
+                            <span *ngIf="changeText">Show</span> -->
+                        </a>
+                        <a routerLink="/admin/company/edit/{{com._id}}" title="This is some text I want to display."
+                        style="background-color:#FFFFFF;color:#000000;text-decoration:none"><i class="far fa-edit"></i></a>
                         <a href="javascript:void(0);" class="ml-2" (click)="deleteCompany(com._id)"><i class="far fa-trash-alt text-danger"></i></a>
                     </td>
                 </tr>

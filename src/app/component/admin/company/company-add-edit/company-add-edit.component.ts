@@ -17,7 +17,7 @@ export class CompanyAddEditComponent implements OnInit {
   public companyForm : FormGroup;
   companyId : any = ''
   submitted = false;
-  hide = false;
+  hide = true;
   show_eye = false;
   isAddMode : boolean;
 
@@ -88,7 +88,7 @@ export class CompanyAddEditComponent implements OnInit {
       country :  new FormControl('', Validators.required),
       state :  new FormControl('', Validators.required),
       city :  new FormControl('', Validators.required),
-      pin :  new FormControl('', [Validators.required,Validators.pattern("^[0-9]{7}$")]),
+      pin :  new FormControl('', [Validators.required,Validators.pattern("^[0-9]{6}$")]),
       image : new FormControl('https://media.istockphoto.com/vectors/washing-machine-with-a-wash-basin-and-cleaning-stuff-vector-id1141658592?k=20&m=1141658592&s=612x612&w=0&h=FpNfdvX28sfE17zvGl8dGuhyYJu31X3UTCusmc6Ed2o=')
     },{ 
       validator: this.isAddMode ? this.checkPasswords('password','confirmPassword') : Validators.nullValidator

@@ -30,13 +30,14 @@
             <tbody>
                 <tr *ngFor="let subCategory of subCategoryList; let i = index">
                     <td>{{subCategory.name}}</td>
-                    <td><img src="{{(subCategory.image) || ''}}" alt="subCategory Img"></td>                    
+                    <!-- <td><img src="{{(subCategory.image) || ''}}" alt="subCategory Img"></td>   -->
+                    <td><img src="../../../../../assets/img/blank-ticket.png" alt="subCategory Img"></td>                    
                     <td>{{subCategory.category.name}}</td>
                     <td>{{subCategory.createdAt | date}}</td>
                     <td>{{subCategory.smallDesc}}</td>
                     <td class="text-center"><span class="badge badge-success">{{subCategory.status}}</span></td>
                     <td class="text-center">
-                        <a routerLink="/admin/sub-category/edit/{{subCategory._id}}"><i class="far fa-eye"></i></a>
+                        <a routerLink="/admin/sub-category/edit/{{subCategory._id}}"><i class="far fa-edit"></i></a>
                         <a href="javascript:void(0);" class="ml-2" (click)="deletesubCategory(subCategory._id)"><i class="far fa-trash-alt text-danger"></i></a>
                     </td>
                 </tr>

@@ -1,14 +1,14 @@
 <div class="dashboard-body-content">
     <h5>{{formType}} company</h5>
     <hr>
-    <form class="edit-form" [formGroup]="companyForm" (ngSubmit)="submitCompanyForm(companyForm)">
+    <form class="edit-form" [formGroup]="companyForm" (ngSubmit)="submitCompanyForm(companyForm)" autocomplete="off">
         <div class="row m-0 pt-3">
             <div class="col-lg-2">
-                <!-- <div class="brand-wrapper"> -->
-                    <!-- <input type="file" class="brand-file"> -->
+                <div class="brand-wrapper">
+                    <input type="file" class="brand-file">
                     <!-- <input type="file" #image="ngModel" ngModel name="image" id="image" (change)="fileProgress($event)" />
                     <img [src]="previewUrl" height="100" />   -->
-                <!-- </div> -->
+                </div>
             </div>
             <div class="col-lg-10">
                 <div class="row">
@@ -35,7 +35,7 @@
                         <div class="form-group edit-box">
                             <label for="desc">Password</label>
                             <input [type]="hide ? 
-                            'password' : 'text'" placeholder="Enter password" class="form-control" formControlName = "password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                            'password' : 'text'" id="real-password" autocomplete="new-password" placeholder="Enter password" class="form-control" formControlName = "password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
                             <i [class]="show_eye ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showPassword()"></i>
                             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                                 <div *ngIf="f.password.errors.required">Password is required</div>
@@ -134,7 +134,7 @@
                             <input type="number" placeholder="Enter Pin" class="form-control" formControlName = "pin" [ngClass]="{ 'is-invalid': submitted && f.pin.errors }" />
                             <div *ngIf="submitted && f.pin.errors" class="invalid-feedback">
                                 <div *ngIf="f.pin.errors.required">Pin is required</div>
-                                <div *ngIf="f.pin.errors.pattern">Pin must be 7 digit</div>
+                                <div *ngIf="f.pin.errors.pattern">Pin must be 6 digit</div>
                             </div>
                         </div>
                     </div>

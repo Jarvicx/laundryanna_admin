@@ -1,0 +1,54 @@
+<div class="dashboard-body-content">
+    <div class="row d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom row-header">
+        <div class="col-lg-8 d-flex justify-content-start align-items-center">
+            <h5>Service Boys</h5>
+        </div>
+        <div class="col-lg-4 d-flex justify-content-end align-items-center">
+            <button class="actionbutton btn btn-sm ml-3" routerLink='/admin/service-boy/add'>Add Boy</button>
+        </div>
+    </div>
+    <div class="table-responsive edit-table">
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email Id</th>
+                    <th>Age</th>
+                    <th>Mobile No.</th>
+                    <th>Boy type</th>
+                    <th>Register Date</th>
+                    <th style="width: 150px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let serviceBoy of service_boyList">
+                    <td>{{serviceBoy._id}}</td>
+                    <td>{{serviceBoy.name}}</td>
+                    <td>{{serviceBoy.email}}</td>
+                    <td>{{serviceBoy.age}}</td>
+                    <td>{{serviceBoy.phone}}</td>
+                    <td>{{serviceBoy.boy_type}}</td>
+                    <td>{{serviceBoy.createdAt| date: 'shortDate'}}</td>
+                    <td>
+                        <a routerLink='/admin/service-boy/edit/{{serviceBoy._id}}'><i class="far fa-edit"  data-placement="left" data-toggle="tooltip" title="Edit" ></i></a>
+                        <!-- <a href="edit_customer.html"><i class="far fa-eye"  data-placement="left" data-toggle="tooltip" title="View Boy" ></i></a>
+                        <a href="customer_details.html"><i class="fas fa-hand-holding-usd" data-placement="left" data-toggle="tooltip" title="Money Collection"></i></a> -->
+                        <a href="javascript:void(0);" (click)="deleteData(serviceBoy._id)" data-toggle="modal" data-placement="left" data-target="#exampleModal"><i class="far fa-trash-alt" data-toggle="tooltip" title="Delete"></i></a>
+                    </td>
+                </tr>                
+            </tbody>
+        </table>
+    </div>
+    <!-- <nav class="pagination-container">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#"><i
+                        class="fa fa-angle-double-left previous-img"></i></a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link active" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#"><i
+                        class="fa fa-angle-double-right next-img"></i></a></li>
+        </ul>
+    </nav> -->
+</div>
