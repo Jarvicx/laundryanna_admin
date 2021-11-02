@@ -33,7 +33,7 @@ export class ApiService {
     localStorage.setItem('accessToken', data.data[1].accessToken);
     localStorage.setItem('userInfo',JSON.stringify(data.data[0]));
     window.location.href = environment.dasboardPath;
-    location.reload();
+    // location.reload();
     // this._router.navigate([(routeIntended) ? routeIntended : '/admin/dashboard']);
   }
 
@@ -169,6 +169,14 @@ export class ApiService {
     return this._http.patch<any>(_apiUrl + '/customer/update/'+customerId,formData, {headers : this.header} );
   }
 
+  customerSearch(keyWord : any){
+    return this._http.get<any>(_apiUrl + '/customer/search?q='+keyWord);
+  }
+  
+  customerSearchByDate(startDate : any, endDate : any){
+    return this._http.get<any>(_apiUrl + '/customer/search-by-date-range?startDate='+startDate+'&endDate='+endDate);
+  }
+
   // ************* Customer Address ***************************//
   getCustomerAddressList(cust_id : any){
     return this._http.get<any>(_apiUrl + '/address/list-by-user/' + cust_id);
@@ -251,5 +259,69 @@ export class ApiService {
   updateStatus(pick_id:any, statusData:any){
     return this._http.patch<any>(_apiUrl + '/pickup/change-status/'+ pick_id, statusData, {headers:this.header});
   }
+
+  pickupSearchByDate(inputDate : any){
+    return this._http.get<any>(_apiUrl + '/pickup/search-by-date?date='+inputDate);
+  }
+
+  pickupSearchByDateRange(startDate : any, endDate : any){
+    return this._http.get<any>(_apiUrl + '/pickup/search-by-date-range?startDate='+startDate+'&endDate='+endDate);
+  }
+  
+  pickupSearchByStatus(status : any){
+    return this._http.get<any>(_apiUrl + '/pickup/search-by-status?status='+status);
+  }
+
+  //***************************offer *******************************/
+  getOfferList(){
+    return this._http.get<any>(_apiUrl + '/offer/list');
+  }
+  addOffer(formData:any){
+    return this._http.post<any>(_apiUrl + '/offer/create', formData, {headers:this.header});
+  }
+  getOfferDetail(offerId:any){
+    return this._http.get<any>(_apiUrl + '/offer/detail/' + offerId) //, {headers:this.header});
+  }
+  updateOffer(OfferId:any,formData:any){
+    return this._http.patch<any>(_apiUrl + '/offer/update/' + OfferId, formData, {headers:this.header});
+  }
+  deleteOffer(offerId:any){
+    return this._http.delete<any>(_apiUrl + '/offer/delete/' + offerId, {headers:this.header});
+  }
+
+  //***************************coupon *******************************/
+  getCouponList(){
+    return this._http.get<any>(_apiUrl + '/coupon/list');
+  }
+  addCoupon(formData:any){
+    return this._http.post<any>(_apiUrl + '/coupon/create', formData, {headers:this.header});
+  }
+  getCouponDetail(CouponId:any){
+    return this._http.get<any>(_apiUrl + '/coupon/detail/' + CouponId) //, {headers:this.header});
+  }
+  updateCoupon(CouponId:any,formData:any){
+    return this._http.patch<any>(_apiUrl + '/coupon/update/' + CouponId, formData, {headers:this.header});
+  }
+  deleteCoupon(CouponId:any){
+    return this._http.delete<any>(_apiUrl + '/coupon/delete/' + CouponId, {headers:this.header});
+  }
+
+  //***************************Plan *******************************/
+  getPlanList(){
+    return this._http.get<any>(_apiUrl + '/plan/list');
+  }
+  addPlan(formData:any){
+    return this._http.post<any>(_apiUrl + '/plan/create', formData, {headers:this.header});
+  }
+  getPlanDetail(PlanId:any){
+    return this._http.get<any>(_apiUrl + '/plan/detail/' + PlanId) //, {headers:this.header});
+  }
+  updatePlan(PlanId:any,formData:any){
+    return this._http.patch<any>(_apiUrl + '/plan/update/' + PlanId, formData, {headers:this.header});
+  }
+  deletePlan(planId:any){
+    return this._http.delete<any>(_apiUrl + '/plan/delete/' + planId, {headers:this.header});
+  }
+
 }
 

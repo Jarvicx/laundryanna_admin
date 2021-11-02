@@ -51,7 +51,7 @@
                     <div class="form-group edit-box">
                         <label for="pickup_date">Pickup Date</label>
                         <!-- <input type="time" id="pickup_date" placeholder="Choose Start Time Slot" formControlName = "pickup_date" class="form-control" mdbInput [ngClass]="{ 'is-invalid': submitted && f.pickup_date.errors }" /> -->
-                        <input type="date" formControlName="pickup_date" >
+                        <input type="date" formControlName="pickup_date" class="form-control">
                         <div *ngIf="submitted && f.pickup_date.errors" class="invalid-feedback">
                             <div *ngIf="f.pickup_date.errors.required">Start Time is required</div>
                         </div> 
@@ -60,7 +60,7 @@
                 <div class="col-lg-6">
                     <div class="form-group edit-box">
                         <label for="pickup_time">Pickup Time </label>
-                        <input type="time" id="pickup_time" placeholder="Choose End Time Slot" formControlName = "pickup_time" class="form-control" mdbInput [ngClass]="{ 'is-invalid': submitted && f.pickup_time.errors }" />
+                        <input type="text" id="pickup_time" placeholder="Choose End Time Slot" formControlName = "pickup_time" class="form-control" mdbInput [ngClass]="{ 'is-invalid': submitted && f.pickup_time.errors }" />
                         <div *ngIf="submitted && f.pickup_time.errors" class="invalid-feedback">  
                             <div *ngIf="f.pickup_time.errors.required">End Time is required.</div>  
                         </div>  

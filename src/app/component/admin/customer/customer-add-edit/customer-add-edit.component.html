@@ -37,7 +37,7 @@
                     <div class="form-group edit-box">
                         <label for="password">Password</label>
                         <input [type]="hide ? 
-                        'password' : 'text'" id="real-password" id="real-password" autocomplete="new-password" placeholder="Enter password" formControlName = "password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                        'password' : 'text'" id="real-password" id="real-password" autocomplete="new-password" placeholder="Enter password" formControlName = "password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
                         <!-- <i [class]="show_eye ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showPassword()"></i> -->
                         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                             <div *ngIf="f.password.errors.required">Password is required</div>
@@ -48,7 +48,7 @@
                 <div class="col-lg-6" *ngIf="formType=='Add'">
                     <div class="form-group edit-box">
                         <label for="conFirmpassword">Confirm Password</label>
-                        <input type="password" placeholder="Enter confirm password" formControlName = "conFirmpassword" [ngClass]="{ 'is-invalid': submitted && f.conFirmpassword.errors }">
+                        <input type="password" placeholder="Enter confirm password" formControlName = "conFirmpassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.conFirmpassword.errors }">
                         <div *ngIf="submitted && f.conFirmpassword.errors" class="invalid-feedback">
                             <div *ngIf="f.conFirmpassword.errors.required">Confirm Password is required</div>
                             <div *ngIf="f.conFirmpassword.errors.confirmedValidator">Password does not match.</div>

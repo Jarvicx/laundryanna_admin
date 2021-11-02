@@ -10,20 +10,20 @@
         <div class="clearfix"></div>
     </div>
     <hr>
-    <!-- <div class="row m-0 justify-content-end align-items-center">
+    <div class="row m-0 justify-content-start align-items-center">
         <div class="input-group col-md-3 plr-2 mt-2">
-            <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="button-addon2">
+            <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="button-addon2" (keyup)="searchCustomer($event)">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary searchbtn" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
             </div>
         </div>
         <div class="col-md-2 plr-2 mt-2">
-            <select name="" id="" class="mr-3 form-control">
+            <select name="" id="" class="mr-3 form-control" (change)="searchCustomerDateRange($event)">
                 <option value="all">All</option>
                 <option value="today">Today</option>
-                <option value="7days">Last 7 days</option>
-                <option value="1month">Last 1 month</option>
-                <option value="1year">Last 1 year</option>
+                <option value="week">Last 7 days</option>
+                <option value="month">Last 1 month</option>
+                <option value="year">Last 1 year</option>
             </select>
         </div>						
         <div>
@@ -31,7 +31,7 @@
             <button class="actionbutton btn btn-sm ml-3 mt-2">Export Data</button>
             <button class="actionbutton btn btn-sm ml-3 mt-2">View Partners</button>
         </div>
-    </div> -->
+    </div>
     <div class="row m-0">
         <div class="col-12 col-md-3 ml-auto mb-4">
             <div class="input-group ">
@@ -47,12 +47,12 @@
                     <th>Mobile No.</th>
                     <th>Email</th>
                     <th>Gender</th>
-                    <th>Wallet Balance</th>
+                    <!-- <th>Wallet Balance</th> -->
                     <!-- <th>Orders</th> -->
                     <th style="width: 150px;">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="allCustomer.length > 0; else otherBlock;">
                 <tr *ngFor="let customer of allCustomer">
                     <!-- <td>
                         <div class="id">45987</div>
@@ -62,7 +62,7 @@
                     <td>{{customer.phone}}</td>
                     <td>{{customer.email}}</td>
                     <td>{{customer.gender}}</td>
-                    <td>{{customer.wallet}}</td>
+                    <!-- <td>{{customer.wallet}}</td> -->
                     <td class="text-center">
                         <a routerLink="/admin/customer-address/list/{{customer._id}}"><i class="fa fa-address-card"></i></a>
                         <a routerLink="/admin/customer/edit/{{customer._id}}"><i class="far fa-edit"></i></a>
@@ -86,6 +86,14 @@
                     </td> -->
                 </tr>
             </tbody>
+            <ng-template #otherBlock>
+                <tbody>
+                    <tr>
+                        <td colspan="5">No data!</td>
+                    </tr>
+                </tbody>
+            </ng-template>
+            
         </table>
     </div>
     <!-- <nav class="pagination-container">

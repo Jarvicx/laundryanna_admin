@@ -1,0 +1,48 @@
+<div class="dashboard-body-content">
+    <div class="d-block">
+        <div class="row row-header">
+            <div class="col-lg-6 d-flex justify-content-start align-items-center">
+                <h5>View Wallet Balance</h5>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-end align-items-center">
+                <a href="javascript:void(0);" class="orderbtn btn btn-sm" routerLink="/admin/plan/add">Add Plans</a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <hr>
+        
+        <div class="table-responsive edit-table">
+            <table class="table table-sm table-hover table-bordered">
+                
+                    <tr>
+                        <th>Washtype</th>
+                        <th>Plan Name</th>
+                        <th>Amount</th>
+                        <th>Maximum Weight</th>
+                        <th>Per Kg Price for Extra Weight</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr *ngFor="let plan of planList">
+                        <td>{{plan?.category?.name}}</td>
+                        <td>{{plan?.name}}</td>
+                        <td>{{plan?.amount}}</td>
+                        <td>{{plan?.maxWeight}}</td>
+                        <td>{{plan?.priceExtraWeightPerKg}}</td>
+                        <td>
+                            <a href="javascript:void(0);" routerLink="/admin/plan/edit/{{plan?._id}}"><i class="far fa-edit" title="Edit Item" ></i></a>
+                            <a href="javascript:void(0);" (click)="deletePlan(plan._id)"><i class="far fa-trash-alt" title="Delete Item" ></i></a>
+                        </td>
+                    </tr>
+            </table>
+        </div>
+        <nav class="pagination-container">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-double-left previous-img"></i></a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link active" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-double-right next-img"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

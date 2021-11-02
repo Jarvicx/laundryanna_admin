@@ -1,0 +1,57 @@
+<div class="dashboard-body-content">
+    <div class="d-block">
+        <div class="row row-header">
+            <div class="col-lg-6 d-flex justify-content-start align-items-center">
+                <h5>View Coupons</h5>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-end align-items-center">
+                <a href="javascript:void(0);" class="orderbtn btn btn-sm" routerLink="/admin/coupon/add">Add Coupon</a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <hr>
+        
+        <div class="table-responsive edit-table">
+            <table class="table table-sm table-hover table-bordered">
+                
+                    <tr>
+                        <th>Code Name</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Offer Type</th>
+                        <th>Offer Rate</th>
+                        <th>Maximum Value</th>
+                        <th>Maximum Time can use</th>
+                        <th>Maximum User can use</th>
+
+                        <th>No of used</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr *ngFor="let coupon of couponList">
+                        <td>{{coupon?.code}}</td>
+                        <td>{{coupon?.startDate | date:'d MMM, Y'}}</td>
+                        <td>{{coupon?.endDate | date:'d MMM, Y'}}</td>
+                        <td><span class="badge badge-warning">{{coupon?.offerType}}</span>	</td>
+                        <td>{{coupon?.offerRate}}</td>
+                        <td>{{coupon?.maximumValue}}</td>
+                        <td>{{coupon?.maximumUse}}</td>
+                        <td>{{coupon?.maximumUserUse}}</td>
+                        <td>{{coupon?.noOfUse}}</td>
+                        <td>
+                            <a href="javascript:void(0);" routerLink="/admin/coupon/edit/{{coupon?._id}}"><i class="far fa-edit" title="Edit" ></i></a>
+                            <a href="javascript:void(0);" (click)="deleteCoupon(coupon?._id)"><i class="far fa-trash-alt" title="Delete"></i></a>
+                        </td>
+                    </tr>
+            </table>
+        </div>
+        <nav class="pagination-container">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-double-left previous-img"></i></a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link active" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-double-right next-img"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

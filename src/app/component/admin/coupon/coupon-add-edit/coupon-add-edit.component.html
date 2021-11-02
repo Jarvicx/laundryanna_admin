@@ -1,0 +1,68 @@
+<div class="dashboard-body-content">
+    <h5>Offer {{formType}}</h5>
+    <hr>
+    <form class="edit-form" #couponForm="ngForm" (ngSubmit)="couponFormSubmit(couponForm)">
+        <h5 class="text-blue">Basic Information</h5>
+        <div class="row m-0 pt-3">
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="code">code</label>
+                    <input type="text" name="code" #code="ngModel" [ngModel]="couponData.code" class="form-control" id="code" required [ngClass]="{'is-invalid': code?.invalid && code?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="startDate">Start Date</label>
+                    <input type="date" name="startDate" #startDate="ngModel" [ngModel]="couponData.startDate" class="form-control" id="startDate" required [ngClass]="{'is-invalid': startDate?.invalid && startDate?.touched}" [min]="today">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="endDate">End Date</label>
+                    <input type="date" name="endDate" #endDate="ngModel" [ngModel]="couponData.endDate" class="form-control" id="endDate" required [ngClass]="{'is-invalid': endDate?.invalid && endDate?.touched}" [min]="today">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="offerType">offerType</label>
+                    <select name="offerType" #offerType="ngModel" id="offerType" [ngModel]="couponData.offerType" class="form-control" required [ngClass]="{'is-invalid': offerType?.invalid && offerType?.touched}">
+                        <option value="flat">Flat</option>
+                        <option value="percentage">Percentage</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="offerRate">Offer Rate</label>
+                    <input type="number" name="offerRate" #offerRate="ngModel" [ngModel]="couponData.offerRate" class="form-control" id="offerRate" required [ngClass]="{'is-invalid': offerRate?.invalid && offerRate?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="maximumValue">Maximum Value</label>
+                    <input type="number" name="maximumValue" #maximumValue="ngModel" [ngModel]="couponData.maximumValue" class="form-control" id="maximumValue" required [ngClass]="{'is-invalid': maximumValue?.invalid && maximumValue?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="maximumUse">Maximum Use</label>
+                    <input type="number" name="maximumUse" #maximumUse="ngModel" [ngModel]="couponData.maximumUse" class="form-control" id="maximumUse" required [ngClass]="{'is-invalid': maximumUse?.invalid && maximumUse?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="maximumUserUse">Maximum User Can Use</label>
+                    <input type="number" name="maximumUserUse" #maximumUserUse="ngModel" [ngModel]="couponData.maximumUserUse" class="form-control" id="maximumUserUse" required [ngClass]="{'is-invalid': maximumUserUse?.invalid && maximumUserUse?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="text-danger">{{errorMessage}}</span>
+            </div>
+        </div>
+        
+        <div class="form-group d-flex justify-content-end">
+            <button type="submit" class="actionbutton" >SAVE</button>
+            <button class="actionbutton" style="margin-left: 5px;" routerLink="/admin/coupon/list">CANCEL</button>
+        </div>
+    </form>
+</div>

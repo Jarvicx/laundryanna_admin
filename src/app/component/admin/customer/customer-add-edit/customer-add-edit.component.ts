@@ -122,7 +122,7 @@ export class CustomerAddEditComponent implements OnInit {
           res => {
             this.Toast.fire({
               icon: 'success',
-              title: 'Company added successfully'
+              title: 'Customer added successfully'
             })
             this._router.navigate(['/admin/customer/list']);
             this._loader.stopLoader('loader');
@@ -155,7 +155,7 @@ export class CustomerAddEditComponent implements OnInit {
           }
         )
       }
-    }else{
+    } else {
       return;
     }
   }

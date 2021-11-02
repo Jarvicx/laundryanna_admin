@@ -78,6 +78,12 @@ import { ServiceBoyListComponent } from './component/admin/service_boy/service-b
 import { ServiceBoyAddComponent } from './component/admin/service_boy/service-boy-add/service-boy-add.component';
 import { PickUpListComponent } from './component/admin/pickUp/pick-up-list/pick-up-list.component';
 import { PickUpAddEditComponent } from './component/admin/pickUp/pick-up-add-edit/pick-up-add-edit.component';
+import { OfferListComponent } from './component/admin/offer/offer-list/offer-list.component';
+import { OfferAddEditComponent } from './component/admin/offer/offer-add-edit/offer-add-edit.component';
+import { CouponListComponent } from './component/admin/coupon/coupon-list/coupon-list.component';
+import { CouponAddEditComponent } from './component/admin/coupon/coupon-add-edit/coupon-add-edit.component';
+import { PlanListComponent } from './component/admin/plan/plan-list/plan-list.component';
+import { PlanAddEditComponent } from './component/admin/plan/plan-add-edit/plan-add-edit.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +115,13 @@ import { PickUpAddEditComponent } from './component/admin/pickUp/pick-up-add-edi
     ServiceBoyListComponent,
     ServiceBoyAddComponent,
     PickUpListComponent,
-    PickUpAddEditComponent
+    PickUpAddEditComponent,
+    OfferListComponent,
+    OfferAddEditComponent,
+    CouponListComponent,
+    CouponAddEditComponent,
+    PlanListComponent,
+    PlanAddEditComponent
   ],
   imports: [
     BrowserModule,AppRoutingModule,CommonModule,FormsModule,ReactiveFormsModule,HttpClientModule,BrowserAnimationsModule,NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),

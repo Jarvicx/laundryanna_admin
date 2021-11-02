@@ -1,0 +1,49 @@
+<div class="dashboard-body-content">
+    <h5>Plan {{formType}}</h5>
+    <hr>
+    <form class="edit-form" #planForm="ngForm" (ngSubmit)="planFormSubmit(planForm)">
+        <h5 class="text-blue">Basic Information</h5>
+        <div class="row m-0 pt-3">
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="category">category</label>
+                    <select name="category" #category="ngModel" id="category" [ngModel]="planData.category" class="form-control" required [ngClass]="{'is-invalid': category?.invalid && category?.touched}">
+                        <option *ngFor="let item of categoryData" value="{{item._id}}">{{item.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" #name="ngModel" [ngModel]="planData.name" class="form-control" id="name" required [ngClass]="{'is-invalid': name?.invalid && name?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="amount">Amount</label>
+                    <input type="number" name="amount" #amount="ngModel" [ngModel]="planData.amount" class="form-control" id="amount" required [ngClass]="{'is-invalid': amount?.invalid && amount?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="maxWeight">Max Weight</label>
+                    <input type="number" name="maxWeight" #maxWeight="ngModel" [ngModel]="planData.maxWeight" class="form-control" id="maxWeight" required [ngClass]="{'is-invalid': maxWeight?.invalid && maxWeight?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="priceExtraWeightPerKg">Price Extra Weight Per Kg</label>
+                    <input type="number" name="priceExtraWeightPerKg" #priceExtraWeightPerKg="ngModel" [ngModel]="planData.priceExtraWeightPerKg" class="form-control" id="priceExtraWeightPerKg" required [ngClass]="{'is-invalid': priceExtraWeightPerKg?.invalid && priceExtraWeightPerKg?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="text-danger">{{errorMessage}}</span>
+            </div>
+        </div>
+        
+        <div class="form-group d-flex justify-content-end">
+            <button type="submit" class="actionbutton" >SAVE</button>
+            <button class="actionbutton" style="margin-left: 5px;" routerLink="/admin/plan/list">CANCEL</button>
+        </div>
+    </form>
+</div>

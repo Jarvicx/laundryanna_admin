@@ -1,0 +1,41 @@
+<div class="dashboard-body-content">
+    <div class="d-block">
+        <div class="row row-header">
+            <div class="col-lg-6 d-flex justify-content-start align-items-center">
+                <h5>View Offers</h5>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-end align-items-center">
+                <a href="javascript:void(0);" class="orderbtn btn btn-sm" routerLink="/admin/offer/add">Add Offer</a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <hr>
+        
+        <div class="table-responsive edit-table">
+            <table class="table table-sm table-hover table-bordered">
+                
+                    <tr>
+                        <th>Offer Head</th>
+                        <th>Offer Body</th>
+                        <th>Availability</th>
+                    </tr>
+                    <tr *ngFor="let offer of offerList;">
+                        <td>{{offer?.title}}</td>
+                        <td>{{offer?.desc}}</td>
+                        <td *ngIf="offer?.status === false" (click)="offerStatusChange(offer?._id, true)"><img src="./assets/img/close.png" alt="" width="25px"></td>
+                        <td *ngIf="offer?.status === true" (click)="offerStatusChange(offer?._id, false)"><img src="./assets/img/check-mark.png" alt="" width="25px"></td>
+                    </tr>
+            </table>
+        </div>
+        <nav class="pagination-container">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#"><i
+                            class="fa fa-angle-double-left previous-img"></i></a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link active" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-double-right next-img"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

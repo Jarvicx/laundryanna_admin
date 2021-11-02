@@ -3,6 +3,10 @@
         <div class="float-left">
             <h5>Customer Address</h5>
         </div>
+        
+        <div class="float-right">
+            <a href="javascript:void(0);" routerLink="/admin/customer/list" class="orderbtn btn btn-sm">Back</a>
+        </div>
         <div class="float-right">
             <a href="javascript:void(0);" (click)="add()" class="orderbtn btn btn-sm">Add Customer Adress</a>
         </div>
@@ -19,7 +23,7 @@
         <table class="table table-sm table-hover">
             <thead>
                 <tr>
-                    <th>Customer Id</th>
+                    <th>Sl no.</th>
                     <th>Country</th>
                     <th>State</th>
                     <th>City</th>
@@ -28,9 +32,9 @@
                     <th style="width: 150px;">Action</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr *ngFor="let address of addressListing">
-                    <td>{{address.customerId}}</td>
+            <tbody *ngIf="addressListing.length > 0; else otherBlock">
+                <tr *ngFor="let address of addressListing; let i=index">
+                    <td>{{i+1}}</td>
                     <td>{{address.country}}</td>
                     <td>{{address.state}}</td>
                     <td>{{address.city}}</td>
@@ -43,6 +47,13 @@
                    
                 </tr>
             </tbody>
+            <ng-template #otherBlock>
+                <tbody>
+                    <tr>
+                        <td colspan="7">No data!</td>
+                    </tr>
+                </tbody>
+            </ng-template>
         </table>
     </div>
   

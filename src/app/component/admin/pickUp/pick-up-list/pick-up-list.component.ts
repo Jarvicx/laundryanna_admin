@@ -4,6 +4,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ApiService } from 'src/app/service/api.service';
 import Swal from "sweetalert2";
+import { getDateFormat } from "src/app/service/globalFunction";
 
 @Component({
   selector: 'app-pick-up-list',
@@ -12,9 +13,10 @@ import Swal from "sweetalert2";
 })
 export class PickUpListComponent implements OnInit {
   modalRef: any = BsModalRef;
-  public pickUp : any = []; 
+  public pickUpData : any = []; 
+  public filter : boolean = false; 
   statusForm : FormGroup;
-  allStatus=["New Order", "Pick Up assigned", "Order picked"];
+  allStatus=["New Order", "Pick Up assigned", "Order picked", "Delivered", "Cancelled"];
   pickId : any = '';
   submitted = false;
 
@@ -48,7 +50,7 @@ export class PickUpListComponent implements OnInit {
     this._api.getPickUpList().subscribe(
       res=>{
         console.log(res);       
-        this.pickUp = res.data;
+        this.pickUpData = res.data;
         this._loader.stopLoader('loader');
       },err=>{
         this._loader.stopLoader('loader');
@@ -96,7 +98,7 @@ export class PickUpListComponent implements OnInit {
     this.pickId = pickId;
     this.modalRef = this.modalService.show(  
       template,  
-      Object.assign({}, { class: 'gray modal-lg' })  
+      Object.assign({}, { class: 'gray modal-sm' })  
     );  
   } 
   get f(){
@@ -124,4 +126,80 @@ export class PickUpListComponent implements OnInit {
     } 
   } 
 
+  searchPickupDateRange(evt : any) {
+    this.filter = true;
+    console.log(evt.target.value);
+    let today = new Date();
+    let range = new Date();
+
+    let rangeVal = evt.target.value;
+    if (rangeVal === 'today') {
+      today.setDate(today.getDate() + 1);
+    }
+    if (rangeVal === 'week') {
+      range.setDate(today.getDate() - 7);
+    }
+    if (rangeVal === 'month') {
+      range.setDate(today.getDate() - 30);
+    }
+    if (rangeVal === 'year') {
+      range = new Date(today.getFullYear(), 0, 1);
+    }
+    if (rangeVal === 'all') {
+      return this.pickUpList();
+    }
+    console.log({today: getDateFormat(today), range: getDateFormat(range)});
+    
+    let startDate = getDateFormat(range);
+    let endDate = getDateFormat(today);
+
+    this._loader.startLoader('loader');
+    this._api.pickupSearchByDateRange(startDate, endDate).subscribe(
+      res => {
+        console.log(res);
+        this.pickUpData = res.data;
+        this._loader.stopLoader('loader');
+      }, err => {
+        this._loader.stopLoader('loader');
+      }
+    )
+  }
+  
+  searchPickupDate(evt : any) {
+    this.filter = true;
+    console.log(evt.target.value);
+    let selectedDate = evt.target.value;
+
+    this._loader.startLoader('loader');
+    this._api.pickupSearchByDate(selectedDate).subscribe(
+      res => {
+        console.log(res);
+        this.pickUpData = res.data;
+        this._loader.stopLoader('loader');
+      }, err => {
+        this._loader.stopLoader('loader');
+      }
+    )
+  }
+
+  searchPickupByStatus(status : any = 'Cancelled') {
+    this.filter = true;
+    this._loader.startLoader('loader');
+    this._api.pickupSearchByStatus(status).subscribe(
+      res => {
+        console.log(res);
+        this.pickUpData = res.data;
+        this._loader.stopLoader('loader');
+      }, err => {
+        this._loader.stopLoader('loader');
+      }
+    )
+  }
+
+  clearFilter() {
+    console.log(111);
+    
+    this.filter = false;
+    location.reload();
+  }
 }
