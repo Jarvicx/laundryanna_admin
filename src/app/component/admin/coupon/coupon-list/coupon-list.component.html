@@ -14,34 +14,44 @@
         <div class="table-responsive edit-table">
             <table class="table table-sm table-hover table-bordered">
                 
-                    <tr>
-                        <th>Code Name</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Offer Type</th>
-                        <th>Offer Rate</th>
-                        <th>Maximum Value</th>
-                        <th>Maximum Time can use</th>
-                        <th>Maximum User can use</th>
-
-                        <th>No of used</th>
-                        <th>Action</th>
-                    </tr>
-                    <tr *ngFor="let coupon of couponList">
-                        <td>{{coupon?.code}}</td>
-                        <td>{{coupon?.startDate | date:'d MMM, Y'}}</td>
-                        <td>{{coupon?.endDate | date:'d MMM, Y'}}</td>
-                        <td><span class="badge badge-warning">{{coupon?.offerType}}</span>	</td>
-                        <td>{{coupon?.offerRate}}</td>
-                        <td>{{coupon?.maximumValue}}</td>
-                        <td>{{coupon?.maximumUse}}</td>
-                        <td>{{coupon?.maximumUserUse}}</td>
-                        <td>{{coupon?.noOfUse}}</td>
-                        <td>
-                            <a href="javascript:void(0);" routerLink="/admin/coupon/edit/{{coupon?._id}}"><i class="far fa-edit" title="Edit" ></i></a>
-                            <a href="javascript:void(0);" (click)="deleteCoupon(coupon?._id)"><i class="far fa-trash-alt" title="Delete"></i></a>
-                        </td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Code Name</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Offer Type</th>
+                            <th>Offer Rate</th>
+                            <th>Maximum Value</th>
+                            <th>Maximum Time can use</th>
+                            <th>Maximum User can use</th>
+                            <th>No of used</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="couponList.length > 0; else emptyBlock;">
+                        <tr *ngFor="let coupon of couponList">
+                            <td>{{coupon?.code}}</td>
+                            <td>{{coupon?.startDate | date:'d MMM, Y'}}</td>
+                            <td>{{coupon?.endDate | date:'d MMM, Y'}}</td>
+                            <td><span class="badge badge-warning">{{coupon?.offerType}}</span>	</td>
+                            <td>{{coupon?.offerRate}}</td>
+                            <td>{{coupon?.maximumValue}}</td>
+                            <td>{{coupon?.maximumUse}}</td>
+                            <td>{{coupon?.maximumUserUse}}</td>
+                            <td>{{coupon?.noOfUse}}</td>
+                            <td>
+                                <a href="javascript:void(0);" routerLink="/admin/coupon/edit/{{coupon?._id}}"><i class="far fa-edit" title="Edit" ></i></a>
+                                <a href="javascript:void(0);" (click)="deleteCoupon(coupon?._id)"><i class="far fa-trash-alt" title="Delete"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <ng-template #emptyBlock>
+                        <tbody>
+                            <tr>
+                                <td colspan="10">No data!</td>
+                            </tr>
+                        </tbody>
+                    </ng-template>
             </table>
         </div>
         <nav class="pagination-container">

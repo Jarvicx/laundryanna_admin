@@ -323,5 +323,10 @@ export class ApiService {
     return this._http.delete<any>(_apiUrl + '/plan/delete/' + planId, {headers:this.header});
   }
 
+  //***************************Store *******************************/
+  getStoreList(){
+    return this._http.get<any>(_apiUrl + '/store/list');
+  }
+
 }
 

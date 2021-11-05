@@ -14,25 +14,36 @@
         <div class="table-responsive edit-table">
             <table class="table table-sm table-hover table-bordered">
                 
-                    <tr>
-                        <th>Washtype</th>
-                        <th>Plan Name</th>
-                        <th>Amount</th>
-                        <th>Maximum Weight</th>
-                        <th>Per Kg Price for Extra Weight</th>
-                        <th>Action</th>
-                    </tr>
-                    <tr *ngFor="let plan of planList">
-                        <td>{{plan?.category?.name}}</td>
-                        <td>{{plan?.name}}</td>
-                        <td>{{plan?.amount}}</td>
-                        <td>{{plan?.maxWeight}}</td>
-                        <td>{{plan?.priceExtraWeightPerKg}}</td>
-                        <td>
-                            <a href="javascript:void(0);" routerLink="/admin/plan/edit/{{plan?._id}}"><i class="far fa-edit" title="Edit Item" ></i></a>
-                            <a href="javascript:void(0);" (click)="deletePlan(plan._id)"><i class="far fa-trash-alt" title="Delete Item" ></i></a>
-                        </td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Washtype</th>
+                            <th>Plan Name</th>
+                            <th>Amount</th>
+                            <th>Maximum Weight</th>
+                            <th>Per Kg Price for Extra Weight</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="planList.length > 0; else emptyBlock;">
+                        <tr *ngFor="let plan of planList">
+                            <td>{{plan?.category?.name}}</td>
+                            <td>{{plan?.name}}</td>
+                            <td>{{plan?.amount}}</td>
+                            <td>{{plan?.maxWeight}}</td>
+                            <td>{{plan?.priceExtraWeightPerKg}}</td>
+                            <td>
+                                <a href="javascript:void(0);" routerLink="/admin/plan/edit/{{plan?._id}}"><i class="far fa-edit" title="Edit Item" ></i></a>
+                                <a href="javascript:void(0);" (click)="deletePlan(plan._id)"><i class="far fa-trash-alt" title="Delete Item" ></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <ng-template #emptyBlock>
+                        <tbody>
+                            <tr>
+                                <td colspan="6">No data!</td>
+                            </tr>
+                        </tbody>
+                    </ng-template>
             </table>
         </div>
         <nav class="pagination-container">

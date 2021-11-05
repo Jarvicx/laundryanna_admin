@@ -15,9 +15,6 @@
     <div class="row m-0">
         <div class="col-12 col-md-10 ml-auto mb-4 row m-0 d-flex justify-content-end p-0">
             <div class="col-12 col-md-3 plr-2">
-                <input type="text" class="form-control" placeholder="Name/mobile.address/order id..." aria-label="Recipient's username" aria-describedby="button-addon2">
-            </div>
-            <div class="col-12 col-md-3 plr-2">
                 <input type="date" class="form-control" (change)="searchPickupDate($event)">
             </div>
             <div class="col-12 col-md-3 plr-2">
@@ -36,25 +33,12 @@
             <div class="col-12 col-md-1 pl-0 pr-0 d-flex align-items-center" *ngIf="filter">
                 <a href="javascript:void(0);" class="orderbtn btn btn-sm" (click)="clearFilter()">Clear</a>
             </div>
-                <!-- <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="button-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary searchbtn" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
-            </div> -->
         </div>
     </div>
     <div class="table-responsive edit-table card-body p-0">
         <table class="table table-sm table-hover brand-table">
             <thead>
-                <!-- <tr>
-                    <td colspan="7"></td>
-                    <td>25</td>
-                    <td>30</td>
-                    <td><span>₹</span> 30.00</td>
-                    <td><span>₹</span> 30.00</td>
-                    <td></td>
-                </tr> -->
                 <tr>
-                    <!-- <th><label><input type="checkbox" class="form-check-input" id="exampleCheck1"></label></th> -->
                     <th></th>
                     <th>Pickup Id</th>
                     <th>Pickup Date</th>
@@ -63,7 +47,7 @@
                     <th>Mobile No</th>
                     <th>Address</th>
                     <th>Status</th>
-                    <th style="width:80px" class="text-center" colspan="3">Action</th>
+                    <th style="width:80px" class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -77,18 +61,22 @@
                     <td>{{pickup?.addressId?.addressLine1}}</td>
                     <td><span class="badge badge-warning" (click)="openModalWithClass(template,pickup._id)">{{pickup.status}}</span></td>
                     <td class="text-center">
-                        <a href="javascript:void(0);" routerLink="/admin/pick_up/edit/{{pickup._id}}"><i class="far fa-edit" title="Edit Boy" ></i></a>
-                        <!-- <a href=""><i class="fas fa-cart-plus"  data-placement="left" data-toggle="tooltip" title="Create Order" ></i></a>
-                        <a href=""><i class="fas fa-truck-pickup"  data-placement="left" data-toggle="tooltip" title="Order Picked" ></i></a>
-                        <a href=""><i class="fa fa-window-close"  data-placement="left" data-toggle="tooltip" title="Cancel Order" ></i></a> -->
-                        <a href="javascript:void(0);" (click)="deletePickUp(pickup._id)"><i class="far fa-trash-alt" title="Delete Order" ></i></a>
+                        <a href="javascript:void(0);" data-toggle="modal" data-target="#assignBoyModal" *ngIf="!pickup?.boyAssign && !pickup?.storeAssign" (click)="selectPickup(pickup?._id)"><i class="fas fa-user-plus" title="Assign"></i></a>
                         
+                        <a href="javascript:void(0);"><i class="fas fa-cart-plus" title="Create Order" ></i></a>
+                        
+                        <a href="javascript:void(0);" (click)="submitStatus('Order picked', pickup?._id)"><i class="fas fa-truck-pickup" title="Order Picked"></i></a>
+                        
+                        <a href="javascript:void(0);" (click)="submitStatus('Cancelled', pickup?._id)"><i class="fa fa-window-close" title="Cancel Order"></i></a>
+                        
+                        <a href="javascript:void(0);" routerLink="/admin/pick_up/edit/{{pickup._id}}"><i class="far fa-edit" title="Edit" ></i></a>
+                        <a href="javascript:void(0);" (click)="deletePickUp(pickup._id)"><i class="far fa-trash-alt" title="Delete" ></i></a>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <nav class="pagination-container mt-3">
+    <!-- <nav class="pagination-container mt-3">
         <ul class="pagination">
             <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-double-left previous-img"></i></a></li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -96,9 +84,41 @@
             <li class="page-item"><a class="page-link" href="#">3</a></li>
             <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-double-right next-img"></i></a></li>
         </ul>
-    </nav>
+    </nav> -->
 </div>
-
+<div class="export-modal modal fade" id="assignBoyModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" #closebutton>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="edit-form" [formGroup]="boyAssignForm" (ngSubmit)="submitAssignBoy()" #mainForm="ngForm">
+                <div class="modal-body">
+                    <div class="col-12">
+                        <label for="storeAssign">Choose Store</label>
+                        <select name="storeAssign" id="storeAssign"  class="form-control" formControlName="storeAssign" required [ngClass]="{'is-invalid':submitted && h.storeAssign.errors}">
+                            <option value="" hidden>-select-</option>
+                            <option *ngFor="let store of storeData" value="{{store._id}}">{{store.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="boyAssign">Choose Service Boy</label>
+                        <select name="boyAssign" id="boyAssign"  class="form-control" formControlName="boyAssign" required [ngClass]="{'is-invalid':submitted && h.boyAssign.errors}">
+                            <option value="" hidden>-select-</option>
+                            <option *ngFor="let serviceBoy of serviceBoyData" value="{{serviceBoy._id}}">{{serviceBoy.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-3 mb-3 button-container d-flex justify-content-end pr-2">
+                    <button class="actionbutton">Assign</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <ng-template #template>  
     <div class="modal-header">  
         <h4 class="modal-title pull-left">Status Update</h4>  

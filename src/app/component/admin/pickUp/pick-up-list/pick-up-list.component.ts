@@ -1,10 +1,11 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';  
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';  
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';  
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ApiService } from 'src/app/service/api.service';
 import Swal from "sweetalert2";
-import { getDateFormat } from "src/app/service/globalFunction";
+import { dateDiffInDays, getDateFormat } from "src/app/service/globalFunction";
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-pick-up-list',
@@ -12,10 +13,23 @@ import { getDateFormat } from "src/app/service/globalFunction";
   styleUrls: ['./pick-up-list.component.css']
 })
 export class PickUpListComponent implements OnInit {
+
+  // dtInstance!: DataTables.Api
+
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
+
+  @ViewChild('closebutton') closebutton:any;
+  @ViewChild('mainForm') mainForm:any;
+
   modalRef: any = BsModalRef;
-  public pickUpData : any = []; 
-  public filter : boolean = false; 
+  public pickUpData : any = [];
+  public storeData : any = [];
+  public serviceBoyData : any = [];
+  public filter : boolean = false;
+  public selectedPickup: any = {};
   statusForm : FormGroup;
+  boyAssignForm : FormGroup;
   allStatus=["New Order", "Pick Up assigned", "Order picked", "Delivered", "Cancelled"];
   pickId : any = '';
   submitted = false;
@@ -35,22 +49,85 @@ export class PickUpListComponent implements OnInit {
   constructor(private _api : ApiService, private _loader : NgxUiLoaderService, private modalService: BsModalService, private fbuilder : FormBuilder) { 
     this.statusForm= this.fbuilder.group({
       status : new FormControl('',Validators.required)
-    })
+    });
+    this.boyAssignForm= this.fbuilder.group({
+      boyAssign : new FormControl('',Validators.required),
+      storeAssign : new FormControl('',Validators.required)
+    });
   }
 
   ngOnInit(): void {
     if (localStorage.getItem('accessToken')) {
       this.pickUpList();
+      this.storeList();
+      this.serviceBoyList();
+      // this.dtOptions = {
+      //   pagingType: 'full_numbers',
+      //   pageLength: 10
+      // };
+      // this._api.getPickUpList().subscribe(
+      //   res=>{
+      //     console.log(res);       
+      //     this.pickUpData = res.data;
+      //     this.dtTrigger.next();
+      //     this._loader.stopLoader('loader');
+      //   },err=>{
+      //     this._loader.stopLoader('loader');
+      //   }
+      // )
     } else {
       this._api.logoutUser();
     }
   }
+  // ngOnDestroy(): void {
+  //   // Do not forget to unsubscribe the event
+  //   this.dtTrigger.unsubscribe();
+  // }
+  selectPickup(pickupId : any) {
+    this.selectedPickup = [];
+    this._api.getPickID(pickupId).subscribe(
+      res => {
+        this.selectedPickup = res.data;
+        console.log(this.selectedPickup);
+        
+      }, err => {}
+    )
+    
+  }
+  
   pickUpList(){
     this._loader.startLoader('loader');
     this._api.getPickUpList().subscribe(
       res=>{
         console.log(res);       
         this.pickUpData = res.data;
+        // this.dtTrigger.next();
+        this._loader.stopLoader('loader');
+      },err=>{
+        this._loader.stopLoader('loader');
+      }
+    )
+  }
+
+  storeList(){
+    this._loader.startLoader('loader');
+    this._api.getStoreList().subscribe(
+      res=>{
+        console.log(res);       
+        this.storeData = res.data;
+        this._loader.stopLoader('loader');
+      },err=>{
+        this._loader.stopLoader('loader');
+      }
+    )
+  }
+
+  serviceBoyList(){
+    this._loader.startLoader('loader');
+    this._api.getServiceBoyList().subscribe(
+      res=>{
+        console.log(res);       
+        this.serviceBoyData = res.data.filter((e:any) => e.boy_type === 'Delivery Boy');
         this._loader.stopLoader('loader');
       },err=>{
         this._loader.stopLoader('loader');
@@ -104,18 +181,54 @@ export class PickUpListComponent implements OnInit {
   get f(){
     return this.statusForm.controls
   }
+  get h(){
+    return this.boyAssignForm.controls
+  }
 
-  submitStatus(){
+  submitStatus(status : any = '', pickupId : any = ''){
+    
     this.submitted=true;
     this._loader.startLoader('loader');
-    if ( this.statusForm.valid) {
-      this._api.updateStatus(this.pickId,this.statusForm.value).subscribe(
+    let mainForm = {};
+      
+    if(status !== '' && pickupId !== '') {
+      this.pickId = pickupId;
+      mainForm = {status};
+    } else {
+      mainForm = this.statusForm.value;
+    }
+    console.log(mainForm);
+
+    if ((this.statusForm.valid) || (status !== '' && pickupId !== '')) {
+      this._api.updateStatus(this.pickId, mainForm).subscribe(
         res=>{
           this.Toast.fire({
             icon: 'success',
             title: 'Status updated successfully'
           })
-          this.modalRef.hide();
+          if (status === '' && pickupId === '') {
+            this.modalRef.hide();
+          }
+          this.pickUpList();
+          this._loader.stopLoader('loader');
+        },err=>{}
+      )
+    } else {
+      return;
+    } 
+  } 
+  
+  submitAssignBoy(){
+    this.submitted=true;
+    this._loader.startLoader('loader');
+    if ( this.boyAssignForm.valid) {
+      this._api.updatePickUp(this.selectedPickup._id, this.boyAssignForm.value).subscribe(
+        res=>{
+          this.Toast.fire({
+            icon: 'success',
+            title: 'Boy assigned successfully'
+          })
+          this.emptyModal();
           this.pickUpList();
           this._loader.stopLoader('loader');
         },err=>{
@@ -123,8 +236,18 @@ export class PickUpListComponent implements OnInit {
         })
     } else {
       return;
-    } 
+    }
+    this.closeModal();
+    console.log(this.boyAssignForm.value);
+    
   } 
+  
+  emptyModal() {
+    this.mainForm.reset();
+  }
+  closeModal() {
+    this.closebutton.nativeElement.click();
+  }
 
   searchPickupDateRange(evt : any) {
     this.filter = true;
@@ -184,11 +307,12 @@ export class PickUpListComponent implements OnInit {
 
   searchPickupByStatus(status : any = 'Cancelled') {
     this.filter = true;
-    this._loader.startLoader('loader');
+    // this._loader.startLoader('loader');
     this._api.pickupSearchByStatus(status).subscribe(
       res => {
         console.log(res);
         this.pickUpData = res.data;
+    
         this._loader.stopLoader('loader');
       }, err => {
         this._loader.stopLoader('loader');
@@ -197,8 +321,6 @@ export class PickUpListComponent implements OnInit {
   }
 
   clearFilter() {
-    console.log(111);
-    
     this.filter = false;
     location.reload();
   }

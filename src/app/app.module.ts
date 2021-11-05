@@ -84,7 +84,8 @@ import { CouponListComponent } from './component/admin/coupon/coupon-list/coupon
 import { CouponAddEditComponent } from './component/admin/coupon/coupon-add-edit/coupon-add-edit.component';
 import { PlanListComponent } from './component/admin/plan/plan-list/plan-list.component';
 import { PlanAddEditComponent } from './component/admin/plan/plan-add-edit/plan-add-edit.component';
-
+import { MatTableModule } from '@angular/material/table';
+import { DataTablesModule } from "angular-datatables";
 @NgModule({
   declarations: [
     AppComponent,
@@ -126,7 +127,7 @@ import { PlanAddEditComponent } from './component/admin/plan/plan-add-edit/plan-
   imports: [
     BrowserModule,AppRoutingModule,CommonModule,FormsModule,ReactiveFormsModule,HttpClientModule,BrowserAnimationsModule,NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgbModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),MatTableModule,DataTablesModule
   ],
   providers: [ConfirmationDialogService],
   bootstrap: [AppComponent]

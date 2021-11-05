@@ -14,17 +14,28 @@
         <div class="table-responsive edit-table">
             <table class="table table-sm table-hover table-bordered">
                 
-                    <tr>
-                        <th>Offer Head</th>
-                        <th>Offer Body</th>
-                        <th>Availability</th>
-                    </tr>
-                    <tr *ngFor="let offer of offerList;">
-                        <td>{{offer?.title}}</td>
-                        <td>{{offer?.desc}}</td>
-                        <td *ngIf="offer?.status === false" (click)="offerStatusChange(offer?._id, true)"><img src="./assets/img/close.png" alt="" width="25px"></td>
-                        <td *ngIf="offer?.status === true" (click)="offerStatusChange(offer?._id, false)"><img src="./assets/img/check-mark.png" alt="" width="25px"></td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Offer Head</th>
+                            <th>Offer Body</th>
+                            <th>Availability</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="offerList.length > 0; else emptyBlock;">
+                        <tr *ngFor="let offer of offerList;">
+                            <td>{{offer?.title}}</td>
+                            <td>{{offer?.desc}}</td>
+                            <td *ngIf="offer?.status === false" (click)="offerStatusChange(offer?._id, true)"><img src="./assets/img/close.png" alt="" width="25px"></td>
+                            <td *ngIf="offer?.status === true" (click)="offerStatusChange(offer?._id, false)"><img src="./assets/img/check-mark.png" alt="" width="25px"></td>
+                        </tr>
+                    </tbody>
+                    <ng-template #emptyBlock>
+                        <tbody>
+                            <tr>
+                                <td colspan="3">No data!</td>
+                            </tr>
+                        </tbody>
+                    </ng-template>
             </table>
         </div>
         <nav class="pagination-container">
