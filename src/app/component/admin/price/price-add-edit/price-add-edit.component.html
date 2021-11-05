@@ -1,0 +1,39 @@
+<div class="dashboard-body-content">
+    <h5>Price {{formType}}</h5>
+    <hr>
+    <form class="edit-form" #priceForm="ngForm" (ngSubmit)="priceFormSubmit(priceForm)">
+        <h5 class="text-blue">Basic Information</h5>
+        <div class="row m-0 pt-3">
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="category">Category</label>
+                    <select name="category" #category="ngModel" id="category" [ngModel]="priceData.category._id" class="form-control" required [ngClass]="{'is-invalid': category?.invalid && category?.touched}">
+                        <option *ngFor="let item of categoryData" value="{{item._id}}">{{item.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="item">Item</label>
+                    <select name="item" #item="ngModel" id="item" [ngModel]="priceData.item._id" class="form-control" required [ngClass]="{'is-invalid': item?.invalid && item?.touched}">
+                        <option *ngFor="let item of itemData" value="{{item._id}}">{{item.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="price">Price</label>
+                    <input type="number" name="price" #price="ngModel" [ngModel]="priceData.price" class="form-control" id="price" required [ngClass]="{'is-invalid': price?.invalid && price?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="text-danger">{{errorMessage}}</span>
+            </div>
+        </div>
+        
+        <div class="form-group d-flex justify-content-end">
+            <button type="submit" class="actionbutton" >SAVE</button>
+            <button class="actionbutton" style="margin-left: 5px;" routerLink="/admin/plan/list">CANCEL</button>
+        </div>
+    </form>
+</div>

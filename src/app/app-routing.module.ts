@@ -32,6 +32,8 @@ import { CouponListComponent } from "./component/admin/coupon/coupon-list/coupon
 import { CouponAddEditComponent } from "./component/admin/coupon/coupon-add-edit/coupon-add-edit.component";
 import { PlanListComponent } from "./component/admin/plan/plan-list/plan-list.component";
 import { PlanAddEditComponent } from "./component/admin/plan/plan-add-edit/plan-add-edit.component";
+import { PriceAddEditComponent } from "./component/admin/price/price-add-edit/price-add-edit.component";
+import { PriceListComponent } from "./component/admin/price/price-list/price-list.component";
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthCheckService] },
@@ -106,6 +108,11 @@ const routes: Routes = [
       {path: 'list', component: PlanListComponent},
       {path: 'add', component: PlanAddEditComponent},
       {path: 'edit/:planId', component: PlanAddEditComponent},
+    ]},
+    { path: 'price',children:[
+      {path: 'list', component: PriceListComponent},
+      {path: 'add', component: PriceAddEditComponent},
+      {path: 'edit/:priceId', component: PriceAddEditComponent},
     ]},
     
   ]},

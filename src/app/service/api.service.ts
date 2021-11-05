@@ -323,6 +323,26 @@ export class ApiService {
     return this._http.delete<any>(_apiUrl + '/plan/delete/' + planId, {headers:this.header});
   }
 
+  //***************************Plan *******************************/
+  getPriceList(){
+    return this._http.get<any>(_apiUrl + '/price/list');
+  }
+  addPrice(formData:any){
+    return this._http.post<any>(_apiUrl + '/price/create', formData, {headers:this.header});
+  }
+  getPriceDetail(PriceId:any){
+    return this._http.get<any>(_apiUrl + '/price/detail/' + PriceId) //, {headers:this.header});
+  }
+  updatePrice(PriceId:any,formData:any){
+    return this._http.patch<any>(_apiUrl + '/price/update/' + PriceId, formData, {headers:this.header});
+  }
+  deletePrice(PriceId:any){
+    return this._http.delete<any>(_apiUrl + '/price/delete/' + PriceId, {headers:this.header});
+  }
+  searchPrice(item: any, category: any){
+    return this._http.get<any>(_apiUrl + '/price/search?item='+item+'&category='+category);
+  }
+
   //***************************Store *******************************/
   getStoreList(){
     return this._http.get<any>(_apiUrl + '/store/list');

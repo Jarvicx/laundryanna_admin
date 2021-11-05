@@ -86,6 +86,8 @@ import { PlanListComponent } from './component/admin/plan/plan-list/plan-list.co
 import { PlanAddEditComponent } from './component/admin/plan/plan-add-edit/plan-add-edit.component';
 import { MatTableModule } from '@angular/material/table';
 import { DataTablesModule } from "angular-datatables";
+import { PriceListComponent } from './component/admin/price/price-list/price-list.component';
+import { PriceAddEditComponent } from './component/admin/price/price-add-edit/price-add-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -122,7 +124,9 @@ import { DataTablesModule } from "angular-datatables";
     CouponListComponent,
     CouponAddEditComponent,
     PlanListComponent,
-    PlanAddEditComponent
+    PlanAddEditComponent,
+    PriceListComponent,
+    PriceAddEditComponent
   ],
   imports: [
     BrowserModule,AppRoutingModule,CommonModule,FormsModule,ReactiveFormsModule,HttpClientModule,BrowserAnimationsModule,NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
