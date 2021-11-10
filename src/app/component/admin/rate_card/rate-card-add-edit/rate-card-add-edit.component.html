@@ -1,0 +1,42 @@
+<div class="dashboard-body-content">
+    <h5>Rate card {{formType}}</h5>
+    <hr>
+    <form class="edit-form" #rateCardForm="ngForm" (ngSubmit)="rateCardFormSubmit(rateCardForm)">
+        <div class="row m-0 pt-3">
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="name">Rate card name</label>
+                    <input type="text" name="name" #name="ngModel" [(ngModel)]="rateCardData.name" class="form-control" id="name" required [ngClass]="{'is-invalid': name?.invalid && name?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="text-danger">{{errorMessage}}</span>
+            </div>
+        </div>
+        <div class="row m-0 pt-3">
+            <div class="col-lg-12">
+                <table class="table table-sm table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th *ngFor="let category of categoryData">{{category.name}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let itemDetails of uniqueItemDetails">
+                            <td>{{itemDetails.itemName}}</td>
+                            <td *ngFor="let catData of getSameCategoryDetails(itemDetails);let i = index">
+                                <input type="number" name="price_{{itemDetails.item}}_{{catData.category}}" [(ngModel)]="catData.price" placeholder="Price">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="form-group d-flex justify-content-end">
+            <button type="submit" class="actionbutton" >SAVE</button>
+            <button class="actionbutton" style="margin-left: 5px;" routerLink="/admin/rate-card/list">CANCEL</button>
+        </div>
+    </form>
+</div>

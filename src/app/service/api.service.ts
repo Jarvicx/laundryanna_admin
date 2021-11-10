@@ -323,7 +323,7 @@ export class ApiService {
     return this._http.delete<any>(_apiUrl + '/plan/delete/' + planId, {headers:this.header});
   }
 
-  //***************************Plan *******************************/
+  //***************************Price *******************************/
   getPriceList(){
     return this._http.get<any>(_apiUrl + '/price/list');
   }
@@ -341,6 +341,23 @@ export class ApiService {
   }
   searchPrice(item: any, category: any){
     return this._http.get<any>(_apiUrl + '/price/search?item='+item+'&category='+category);
+  }
+
+  //***************************Rate Card *******************************/
+  getRateCardList(){
+    return this._http.get<any>(_apiUrl + '/rate-card/list');
+  }
+  addRateCard(formData:any){
+    return this._http.post<any>(_apiUrl + '/rate-card/create', formData, {headers:this.header});
+  }
+  getRateCardDetail(RateCardId:any){
+    return this._http.get<any>(_apiUrl + '/rate-card/detail/' + RateCardId) //, {headers:this.header});
+  }
+  updateRateCard(RateCardId:any,formData:any){
+    return this._http.patch<any>(_apiUrl + '/rate-card/update/' + RateCardId, formData, {headers:this.header});
+  }
+  deleteRateCard(RateCardId:any){
+    return this._http.delete<any>(_apiUrl + '/rate-card/delete/' + RateCardId, {headers:this.header});
   }
 
   //***************************Store *******************************/

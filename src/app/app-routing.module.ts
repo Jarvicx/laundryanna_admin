@@ -34,6 +34,8 @@ import { PlanListComponent } from "./component/admin/plan/plan-list/plan-list.co
 import { PlanAddEditComponent } from "./component/admin/plan/plan-add-edit/plan-add-edit.component";
 import { PriceAddEditComponent } from "./component/admin/price/price-add-edit/price-add-edit.component";
 import { PriceListComponent } from "./component/admin/price/price-list/price-list.component";
+import { RateCardListComponent } from "./component/admin/rate_card/rate-card-list/rate-card-list.component";
+import { RateCardAddEditComponent } from "./component/admin/rate_card/rate-card-add-edit/rate-card-add-edit.component";
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthCheckService] },
@@ -113,6 +115,11 @@ const routes: Routes = [
       {path: 'list', component: PriceListComponent},
       {path: 'add', component: PriceAddEditComponent},
       {path: 'edit/:priceId', component: PriceAddEditComponent},
+    ]},
+    { path: 'rate-card',children:[
+      {path: 'list', component: RateCardListComponent},
+      {path: 'add', component: RateCardAddEditComponent},
+      {path: 'edit/:rateCardId', component: RateCardAddEditComponent},
     ]},
     
   ]},

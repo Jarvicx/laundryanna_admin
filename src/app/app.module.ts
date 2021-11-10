@@ -88,6 +88,8 @@ import { MatTableModule } from '@angular/material/table';
 import { DataTablesModule } from "angular-datatables";
 import { PriceListComponent } from './component/admin/price/price-list/price-list.component';
 import { PriceAddEditComponent } from './component/admin/price/price-add-edit/price-add-edit.component';
+import { RateCardAddEditComponent } from './component/admin/rate_card/rate-card-add-edit/rate-card-add-edit.component';
+import { RateCardListComponent } from './component/admin/rate_card/rate-card-list/rate-card-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -126,7 +128,9 @@ import { PriceAddEditComponent } from './component/admin/price/price-add-edit/pr
     PlanListComponent,
     PlanAddEditComponent,
     PriceListComponent,
-    PriceAddEditComponent
+    PriceAddEditComponent,
+    RateCardAddEditComponent,
+    RateCardListComponent
   ],
   imports: [
     BrowserModule,AppRoutingModule,CommonModule,FormsModule,ReactiveFormsModule,HttpClientModule,BrowserAnimationsModule,NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),

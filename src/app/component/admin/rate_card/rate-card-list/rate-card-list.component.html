@@ -1,0 +1,50 @@
+<div class="dashboard-body-content">
+    <div class="d-block">
+        <div class="float-left">
+            <h5>Price Manager </h5>
+        </div>
+        <div class="float-right">
+            <a href="javascript:void(0);" class="orderbtn btn btn-sm" routerLink="/admin/rate-card/add">Add Rate crad</a>
+            <a href="javascript:void(0);" class="orderbtn btn btn-sm" routerLink="/admin/price/list">Back</a>
+        </div>
+        <div class="clearfix"></div>
+        <hr>
+        <div class="table-responsive edit-table">
+            <table class="table table-sm table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Sl No.</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="rateCardList?.length || rateCardList.length > 0; else notFoundBlock;">
+                    <tr *ngFor="let rateCardData of rateCardList; let i=index;">
+                        <td>{{i+1}}</td>
+                        <td>{{rateCardData?.name}}</td>
+                        <td>
+                            <a href="javascript:void(0);" routerLink="/admin/rate-card/edit/{{rateCardData?._id}}"><i class="far fa-edit" title="Edit Item" ></i></a>
+                            <a href="javascript:void(0);" (click)="deleteRateCard(rateCardData._id)"><i class="far fa-trash-alt" title="Delete Item" ></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+                <ng-template #notFoundBlock>
+                    <tbody>
+                        <tr>
+                            <td colspan="4">No data!</td>
+                        </tr>
+                    </tbody>
+                </ng-template>
+            </table>
+        </div>
+        <nav class="pagination-container">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-double-left previous-img"></i></a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link active" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-double-right next-img"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
