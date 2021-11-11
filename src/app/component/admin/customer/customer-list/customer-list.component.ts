@@ -10,6 +10,7 @@ import { getDateFormat } from "src/app/service/globalFunction";
 })
 export class CustomerListComponent implements OnInit {
   public allCustomer : any= [];
+  public filtered : boolean = false;
   constructor( private _api : ApiService, private _loader: NgxUiLoaderService ) { }
 
   ngOnInit(): void {
@@ -70,6 +71,7 @@ export class CustomerListComponent implements OnInit {
   }
 
   searchCustomer(evt : any) {
+    this.filtered = true;
     console.log(evt.target.value);
     let keyWord = evt.target.value;
     this._loader.startLoader('loader');
@@ -83,8 +85,27 @@ export class CustomerListComponent implements OnInit {
       }
     )
   }
+  
+  searchCustomerByMobile(evt : any) {
+    console.log(evt.target.value);
+    if (evt.target.value.length >= 10) {
+      this.filtered = true;
+      let keyWord = evt.target.value;
+      this._loader.startLoader('loader');
+      this._api.customerSearchMobile(keyWord).subscribe(
+        res => {
+          console.log(res);
+          this.allCustomer = res.data;
+          this._loader.stopLoader('loader');
+        }, err => {
+          this._loader.stopLoader('loader');
+        }
+      )
+    }
+  }
 
   searchCustomerDateRange(evt : any) {
+    this.filtered = true;
     console.log(evt.target.value);
     let today = new Date();
     let range = new Date();
@@ -120,6 +141,11 @@ export class CustomerListComponent implements OnInit {
         this._loader.stopLoader('loader');
       }
     )
+  }
+
+  clearFilter() {
+    this.filtered = false;
+    location.reload();
   }
 }
 

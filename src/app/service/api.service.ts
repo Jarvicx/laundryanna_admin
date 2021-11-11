@@ -172,6 +172,9 @@ export class ApiService {
   customerSearch(keyWord : any){
     return this._http.get<any>(_apiUrl + '/customer/search?q='+keyWord);
   }
+  customerSearchMobile(keyWord : any){
+    return this._http.get<any>(_apiUrl + '/customer/search?mobile='+keyWord);
+  }
   
   customerSearchByDate(startDate : any, endDate : any){
     return this._http.get<any>(_apiUrl + '/customer/search-by-date-range?startDate='+startDate+'&endDate='+endDate);
@@ -270,6 +273,13 @@ export class ApiService {
   
   pickupSearchByStatus(status : any){
     return this._http.get<any>(_apiUrl + '/pickup/search-by-status?status='+status);
+  }
+
+  pickupCustomerSearch(keyWord : any){
+    return this._http.get<any>(_apiUrl + '/pickup/universal-search?q='+keyWord);
+  }
+  pickupCustomerSearchMobile(keyWord : any){
+    return this._http.get<any>(_apiUrl + '/pickup/universal-search?mobile='+keyWord);
   }
 
   //***************************offer *******************************/

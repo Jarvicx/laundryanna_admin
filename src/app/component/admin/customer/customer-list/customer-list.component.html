@@ -11,8 +11,14 @@
     </div>
     <hr>
     <div class="row m-0 justify-content-start align-items-center">
-        <div class="input-group col-md-3 plr-2 mt-2">
-            <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="button-addon2" (keyup)="searchCustomer($event)">
+        <div class="input-group col-md-2 plr-2 mt-2">
+            <input type="text" class="form-control" placeholder="Search name..." aria-label="Recipient's username" aria-describedby="button-addon2" (keyup)="searchCustomer($event)">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary searchbtn" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        <div class="input-group col-md-2 plr-2 mt-2">
+            <input type="text" class="form-control" placeholder="Search mobile..." aria-label="Recipient's username" aria-describedby="button-addon2" (keyup)="searchCustomerByMobile($event)">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary searchbtn" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
             </div>
@@ -27,7 +33,7 @@
             </select>
         </div>						
         <div>
-            
+            <button class="actionbutton btn btn-sm ml-3 mt-2" *ngIf="filtered" (click)=clearFilter()>Clear</button>
             <button class="actionbutton btn btn-sm ml-3 mt-2">Export Data</button>
             <button class="actionbutton btn btn-sm ml-3 mt-2">View Partners</button>
         </div>
@@ -72,15 +78,15 @@
                         <a href=""><i class="fa fa-truck"  data-placement="left" data-toggle="tooltip" title="Pickup request" ></i></a>
                         <a href=""><i class="far fa-edit"  data-placement="left" data-toggle="tooltip" title="Edit wallet" ></i></a>
                         <a href=""><i class="fas fa-list-ol"  data-placement="left" data-toggle="tooltip" title="Order list" ></i></a>
-                        <a href="#"><i class="fas fa-wallet"  data-placement="left" data-toggle="tooltip" title="Add to wallet" ></i></a>
+                        <a href="javascript:void(0);"><i class="fas fa-wallet"  data-placement="left" data-toggle="tooltip" title="Add to wallet" ></i></a>
                         <a href="javascript:void(0);" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v" data-placement="left" data-toggle="tooltip" title="More Action" ></i></a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#"><i class="fa fa-address-card mr-1"  data-placement="left" data-toggle="tooltip" title="Add user address" ></i> Add user address</a>
-                            <a class="dropdown-item" href="#"><i class="fa fa-list mr-1"  data-placement="left" data-toggle="tooltip" title="User address list" ></i> User address list</a>
-                            <a class="dropdown-item" href="#"><i class="fa fa-user mr-1"  data-placement="left" data-toggle="tooltip" title="Active user" ></i> Active user</a>
-                            <a class="dropdown-item" href="#"><i class="fa fa-first-order mr-1"  data-placement="left" data-toggle="tooltip" title="Quick order" ></i> Quick order</a>
-                            <a class="dropdown-item" href="#"><i class="fas fa-eraser mr-1"  data-placement="left" data-toggle="tooltip" title="Deduct from wallet" ></i> Deduct from wallet</a>
-                            <a class="dropdown-item" href="#"><i class="far fa-trash-alt mr-1"  data-placement="left" data-toggle="tooltip" title="Delete" ></i> Delete</a>
+                            <a class="dropdown-item" href="javascript:void(0);"><i class="fa fa-address-card mr-1"  data-placement="left" data-toggle="tooltip" title="Add user address" ></i> Add user address</a>
+                            <a class="dropdown-item" href="javascript:void(0);"><i class="fa fa-list mr-1"  data-placement="left" data-toggle="tooltip" title="User address list" ></i> User address list</a>
+                            <a class="dropdown-item" href="javascript:void(0);"><i class="fa fa-user mr-1"  data-placement="left" data-toggle="tooltip" title="Active user" ></i> Active user</a>
+                            <a class="dropdown-item" href="javascript:void(0);"><i class="fa fa-first-order mr-1"  data-placement="left" data-toggle="tooltip" title="Quick order" ></i> Quick order</a>
+                            <a class="dropdown-item" href="javascript:void(0);"><i class="fas fa-eraser mr-1"  data-placement="left" data-toggle="tooltip" title="Deduct from wallet" ></i> Deduct from wallet</a>
+                            <a class="dropdown-item" href="javascript:void(0);"><i class="far fa-trash-alt mr-1"  data-placement="left" data-toggle="tooltip" title="Delete" ></i> Delete</a>
                             
                         </div>								
                     </td> -->
@@ -98,12 +104,12 @@
     </div>
     <!-- <nav class="pagination-container">
         <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#"><i
+            <li class="page-item"><a class="page-link" href="javascript:void(0);"><i
                         class="fa fa-angle-double-left previous-img"></i></a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link active" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#"><i
+            <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+            <li class="page-item"><a class="page-link active" href="javascript:void(0);">2</a></li>
+            <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+            <li class="page-item"><a class="page-link" href="javascript:void(0);"><i
                         class="fa fa-angle-double-right next-img"></i></a></li>
         </ul>
     </nav> -->

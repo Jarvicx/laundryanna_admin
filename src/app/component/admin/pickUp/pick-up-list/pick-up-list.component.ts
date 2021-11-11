@@ -306,8 +306,8 @@ export class PickUpListComponent implements OnInit {
   }
 
   searchPickupByStatus(status : any = 'Cancelled') {
-    this.filter = true;
-    // this._loader.startLoader('loader');
+    // this.filter = true;
+    this._loader.startLoader('loader');
     this._api.pickupSearchByStatus(status).subscribe(
       res => {
         console.log(res);
@@ -318,6 +318,40 @@ export class PickUpListComponent implements OnInit {
         this._loader.stopLoader('loader');
       }
     )
+  }
+
+  searchCustomer(evt : any) {
+    this.filter = true;
+    console.log(evt.target.value);
+    let keyWord = evt.target.value;
+    this._loader.startLoader('loader');
+    this._api.pickupCustomerSearch(keyWord).subscribe(
+      res => {
+        console.log(res);
+        this.pickUpData = res.data;
+        this._loader.stopLoader('loader');
+      }, err => {
+        this._loader.stopLoader('loader');
+      }
+    )
+  }
+  
+  searchCustomerByMobile(evt : any) {
+    console.log(evt.target.value);
+    if (evt.target.value.length >= 10) {
+      this.filter = true;
+      let keyWord = evt.target.value;
+      this._loader.startLoader('loader');
+      this._api.pickupCustomerSearchMobile(keyWord).subscribe(
+        res => {
+          console.log(res);
+          this.pickUpData = res.data;
+          this._loader.stopLoader('loader');
+        }, err => {
+          this._loader.stopLoader('loader');
+        }
+      )
+    }
   }
 
   clearFilter() {
