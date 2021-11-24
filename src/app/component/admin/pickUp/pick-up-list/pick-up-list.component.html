@@ -76,7 +76,7 @@
                     <td class="text-center">
                         <a href="javascript:void(0);" data-toggle="modal" data-target="#assignBoyModal" *ngIf="!pickup?.boyAssign && !pickup?.storeAssign" (click)="selectPickup(pickup?._id)"><i class="fas fa-user-plus" title="Assign"></i></a>
                         
-                        <a href="javascript:void(0);" *ngIf="pickup?.boyAssign && pickup?.storeAssign" routerLink="/admin/order/edit/{{pickup._id}}"><i class="fas fa-cart-plus" title="Create Order" ></i></a>
+                        <a href="javascript:void(0);" *ngIf="pickup?.boyAssign && pickup?.storeAssign" routerLink="/admin/order/add/{{pickup._id}}"><i class="fas fa-cart-plus" title="Create Order" ></i></a>
                         
                         <a href="javascript:void(0);" (click)="submitStatus('Order picked', pickup?._id)"><i class="fas fa-truck-pickup" title="Order Picked"></i></a>
                         

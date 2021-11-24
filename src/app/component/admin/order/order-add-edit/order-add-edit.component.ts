@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-order-add-edit',
@@ -7,9 +9,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderAddEditComponent implements OnInit {
 
-  constructor() { }
+  public cartItem :  {cart: CARTSITEM[];};
+  public pickUpId : any = '';
+  public pickUpDetails : any = {};
 
-  ngOnInit(): void {
+  public orderCreateInfo = {
+    cartDetail : [], pickup : '',
+    store : '', customer : '',
+    address : '', totalAmount : 0
   }
 
+  constructor(private _api:ApiService,public _activRoute : ActivatedRoute) {
+    this.cartItem = {cart : []};
+    this.pickUpId = this._activRoute.snapshot.paramMap.get('pickupId');
+    if(this.pickUpId){
+      this.getpickUpDetails(this.pickUpId);
+    }
+  }
+
+  ngOnInit(): void {
+
+  }
+
+  getpickUpDetails(pickupid : string){
+    this._api.getPickID(pickupid).subscribe(
+      res => {
+        console.log('PickupDetials',res);
+      }
+    )
+  }
+  
+
+  updateCartItemToLocalStorage(){ // updating the Cart in to LocalStorage
+    localStorage.setItem('allCartItems',JSON.stringify(this.cartItem.cart));
+  }
+}
+
+interface CARTSITEM {
+  category : string,
+  subCategory : string,
+  item : string,
+  quantity : number,
+  price : number,
 }
