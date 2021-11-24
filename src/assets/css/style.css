@@ -1657,3 +1657,90 @@ table tbody td{
 	}
 	
 }
+
+.order_value .sticky-top{
+	top: 40px;
+}
+  .order_value table th {
+	font-size: 14px;
+	font-weight: 600;
+  }
+  
+  .order_value table th:last-child {
+	text-align: right;
+	width: 100px;
+  }
+  
+  .order_value table tr td {
+	font-size: 13px;
+	font-weight: 400;
+	vertical-align: middle;
+	color: #3f4b60;
+  }
+  
+  .order_value table td:last-child {
+	text-align: right;
+	font-weight: 600;
+	color: #ff7979;
+	font-size: 14px;
+  }
+  .nav-item button{
+	border: 0 !important;
+  }
+  .qitem_cars .card-img-top{
+	height: 100px;
+	overflow: hidden;
+
+  }
+  .qitem_cars .card-img-top img{
+	  object-fit: cover;
+	  width: 100%;
+  }
+  .qitem_cars .card-title{
+	font-size: 14px;
+	font-weight: 600;
+  }
+  .qitem_cars .card{
+	transition: 0.5s all;
+	border: 1px solid #efefef;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 15px;
+  }
+  .qitem_cars .card:hover{
+	box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+  }
+  .del_icon{
+	  width: 30px;
+	  height: auto;
+	  background: #5a646c;
+	  position: absolute;
+	  top: 0;
+	  right: -200px;
+	  transition: 0.5s all;
+  }
+  .qitem_cars .card:hover .del_icon{
+	right:0px;
+  }
+  .del_icon i{
+	padding: 6px;
+	margin-bottom: 5px;
+	color: #fff;
+  }
+  .qut_sec .btn{
+	padding: 3px;
+	border: 0;
+	background: transparent;
+	color: #ff7979;
+}
+.qut_sec .btn:focus{
+	box-shadow: inherit;
+}
+.qut_sec input{
+	height: 25px;
+    text-align: center;
+    padding: 0;
+	border: 0;
+	background: transparent;
+	font-weight: 500;
+}
