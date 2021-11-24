@@ -375,5 +375,23 @@ export class ApiService {
     return this._http.get<any>(_apiUrl + '/store/list');
   }
 
+
+  //*************************** Order *******************************/
+  getOrderList(){
+    return this._http.get<any>(_apiUrl + '/order/list');
+  }
+  addOrder(formData:any){
+    return this._http.post<any>(_apiUrl + '/order/create', formData, {headers:this.header});
+  }
+  getOrderDetail(OrderId:any){
+    return this._http.get<any>(_apiUrl + '/order/detail/' + OrderId) //, {headers:this.header});
+  }
+  updateOrder(OrderId:any,formData:any){
+    return this._http.patch<any>(_apiUrl + '/order/update/' + OrderId, formData, {headers:this.header});
+  }
+  deleteOrder(OrderId:any){
+    return this._http.delete<any>(_apiUrl + '/order/delete/' + OrderId, {headers:this.header});
+  }
+
 }
 

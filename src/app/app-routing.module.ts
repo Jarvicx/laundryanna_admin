@@ -36,6 +36,8 @@ import { PriceAddEditComponent } from "./component/admin/price/price-add-edit/pr
 import { PriceListComponent } from "./component/admin/price/price-list/price-list.component";
 import { RateCardListComponent } from "./component/admin/rate_card/rate-card-list/rate-card-list.component";
 import { RateCardAddEditComponent } from "./component/admin/rate_card/rate-card-add-edit/rate-card-add-edit.component";
+import { OrderListComponent } from "./component/admin/order/order-list/order-list.component";
+import { OrderAddEditComponent } from "./component/admin/order/order-add-edit/order-add-edit.component";
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthCheckService] },
@@ -120,6 +122,11 @@ const routes: Routes = [
       {path: 'list', component: RateCardListComponent},
       {path: 'add', component: RateCardAddEditComponent},
       {path: 'edit/:rateCardId', component: RateCardAddEditComponent},
+    ]},
+    { path: 'order',children:[
+      {path: 'list', component: OrderListComponent},
+      {path: 'add/:pickupId', component: OrderAddEditComponent},
+      {path: 'edit/:orderId', component: OrderAddEditComponent},
     ]},
     
   ]},

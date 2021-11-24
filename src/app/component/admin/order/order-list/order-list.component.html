@@ -1,0 +1,153 @@
+<div class="dashboard-body-content">
+    <div class="d-block">
+        <div class="float-left">
+            <h5>Order</h5>
+        </div>
+        <div class="float-right">
+            <a href="javascript:void(0);" class="orderbtn btn btn-sm" data-toggle="modal" data-target="#exportModal">Export Data</a>
+            <a href="javascript:void(0);" class="orderbtn btn btn-sm">Payment Collected</a>
+            <a href="javascript:void(0);" class="orderbtn btn btn-sm">Order Delivered</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <hr>
+    <div class="row m-0">
+        <div class="col-12 col-md-9 ml-auto mb-4 row m-0">
+            <div class="col-12 col-md-3 plr-2">
+                <input type="text" class="form-control" placeholder="Order Id/Name..." aria-label="Recipient's username" aria-describedby="button-addon2">
+            </div>
+            <div class="col-12 col-md-3 plr-2">
+                <select class="form-control">
+                    <option selected disable>Select Hub</option>
+                    <option>JPN-Door (JPN Door)</option>
+                    <option>Indira Nagar Door (INDR-DOOR)</option>
+                </select>
+            </div>
+            <div class="col-12 col-md-3 plr-2">
+                <select class="form-control">
+                    <option selected disable>Order Status</option>
+                    <option>Created</option>
+                    <option>Washing</option>
+                    <option>Pending Iron</option>
+                </select>
+            </div>
+            <div class="col-12 col-md-2 plr-2">
+                <select class="form-control">
+                    <option selected disable>Payment Status</option>
+                    <option>Outstanding</option>
+                    <option>Paid</option>
+                    <option>Pending</option>
+                </select>
+            </div>
+            <div class="col-12 col-md-1 plr-2">
+                <button class="btn btn-outline-secondary searchbtn" style="height: 40px;" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+            </div>
+                <!-- <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary searchbtn" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+            </div> -->
+        </div>
+    </div>
+    <div class="table-responsive edit-table card-body p-0">
+        <table class="table table-sm table-hover brand-table">
+            <thead>
+                <tr>
+                    <td colspan="9"></td>
+                    <td class="table-success"><span>₹</span> 30.00</td>
+                    <td class="table-info"><span>₹</span> 30.00</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th><label><input type="checkbox" class="form-check-input" id="exampleCheck1"></label></th>
+                    <th>Order Id</th>
+                    <th>Customer Name</th>
+                    <th>Garments</th>
+                    <th>Hub</th>
+                    <th>Picked Up Date</th>
+                    <th>Picked Up Time</th>
+                    <th>Order Status</th>
+                    <th>Payment Status</th>
+                    <th>Billed Amount</th>
+                    <th>Due Amount</th>
+                    <th style="width:80px" class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox" class="form-check-input" id="exampleCheck2"></td>
+                    <td>1CD54</td>
+                    <td>John Doe</td>
+                    <td>ABC</td>
+                    <td>XYZ</td>
+                    <td>12.08.2021</td>
+                    <td>11:05 am</td>
+                    <td>
+                        <span class="badge badge-success">Delivered</span>
+                    </td>
+                    <td>
+                        <span class="badge badge-success">Completed</span>
+                    </td>
+                    <td> <span>₹</span> 2750.00</td>
+                    <td><span>₹</span> 525.00</td>
+                    <td class="text-center">
+                        <a href="OrderDetails.html"><i class="far fa-eye"></i></a>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="form-check-input" id="exampleCheck3"></td>
+                    <td>1CD54</td>
+                    <td>John Doe</td>
+                    <td>ABC</td>
+                    <td>XYZ</td>
+                    <td>12.08.2021</td>
+                    <td>11:05 am</td>
+                    <td>
+                        <span class="badge badge-success">Delivered</span>
+                    </td>
+                    <td>
+                        <span class="badge badge-success">Completed</span>
+                    </td>
+                    <td> <span>₹</span> 2750.00</td>
+                    <td><span>₹</span> 525.00</td>
+                    <td class="text-center">
+                        <a href="OrderDetails.html"><i class="far fa-eye"></i></a>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><input type="checkbox" class="form-check-input" id="exampleCheck4"></td>
+                    <td>1CD54</td>
+                    <td>John Doe</td>
+                    <td>ABC</td>
+                    <td>XYZ</td>
+                    <td>12.08.2021</td>
+                    <td>11:05 am</td>
+                    <td>
+                        <span class="badge badge-success">Delivered</span>
+                    </td>
+                    <td>
+                        <span class="badge badge-success">Completed</span>
+                    </td>
+                    <td> <span>₹</span> 2750.00</td>
+                    <td><span>₹</span> 525.00</td>
+                    <td class="text-center">
+                        <a href="OrderDetails.html"><i class="far fa-eye"></i></a>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <nav class="pagination-container mt-3">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#"><i
+                        class="fa fa-angle-double-left previous-img"></i></a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link active" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#"><i
+                        class="fa fa-angle-double-right next-img"></i></a></li>
+        </ul>
+    </nav>
+</div>

@@ -90,6 +90,8 @@ import { PriceListComponent } from './component/admin/price/price-list/price-lis
 import { PriceAddEditComponent } from './component/admin/price/price-add-edit/price-add-edit.component';
 import { RateCardAddEditComponent } from './component/admin/rate_card/rate-card-add-edit/rate-card-add-edit.component';
 import { RateCardListComponent } from './component/admin/rate_card/rate-card-list/rate-card-list.component';
+import { OrderListComponent } from './component/admin/order/order-list/order-list.component';
+import { OrderAddEditComponent } from './component/admin/order/order-add-edit/order-add-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -130,7 +132,9 @@ import { RateCardListComponent } from './component/admin/rate_card/rate-card-lis
     PriceListComponent,
     PriceAddEditComponent,
     RateCardAddEditComponent,
-    RateCardListComponent
+    RateCardListComponent,
+    OrderListComponent,
+    OrderAddEditComponent
   ],
   imports: [
     BrowserModule,AppRoutingModule,CommonModule,FormsModule,ReactiveFormsModule,HttpClientModule,BrowserAnimationsModule,NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
