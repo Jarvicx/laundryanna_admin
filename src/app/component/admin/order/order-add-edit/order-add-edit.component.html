@@ -10,130 +10,39 @@
         <!--tabsection-->
         <div class="mt-4">
           <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
+            <li class="nav-item" role="presentation" *ngFor="let category of categoryList">
+              <button (click)="changeSelectedCatgeory(category)" class="nav-link {{(selectedCategoryInfo?._id == category?._id) ? 'active' : ''}}" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{{category?.name}}</button>
             </li>
-            <li class="nav-item" role="presentation">
+            <!-- <li class="nav-item" role="presentation">
               <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
             </li>
             <li class="nav-item" role="presentation">
               <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
-            </li>
+            </li> -->
           </ul>
           <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
               <div class="row m-0 qitem_cars">
-                <div class="col-6 col-lg-4"> 
+                <div class="col-6 col-lg-4" *ngFor="let item of itemList;"> 
                   <div class="card shadow-0">
-                    <img src="./assets/img/picture.png" class="card-img-top">
-                    <div class="del_icon">
+                    <img src="{{item?.image}}" class="card-img-top">
+                    <!-- <div class="del_icon">
                       <a href=""><i class="fas fa-trash-alt"></i></a>
                       <a href=""><i class="fas fa-pen"></i></a>
-                    </div>
+                    </div> -->
                     <div class="card-body p-2">
-                      <h5 class="card-title">Card title</h5>
+                      <h5 class="card-title">{{item?.name}}</h5>
                     </div>
                     <div class="card-footer p-2 bg-white qut_sec">
                       <div class="input-group">
-                        <span class="input-group-prepend">
+                        <span class="input-group-prepend" (click)="removeQuantity(item)">
                           <button type="button" class="btn btn-outline-secondary btn-number" disabled="disabled"
-                            data-type="minus" data-field="quant[1]">
+                            data-type="minus" data-field="quant[]">
                             <span class="fa fa-minus"></span>
                           </button>
                         </span>
-                        <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1"
-                          max="10">
-                        <span class="input-group-append">
-                          <button type="button" class="btn btn-outline-secondary btn-number" data-type="plus"
-                            data-field="quant[1]">
-                            <span class="fa fa-plus"></span>
-                          </button>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 col-lg-4"> 
-                  <div class="card shadow-0">
-                    <img src="./assets/img/picture.png" class="card-img-top">
-                    <div class="del_icon">
-                      <a href=""><i class="fas fa-trash-alt"></i></a>
-                      <a href=""><i class="fas fa-pen"></i></a>
-                    </div>
-                    <div class="card-body p-2">
-                      <h5 class="card-title">Card title</h5>
-                    </div>
-                    <div class="card-footer p-2 bg-white qut_sec">
-                      <div class="input-group">
-                        <span class="input-group-prepend">
-                          <button type="button" class="btn btn-outline-secondary btn-number" disabled="disabled"
-                            data-type="minus" data-field="quant[1]">
-                            <span class="fa fa-minus"></span>
-                          </button>
-                        </span>
-                        <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1"
-                          max="10">
-                        <span class="input-group-append">
-                          <button type="button" class="btn btn-outline-secondary btn-number" data-type="plus"
-                            data-field="quant[1]">
-                            <span class="fa fa-plus"></span>
-                          </button>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 col-lg-4"> 
-                  <div class="card shadow-0">
-                    <img src="./assets/img/picture.png" class="card-img-top">
-                    <div class="del_icon">
-                      <a href=""><i class="fas fa-trash-alt"></i></a>
-                      <a href=""><i class="fas fa-pen"></i></a>
-                    </div>
-                    <div class="card-body p-2">
-                      <h5 class="card-title">Card title</h5>
-                    </div>
-                    <div class="card-footer p-2 bg-white qut_sec">
-                      <div class="input-group">
-                        <span class="input-group-prepend">
-                          <button type="button" class="btn btn-outline-secondary btn-number" disabled="disabled"
-                            data-type="minus" data-field="quant[1]">
-                            <span class="fa fa-minus"></span>
-                          </button>
-                        </span>
-                        <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1"
-                          max="10">
-                        <span class="input-group-append">
-                          <button type="button" class="btn btn-outline-secondary btn-number" data-type="plus"
-                            data-field="quant[1]">
-                            <span class="fa fa-plus"></span>
-                          </button>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 col-lg-4"> 
-                  <div class="card shadow-0">
-                    <img src="./assets/img/picture.png" class="card-img-top">
-                    <div class="del_icon">
-                      <a href=""><i class="fas fa-trash-alt"></i></a>
-                      <a href=""><i class="fas fa-pen"></i></a>
-                    </div>
-                    <div class="card-body p-2">
-                      <h5 class="card-title">Card title</h5>
-                    </div>
-                    <div class="card-footer p-2 bg-white qut_sec">
-                      <div class="input-group">
-                        <span class="input-group-prepend">
-                          <button type="button" class="btn btn-outline-secondary btn-number" disabled="disabled"
-                            data-type="minus" data-field="quant[1]">
-                            <span class="fa fa-minus"></span>
-                          </button>
-                        </span>
-                        <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1"
-                          max="10">
-                        <span class="input-group-append">
+                        <input type="text" name="quant[1]" class="form-control input-number" value="{{checkCurrentQuantityCount(item)}}" min="0">
+                        <span class="input-group-append" (click)="addQuantity(item)">
                           <button type="button" class="btn btn-outline-secondary btn-number" data-type="plus"
                             data-field="quant[1]">
                             <span class="fa fa-plus"></span>
@@ -159,23 +68,24 @@
                 <th>PRODUCT</th>
                 <th>SUBTOTAL</th>
               </tr>
-              <tr>
-                <td>Python Programming - Self Paced  × 1</td>
-                <td>&dollar; 50</td>
+              <tr *ngFor="let cartInfo of cartItem.cart">
+                <td>{{cartInfo?.itemName}} - {{cartInfo?.categoryName}}  × {{cartInfo?.quantity}}</td>
+                <td>&dollar; {{cartInfo?.price}}</td>
               </tr>
               <tr>
                 <td>SUBTOTAL</td>
-                <td>&dollar; 50</td>
+                <td>&dollar; {{totalCartValue}}</td>
               </tr>
               <tr>
                 <td>GST</td>
-                <td>&dollar; 2</td>
+                <td>&dollar; {{gstValue}}</td>
               </tr>
               <tr>
                 <td><b>TOTAL</b></td>
-                <td>&dollar; 52</td>
+                <td>&dollar; {{totalCartValue + gstValue}}</td>
               </tr>
             </table>
+            <button (click)="submitCartProductInfo()">Submit cart</button>
           </div>
         </div>
       </div>
