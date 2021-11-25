@@ -2,10 +2,11 @@
     <div class="row m-0 justify-content-between">
       <div class="col-12 col-lg-8">
         <div class="addres_sec border-bottom">
-          <h5 class="mb-3">Address</h5>
-          <p><b>Jon Dow</b></p>
-          <p class="w-50"> J1, Shaila Towers, Unit: 203A, 16, EP Block, Sector V, Bidhannagar, Kolkata, West Bengal 700091</p>
-          <p>Phone No. : <b>00000000000</b></p>
+          <h5 class="mb-3">Address:</h5>
+          <p><b>{{pickUpDetails?.customerId?.name}}</b></p>
+          <p class="w-50"> {{pickUpDetails?.addressId?.addressLine1}}, {{pickUpDetails?.addressId?.addressLine2}}</p>
+          <p class="w-50"> {{pickUpDetails?.addressId?.pin}}</p>
+          <p>Phone No. : <b>{{pickUpDetails?.customerId?.phone}}</b></p>
         </div>
         <!--tabsection-->
         <div class="mt-4">
@@ -59,7 +60,7 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-4 order_value">
+      <div class="col-12 col-lg-4 order_value" *ngIf="totalCartValue > 0">
         <div class="card border-0 p-3 bg-light sticky-top">
           <h5>Your order</h5>
           <div>
@@ -76,7 +77,7 @@
                 <td>SUBTOTAL</td>
                 <td>&dollar; {{totalCartValue}}</td>
               </tr>
-              <tr>
+              <tr *ngIf="gstValue > 0">
                 <td>GST</td>
                 <td>&dollar; {{gstValue}}</td>
               </tr>

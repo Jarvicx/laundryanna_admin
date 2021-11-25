@@ -69,7 +69,7 @@ export class OrderAddEditComponent implements OnInit {
   public selectedCategoryInfo : any = {};
   changeSelectedCatgeory(categoryInfo : any){
     this.selectedCategoryInfo = categoryInfo;
-    console.log('selected category info',this.selectedCategoryInfo);
+    // console.log('selected category info',this.selectedCategoryInfo);
   }
 
   public itemList : any = [];
@@ -78,7 +78,7 @@ export class OrderAddEditComponent implements OnInit {
     this._api.getItemList().subscribe(
       res => {
         this.itemList = res.data;
-        console.log('itemList',this.itemList);
+        // console.log('itemList',this.itemList);
         this._loader.stopLoader('loader');
       }, err => {
         this._loader.stopLoader('loader');
@@ -91,6 +91,7 @@ export class OrderAddEditComponent implements OnInit {
       res => {
         if(res.error == false){
           this.pickUpDetails = res.data;
+          console.log('pickup Details',this.pickUpDetails);
           this.updatingOrderCreateInfo();
         }
       }
@@ -148,7 +149,7 @@ export class OrderAddEditComponent implements OnInit {
     this.orderCreateInfo.store = this.pickUpDetails?.storeAssign?._id;
     this.orderCreateInfo.customer = this.pickUpDetails?.customerId?._id;
     this.orderCreateInfo.address = this.pickUpDetails?.addressId?._id;
-    console.log('Order Create Info after getting pickupDetails',this.orderCreateInfo);
+    // console.log('Order Create Info after getting pickupDetails',this.orderCreateInfo);
   }
 
   existingCartCheck(){
@@ -164,7 +165,7 @@ export class OrderAddEditComponent implements OnInit {
     this.checkCurrentCartValue();
   }
 
-  public totalCartValue : any = 0;public gstValue : any = 20;
+  public totalCartValue : any = 0;public gstValue : any = 0;
   checkCurrentCartValue(){
     this.totalCartValue = this.cartItem.cart.reduce((accumulator:any, current:any) => parseFloat(accumulator) + parseFloat(current.price), 0);
   }
