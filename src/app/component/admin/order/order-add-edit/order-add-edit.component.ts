@@ -113,6 +113,7 @@ export class OrderAddEditComponent implements OnInit {
         category : this.selectedCategoryInfo?._id,
         categoryName : this.selectedCategoryInfo?.name,
         subCategory : '',
+        subCategoryName : '',
         item : productInfo?._id,
         itemName : productInfo?.name,
         itemImage : productInfo?.image,
@@ -178,14 +179,14 @@ export class OrderAddEditComponent implements OnInit {
     var underCategoryInfo : any = {totalItemsUnderSameCategory : [],totalItemPriceForSameCategory : 0};
     this.cartItem.cart.forEach((cartElement : any,cartIndex : any)=>{
       if(cartElement.category === categoryInfo.category && cartElement.categoryName === categoryInfo.categoryName){
-        // if(cartElement.price > 0 && cartElement.quantity > 0){ // price and quantity is to be zero then skip to send to the api
+        if(cartElement.price > 0 && cartElement.quantity > 0){ // price and quantity is to be zero then skip to send to the api
           underCategoryInfo.totalItemsUnderSameCategory.push({
             item : cartElement.item,
             quantity : cartElement.quantity,
             price : cartElement.price,
           });
           underCategoryInfo.totalItemPriceForSameCategory += cartElement.price;
-        // }
+        }
       }
     });
     return underCategoryInfo;
@@ -204,18 +205,37 @@ export class OrderAddEditComponent implements OnInit {
         cartDetailsArray.push({
           category : categoryElement.category,
           subCategory : '',
-          itemDetail : sameCategoryInfo.totalItemsUnderSameCategory,
-          totalPrice : sameCategoryInfo.totalItemPriceForSameCategory
+          // subCategory : '618221e7bd1903f4430a861b',
+          itemDetail : sameCategoryInfo?.totalItemsUnderSameCategory,
+          totalPrice : sameCategoryInfo?.totalItemPriceForSameCategory
         });
       });
       this.orderCreateInfo.cartDetail = cartDetailsArray;
       this.orderCreateInfo.totalAmount = (this.totalCartValue + this.gstValue);
-      console.log('Full Object',this.orderCreateInfo);
+      // creating the Order
+      console.log('final order Info',this.orderCreateInfo);
+      this._api.addOrder(this.orderCreateInfo).subscribe(
+        res => {
+          if(res.error == false){
+            this.cartItem = {cart : []}; // after successfully placed the order removing all Selected Item
+            this.updateCartItemToLocalStorage(); // updating everything to local Storage
+            this.Toast.fire({
+              icon: 'success',
+              title: 'Order Places success',
+            });
+          }
+        },err => {
+          this.Toast.fire({
+            icon: 'error',
+            title: 'Something went wrong please try after sometime'
+          });
+        }
+      )
     }else{
       this.Toast.fire({
         icon: 'error',
         title: 'Please add item into cart'
-      })
+      });
     }
   }
 }
@@ -224,6 +244,7 @@ interface CARTSITEM {
   category : string,
   categoryName : string,
   subCategory : string,
+  subCategoryName : string,
   item : string,
   itemName : string,
   itemImage : string,
