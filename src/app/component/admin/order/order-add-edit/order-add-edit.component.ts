@@ -138,7 +138,11 @@ export class OrderAddEditComponent implements OnInit {
         itemInfo.price = itemInfo.quantity * (this.selectedCategoryInfo?.deliveryCharge || 0);
       }else if(currentQuantity <= 0){
         itemInfo.quantity = 0;itemInfo.price = 0;
-        this.cartItem.cart = this.cartItem.cart.filter(item => item.item !== productInfo?._id && item.category != this.selectedCategoryInfo?._id); // removing the item from cart
+        this.cartItem.cart.forEach((value,index)=>{
+            if(value.item === productInfo?._id && value.category === this.selectedCategoryInfo?._id){
+              this.cartItem.cart.splice(index,1);
+            }
+        });
       }
       this.updateCartItemToLocalStorage(); // updating the Cart in to LocalStorage
     }
@@ -174,12 +178,14 @@ export class OrderAddEditComponent implements OnInit {
     var underCategoryInfo : any = {totalItemsUnderSameCategory : [],totalItemPriceForSameCategory : 0};
     this.cartItem.cart.forEach((cartElement : any,cartIndex : any)=>{
       if(cartElement.category === categoryInfo.category && cartElement.categoryName === categoryInfo.categoryName){
-        underCategoryInfo.totalItemsUnderSameCategory.push({
-          item : cartElement.item,
-          quantity : cartElement.quantity,
-          price : cartElement.price,
-        });
-        underCategoryInfo.totalItemPriceForSameCategory += cartElement.price;
+        // if(cartElement.price > 0 && cartElement.quantity > 0){ // price and quantity is to be zero then skip to send to the api
+          underCategoryInfo.totalItemsUnderSameCategory.push({
+            item : cartElement.item,
+            quantity : cartElement.quantity,
+            price : cartElement.price,
+          });
+          underCategoryInfo.totalItemPriceForSameCategory += cartElement.price;
+        // }
       }
     });
     return underCategoryInfo;
