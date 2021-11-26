@@ -31,16 +31,13 @@
                     <option>Pending Iron</option>
                 </select>
             </div>
-            <div class="col-12 col-md-2 plr-2">
+            <div class="col-12 col-md-3 plr-2">
                 <select class="form-control">
                     <option selected disable>Payment Status</option>
                     <option>Outstanding</option>
                     <option>Paid</option>
                     <option>Pending</option>
                 </select>
-            </div>
-            <div class="col-12 col-md-1 plr-2">
-                <button class="btn btn-outline-secondary searchbtn" style="height: 40px;" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
             </div>
                 <!-- <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="button-addon2">
             <div class="input-group-append">
@@ -51,17 +48,16 @@
     <div class="table-responsive edit-table card-body p-0">
         <table class="table table-sm table-hover brand-table">
             <thead>
-                <tr>
-                    <td colspan="9"></td>
+                <!-- <tr>
+                    <td colspan="8"></td>
                     <td class="table-success"><span>₹</span> 30.00</td>
                     <td class="table-info"><span>₹</span> 30.00</td>
                     <td></td>
-                </tr>
+                </tr> -->
                 <tr>
-                    <th><label><input type="checkbox" class="form-check-input" id="exampleCheck1"></label></th>
+                    <th></th>
                     <th>Order Id</th>
                     <th>Customer Name</th>
-                    <th>Garments</th>
                     <th>Hub</th>
                     <th>Picked Up Date</th>
                     <th>Picked Up Time</th>
@@ -73,64 +69,21 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr *ngFor="let order of orderList">
                     <td><input type="checkbox" class="form-check-input" id="exampleCheck2"></td>
-                    <td>1CD54</td>
-                    <td>John Doe</td>
-                    <td>ABC</td>
-                    <td>XYZ</td>
-                    <td>12.08.2021</td>
-                    <td>11:05 am</td>
+                    <td>{{order?._id}}</td>
+                    <td>{{order?.customer?.name}}</td>
+                    <td>{{order?.store?.name}}</td>
+                    <td>{{order?.pickup?.pickup_date | date: "MMM d, y"}}</td>
+                    <td>{{order?.pickup?.pickup_time}}</td>
                     <td>
-                        <span class="badge badge-success">Delivered</span>
-                    </td>
-                    <td>
-                        <span class="badge badge-success">Completed</span>
-                    </td>
-                    <td> <span>₹</span> 2750.00</td>
-                    <td><span>₹</span> 525.00</td>
-                    <td class="text-center">
-                        <a href="OrderDetails.html"><i class="far fa-eye"></i></a>
-                    </td>
-
-                </tr>
-                <tr>
-                    <td><input type="checkbox" class="form-check-input" id="exampleCheck3"></td>
-                    <td>1CD54</td>
-                    <td>John Doe</td>
-                    <td>ABC</td>
-                    <td>XYZ</td>
-                    <td>12.08.2021</td>
-                    <td>11:05 am</td>
-                    <td>
-                        <span class="badge badge-success">Delivered</span>
+                        <span class="badge badge-success">{{order?.orderStatus}}</span>
                     </td>
                     <td>
-                        <span class="badge badge-success">Completed</span>
+                        <span class="badge badge-success">{{order?.paymentStatus}}</span>
                     </td>
-                    <td> <span>₹</span> 2750.00</td>
-                    <td><span>₹</span> 525.00</td>
-                    <td class="text-center">
-                        <a href="OrderDetails.html"><i class="far fa-eye"></i></a>
-                    </td>
-
-                </tr>
-                <tr>
-                    <td><input type="checkbox" class="form-check-input" id="exampleCheck4"></td>
-                    <td>1CD54</td>
-                    <td>John Doe</td>
-                    <td>ABC</td>
-                    <td>XYZ</td>
-                    <td>12.08.2021</td>
-                    <td>11:05 am</td>
-                    <td>
-                        <span class="badge badge-success">Delivered</span>
-                    </td>
-                    <td>
-                        <span class="badge badge-success">Completed</span>
-                    </td>
-                    <td> <span>₹</span> 2750.00</td>
-                    <td><span>₹</span> 525.00</td>
+                    <td> <span>₹</span> {{order?.totalAmount}}</td>
+                    <td><span>₹</span> {{order?.totalAmount - order?.totalPaid}}</td>
                     <td class="text-center">
                         <a href="OrderDetails.html"><i class="far fa-eye"></i></a>
                     </td>

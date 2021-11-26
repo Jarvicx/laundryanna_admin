@@ -112,8 +112,8 @@ export class OrderAddEditComponent implements OnInit {
       itemInfo = {
         category : this.selectedCategoryInfo?._id,
         categoryName : this.selectedCategoryInfo?.name,
-        subCategory : '',
-        subCategoryName : '',
+        // subCategory : '',
+        // subCategoryName : '',
         item : productInfo?._id,
         itemName : productInfo?.name,
         itemImage : productInfo?.image,
@@ -204,7 +204,7 @@ export class OrderAddEditComponent implements OnInit {
         let sameCategoryInfo =  this.itemListUnderSameCategory(categoryElement);
         cartDetailsArray.push({
           category : categoryElement.category,
-          subCategory : '',
+          // subCategory : '',
           // subCategory : '618221e7bd1903f4430a861b',
           itemDetail : sameCategoryInfo?.totalItemsUnderSameCategory,
           totalPrice : sameCategoryInfo?.totalItemPriceForSameCategory
@@ -243,11 +243,20 @@ export class OrderAddEditComponent implements OnInit {
 interface CARTSITEM {
   category : string,
   categoryName : string,
-  subCategory : string,
-  subCategoryName : string,
   item : string,
   itemName : string,
   itemImage : string,
   quantity : number,
   price : number,
 }
+// interface CARTSITEM {
+//   category : string,
+//   categoryName : string,
+//   subCategory : any,
+//   subCategoryName : string,
+//   item : string,
+//   itemName : string,
+//   itemImage : string,
+//   quantity : number,
+//   price : number,
+// }
