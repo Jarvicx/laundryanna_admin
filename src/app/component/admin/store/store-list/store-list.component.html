@@ -1,0 +1,51 @@
+<div class="dashboard-body-content">
+    <div class="row d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom row-header">
+        <div class="col-lg-8 d-flex justify-content-start align-items-center">
+            <h5>Stores</h5>
+        </div>
+        <div class="col-lg-4 d-flex justify-content-end align-items-center">
+            <button class="actionbutton btn btn-sm ml-3" routerLink='/admin/store/add'>Add Store</button>
+        </div>
+    </div>
+    <div class="table-responsive edit-table">
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Location</th>
+                    <th style="width: 150px;">Action</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="storeList.length; else emptyBlock;">
+                <tr *ngFor="let store of storeList">
+                    <td>{{store.name}}</td>
+                    <td>{{store.email}}</td>
+                    <td>{{store.location}}</td>
+                    <td>
+                        <a routerLink='/admin/store/geo-fence/{{store._id}}'><i class="far fa-map" title="Geo fencing"></i></a>
+                        <a routerLink='/admin/store/detail/{{store._id}}'><i class="far fa-eye" title="Detail"></i></a>
+                        <a routerLink='/admin/store/edit/{{store._id}}'><i class="far fa-edit" title="Edit"></i></a>
+                        <a href="javascript:void(0);" (click)="deleteData(store._id)"><i class="far fa-trash-alt" title="Delete"></i></a>
+                    </td>
+                </tr>                
+            </tbody>
+            <ng-template #emptyBlock>
+                <tbody>
+                    <tr>
+                        <td colspan="4">No Data!</td>
+                    </tr>
+                </tbody>
+            </ng-template>
+        </table>
+    </div>
+    <nav class="pagination-container">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="javascript:void(0);"><i class="fa fa-angle-double-left previous-img"></i></a></li>
+            <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+            <li class="page-item"><a class="page-link active" href="javascript:void(0);">2</a></li>
+            <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+            <li class="page-item"><a class="page-link" href="javascript:void(0);"><i class="fa fa-angle-double-right next-img"></i></a></li>
+        </ul>
+    </nav>
+</div>

@@ -179,6 +179,23 @@ export class ApiService {
   customerSearchByDate(startDate : any, endDate : any){
     return this._http.get<any>(_apiUrl + '/customer/search-by-date-range?startDate='+startDate+'&endDate='+endDate);
   }
+  
+  // ********************** store ***************************//
+  getStore(){
+    return this._http.get<any>(_apiUrl + '/store/list');
+  }
+  addStore(formData : any){
+    return this._http.post<any>(_apiUrl + '/store/create',formData);
+  }
+  deleteStore(StoreId : any){
+    return this._http.delete<any>(_apiUrl + '/store/delete/'+StoreId, {headers : this.header});
+  }
+  getStoreById(StoreId : any){
+    return this._http.get<any>(_apiUrl + '/store/detail/'+StoreId);
+  }
+  updateStore(StoreId: any, formData:any){
+    return this._http.patch<any>(_apiUrl + '/store/update/'+StoreId,formData, {headers : this.header} );
+  }
 
   // ************* Customer Address ***************************//
   getCustomerAddressList(cust_id : any){

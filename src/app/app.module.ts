@@ -46,6 +46,9 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   "minTime": 300
 };
 
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { AgmCoreModule } from "@agm/core";
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/layouts/header/header.component';
 import { SidebarComponent } from './component/layouts/sidebar/sidebar.component';
@@ -92,6 +95,10 @@ import { RateCardAddEditComponent } from './component/admin/rate_card/rate-card-
 import { RateCardListComponent } from './component/admin/rate_card/rate-card-list/rate-card-list.component';
 import { OrderListComponent } from './component/admin/order/order-list/order-list.component';
 import { OrderAddEditComponent } from './component/admin/order/order-add-edit/order-add-edit.component';
+import { StoreListComponent } from './component/admin/store/store-list/store-list.component';
+import { StoreDetailComponent } from './component/admin/store/store-detail/store-detail.component';
+import { StoreAddEditComponent } from './component/admin/store/store-add-edit/store-add-edit.component';
+import { StoreGeofencingComponent } from './component/admin/store/store-geofencing/store-geofencing.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -134,12 +141,16 @@ import { OrderAddEditComponent } from './component/admin/order/order-add-edit/or
     RateCardAddEditComponent,
     RateCardListComponent,
     OrderListComponent,
-    OrderAddEditComponent
+    OrderAddEditComponent,
+    StoreListComponent,
+    StoreDetailComponent,
+    StoreAddEditComponent,
+    StoreGeofencingComponent
   ],
   imports: [
     BrowserModule,AppRoutingModule,CommonModule,FormsModule,ReactiveFormsModule,HttpClientModule,BrowserAnimationsModule,NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgbModule,
-    ModalModule.forRoot(),MatTableModule,DataTablesModule
+    ModalModule.forRoot(),MatTableModule,DataTablesModule,GooglePlaceModule,AgmCoreModule.forRoot({apiKey:'AIzaSyDPuZ9AcP4PHUBgbUsT6PdCRUUkyczJ66I'})
   ],
   providers: [ConfirmationDialogService],
   bootstrap: [AppComponent]

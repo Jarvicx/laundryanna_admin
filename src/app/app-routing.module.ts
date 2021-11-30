@@ -12,6 +12,10 @@ import { ItemListComponent } from "./component/admin/item/item-list/item-list.co
 import { ItemAddEditComponent } from "./component/admin/item/item-add-edit/item-add-edit.component";
 import { CompanyListComponent } from './component/admin/company/company-list/company-list.component';
 import { CompanyAddEditComponent } from './component/admin/company/company-add-edit/company-add-edit.component';
+import { StoreListComponent } from "./component/admin/store/store-list/store-list.component";
+import { StoreAddEditComponent } from "./component/admin/store/store-add-edit/store-add-edit.component";
+import { StoreDetailComponent } from "./component/admin/store/store-detail/store-detail.component";
+import { StoreGeofencingComponent } from "./component/admin/store/store-geofencing/store-geofencing.component";
 import { SubCategoryListComponent } from './component/admin/sub_category/sub-category-list/sub-category-list.component';
 import { SubCategoryAddEditComponent } from './component/admin/sub_category/sub-category-add-edit/sub-category-add-edit.component';
 import { CustomerListComponent } from './component/admin/customer/customer-list/customer-list.component';
@@ -69,6 +73,13 @@ const routes: Routes = [
       { path: 'list', component: CompanyListComponent },
       { path: 'add', component: CompanyAddEditComponent },
       { path: 'edit/:companyId', component: CompanyAddEditComponent },
+    ]},
+    { path: 'store', children: [
+      { path: 'list', component: StoreListComponent },
+      { path: 'add', component: StoreAddEditComponent },
+      { path: 'edit/:storeId', component: StoreAddEditComponent },
+      { path: 'detail/:storeId', component: StoreDetailComponent },
+      { path: 'geo-fence/:storeId', component: StoreGeofencingComponent },
     ]},
     { path: 'customer', children: [
       { path: 'list', component: CustomerListComponent },

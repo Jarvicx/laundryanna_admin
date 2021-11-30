@@ -1,0 +1,56 @@
+
+<div class="dashboard-body-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <a href="javascript:void(0);" routerLink="/admin/store/list"><h5><i class="fas fa-chevron-left mr-2"></i>Back</h5></a>
+    </div>
+    <hr>
+    <h5 class="text-blue">Basic Information</h5>
+    <div class="row m-0 details-page">
+        <!-- <div class="col-lg-2 avatar">
+            <div class="image-wrapper">
+                <img src="./assets/img/picture.png" class="img-fluid">
+            </div>
+        </div> -->
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <p>{{storeData.name}}</p>   
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="name">email</label>
+                <p>{{storeData.email}}</p>   
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label for="name">phone</label>
+                <p>{{storeData.phone}}</p>   
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="description">Rate card</label>
+                <a routerLink="/admin/rate-card/edit/{{storeData.rateCard?._id}}">{{storeData.rateCard?.name}}</a>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="description">description</label>
+                <p>{{storeData.desc}}</p>      
+            </div>
+        </div>
+    </div>
+
+    <div class="row m-0 details-page">
+        <div class="col-lg-12">
+            <label for="Video">Location</label>
+            <p>{{storeData.location}}</p>
+            <agm-map [latitude]="storeData.lat" [longitude]="storeData.lon" [style.height.px]="400" [zoom]="15">
+                <agm-marker [latitude]="storeData.lat" [longitude]="storeData.lon"></agm-marker>
+                <agm-polygon [paths]="polygon"></agm-polygon>
+            </agm-map>
+        </div>
+    </div>
+</div>

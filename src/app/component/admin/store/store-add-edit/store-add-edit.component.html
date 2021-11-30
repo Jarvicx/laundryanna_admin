@@ -1,0 +1,72 @@
+<div class="dashboard-body-content">
+    <div class="d-flex justify-content-between align-items-center">
+        <h5>{{formType}} Store</h5>
+    </div>
+    <hr>
+    
+    <form class="edit-form" #storeForm="ngForm" (ngSubmit)="storeFormSubmit(storeForm)">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="name">Store Name</label>
+                        <input type="text" name="name" #name="ngModel" [ngModel]="storeData.name" required placeholder="Enter store name" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="name">Store Location</label>
+                        <input ngx-google-places-autocomplete [options]='options'  (onAddressChange)="AddressChange($event)" [ngModel]="location" name="storeLocation" required #ctrl="ngModel"  class="form-control"/>
+                        <!-- {{ location }} -->
+                    </div>
+                </div>
+                <div class="col-lg-6" *ngIf="formType === 'Add'">
+                    <div class="form-group edit-box">
+                        <label for="name">Email</label>
+                        <input type="email" name="email" #email="ngModel" [ngModel]="storeData.email" placeholder="Enter store email" required class="form-control" />
+                    </div>
+                </div>
+                <div class="col-lg-6" *ngIf="formType === 'Add'">
+                    <div class="form-group edit-box">
+                        <label for="name">Phone</label>
+                        <input type="number" name="phone" #phone="ngModel" [ngModel]="storeData.phone" placeholder="Enter store phone"  required pattern="[0-9]{10}" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-lg-6" *ngIf="formType === 'Add'">
+                    <div class="form-group edit-box">
+                        <label for="name">Password</label>
+                        <input type="password" name="password" #password="ngModel" [ngModel]="storeData.password" placeholder="*******" required class="form-control" />
+                    </div>
+                </div>
+                <div class="col-lg-6" *ngIf="formType === 'Add'">
+                    <div class="form-group edit-box">
+                        <label for="name">Confirm password</label>
+                        <input type="password" placeholder="*******" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="wallet">Choose Rate card  </label>
+                        <select name="rateCard" #password="ngModel" [ngModel]="storeData.rateCard" required class="form-control">
+                            <option *ngFor="let rateCard of rateCardData" value="{{rateCard._id}}">{{rateCard.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group edit-box">
+                        <label for="name">Store Description</label>
+                        <textarea name="desc" #desc="ngModel" [ngModel]="storeData.desc" class="form-control" id="" cols="30" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>         
+            <div class="col-lg-4">
+                <span class="text-danger">{{errorMessage}}</span>
+            </div>
+
+        </div>
+        <div class="form-group d-flex justify-content-end">
+            <button type="submit" class="actionbutton" routerLink='/admin/store/list'>Cancel</button>
+            <button type="submit" class="ml-2 actionbutton">SAVE</button>
+        </div>
+    </form>
+</div>
