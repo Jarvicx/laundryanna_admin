@@ -2,8 +2,8 @@
     <div class="row m-0 justify-content-between">
       <div class="col-12 col-lg-8">
         <div class="addres_sec border-bottom">
-          <h5 class="mb-3">Address:</h5>
           <p><b>{{pickUpDetails?.customerId?.name}}</b></p>
+          <h5 class="mb-3">Address:</h5>
           <p class="w-50"> {{pickUpDetails?.addressId?.addressLine1}}, {{pickUpDetails?.addressId?.addressLine2}}</p>
           <p class="w-50"> {{pickUpDetails?.addressId?.pin}}</p>
           <p>Phone No. : <b>{{pickUpDetails?.customerId?.phone}}</b></p>
@@ -42,7 +42,7 @@
                             <span class="fa fa-minus"></span>
                           </button>
                         </span>
-                        <input type="text" name="quant[1]" class="form-control input-number" value="{{checkCurrentQuantityCount(item)}}" min="0">
+                        <input type="text" name="quant[1]" class="form-control input-number" value="{{checkCurrentQuantityCount(item)}}" min="0" [readonly]="true">
                         <span class="input-group-append" (click)="addQuantity(item)">
                           <button type="button" class="btn btn-outline-secondary btn-number" data-type="plus"
                             data-field="quant[1]">
@@ -60,7 +60,7 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-4 order_value" *ngIf="totalCartValue > 0">
+      <div class="col-12 col-lg-4 order_value">
         <div class="card border-0 p-3 bg-light sticky-top">
           <h5>Your order</h5>
           <div>
@@ -71,22 +71,22 @@
               </tr>
               <tr *ngFor="let cartInfo of cartItem.cart">
                 <td>{{cartInfo?.itemName}} - {{cartInfo?.categoryName}}  × {{cartInfo?.quantity}}</td>
-                <td>&dollar; {{cartInfo?.price}}</td>
+                <td><span>₹</span> {{cartInfo?.price}}</td>
               </tr>
               <tr>
                 <td>SUBTOTAL</td>
-                <td>&dollar; {{totalCartValue}}</td>
+                <td><span>₹</span> {{totalCartValue}}</td>
               </tr>
               <tr *ngIf="gstValue > 0">
                 <td>GST</td>
-                <td>&dollar; {{gstValue}}</td>
+                <td><span>₹</span> {{gstValue}}</td>
               </tr>
               <tr>
                 <td><b>TOTAL</b></td>
-                <td>&dollar; {{totalCartValue + gstValue}}</td>
+                <td><span>₹</span> {{totalCartValue + gstValue}}</td>
               </tr>
             </table>
-            <button class="btn btn-success" (click)="submitCartProductInfo()">Submit cart</button>
+            <button class="btn btn-success" *ngIf="totalCartValue > 0" (click)="submitCartProductInfo()">Submit cart</button>
             <!-- {{orderCreateInfo | json}} -->
           </div>
         </div>

@@ -397,6 +397,18 @@ export class ApiService {
   getOrderList(){
     return this._http.get<any>(_apiUrl + '/order/list');
   }
+  searchOrderByStore(searchData: string){
+    return this._http.get<any>(_apiUrl + '/order/universal-search?id=&orderStatus=&paymentStatus=&store='+ searchData);
+  }
+  searchOrderById(searchData: string){
+    return this._http.get<any>(_apiUrl + '/order/universal-search?id='+ searchData +'&orderStatus=&paymentStatus=&store=');
+  }
+  searchOrderByOrder(searchData: string){
+    return this._http.get<any>(_apiUrl + '/order/universal-search?id=&orderStatus='+ searchData +'&paymentStatus=&store=');
+  }
+  searchOrderByPayment(searchData: string){
+    return this._http.get<any>(_apiUrl + '/order/universal-search?id=&orderStatus=&paymentStatus='+ searchData +'&store=');
+  }
   addOrder(formData:any){
     return this._http.post<any>(_apiUrl + '/order/create', formData, {headers:this.header});
   }

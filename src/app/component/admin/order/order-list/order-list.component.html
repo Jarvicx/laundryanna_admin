@@ -1,59 +1,59 @@
 <div class="dashboard-body-content">
     <div class="d-block">
         <div class="float-left">
-            <h5>Order</h5>
+            <h5>Order List</h5>
         </div>
         <div class="float-right">
-            <a href="javascript:void(0);" class="orderbtn btn btn-sm" data-toggle="modal" data-target="#exportModal">Export Data</a>
+            <!-- <a href="javascript:void(0);" class="orderbtn btn btn-sm" data-toggle="modal" data-target="#exportModal">Export Data</a>
             <a href="javascript:void(0);" class="orderbtn btn btn-sm">Payment Collected</a>
-            <a href="javascript:void(0);" class="orderbtn btn btn-sm">Order Delivered</a>
+            <a href="javascript:void(0);" class="orderbtn btn btn-sm">Order Delivered</a> -->
         </div>
         <div class="clearfix"></div>
     </div>
     <hr>
     <div class="row m-0">
-        <div class="col-12 col-md-9 ml-auto mb-4 row m-0">
+        <div class="col-12 col-md-9 mb-4 row m-0">
             <div class="col-12 col-md-3 plr-2">
-                <input type="text" class="form-control" placeholder="Order Id/Name..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                <input type="text" class="form-control" placeholder="Order Id..." aria-label="Recipient's username" aria-describedby="button-addon2" (keyUp)="searchOrder($event,'id')">
             </div>
             <div class="col-12 col-md-3 plr-2">
-                <select class="form-control">
-                    <option selected disable>Select Hub</option>
-                    <option>JPN-Door (JPN Door)</option>
-                    <option>Indira Nagar Door (INDR-DOOR)</option>
+                <select class="form-control" (change)="searchOrder($event,'store')">
+                    <option value="" hidden>Select Hub</option>
+                    <option *ngFor="let item of storeList" value="{{item._id}}">{{item.name}}</option>
                 </select>
             </div>
-            <div class="col-12 col-md-3 plr-2">
-                <select class="form-control">
-                    <option selected disable>Order Status</option>
-                    <option>Created</option>
-                    <option>Washing</option>
-                    <option>Pending Iron</option>
+            <div class="col-12 col-md-2 plr-2">
+                <select class="form-control" (change)="searchOrder($event,'orderStatus')">
+                    <option value="" hidden>Order Status</option>
+                    <option value="new">new</option>
+                    <option value="picked">picked</option>
+                    <option value="processed">processed</option>
+                    <option value="delivered">delivered</option>
+                    <option value="cancelled">cancelled</option>
                 </select>
             </div>
-            <div class="col-12 col-md-3 plr-2">
-                <select class="form-control">
-                    <option selected disable>Payment Status</option>
-                    <option>Outstanding</option>
-                    <option>Paid</option>
-                    <option>Pending</option>
+            <div class="col-12 col-md-2 plr-2">
+                <select class="form-control" (change)="searchOrder($event,'paymentStatus')">
+                    <option value="" hidden>Payment Status</option>
+                    <option value="outstanding">Outstanding</option>
+                    <option value="paid">Paid</option>
+                    <option value="pending">Pending</option>
                 </select>
             </div>
-                <!-- <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username" aria-describedby="button-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary searchbtn" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
-            </div> -->
+            <div class="col-12 col-md-2 pl-0 pr-0 d-flex align-items-center" *ngIf="filter">
+                <a href="javascript:void(0);" class="orderbtn btn btn-sm" (click)="clearFilter()">Clear</a>
+            </div>
         </div>
     </div>
     <div class="table-responsive edit-table card-body p-0">
         <table class="table table-sm table-hover brand-table">
             <thead>
-                <!-- <tr>
+                <tr>
                     <td colspan="8"></td>
-                    <td class="table-success"><span>₹</span> 30.00</td>
-                    <td class="table-info"><span>₹</span> 30.00</td>
+                    <td class="table-success"><span>₹</span> {{billAmount}}</td>
+                    <td class="table-info"><span>₹</span> {{dueAmount}}</td>
                     <td></td>
-                </tr> -->
+                </tr>
                 <tr>
                     <th></th>
                     <th>Order Id</th>
@@ -65,10 +65,10 @@
                     <th>Payment Status</th>
                     <th>Billed Amount</th>
                     <th>Due Amount</th>
-                    <th style="width:80px" class="text-center">Action</th>
+                    <!-- <th style="width:80px" class="text-center">Action</th> -->
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="orderList.length; else emptyBlock;">
                 <tr *ngFor="let order of orderList">
                     <td><input type="checkbox" class="form-check-input" id="exampleCheck2"></td>
                     <td>{{order?._id}}</td>
@@ -84,12 +84,19 @@
                     </td>
                     <td> <span>₹</span> {{order?.totalAmount}}</td>
                     <td><span>₹</span> {{order?.totalAmount - order?.totalPaid}}</td>
-                    <td class="text-center">
-                        <a href="OrderDetails.html"><i class="far fa-eye"></i></a>
-                    </td>
+                    <!-- <td class="text-center">
+                        <a href="javascript:void(0);"><i class="far fa-eye"></i></a>
+                    </td> -->
 
                 </tr>
             </tbody>
+            <ng-template #emptyBlock>
+                <tbody>
+                    <tr>
+                        <td colspan="11">No data!</td>
+                    </tr>
+                </tbody>
+            </ng-template>
         </table>
     </div>
     <nav class="pagination-container mt-3">

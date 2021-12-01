@@ -6,6 +6,7 @@ import { ApiService } from 'src/app/service/api.service';
 import Swal from "sweetalert2";
 import { dateDiffInDays, getDateFormat } from "src/app/service/globalFunction";
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pick-up-list',
@@ -30,7 +31,7 @@ export class PickUpListComponent implements OnInit {
   public selectedPickup: any = {};
   statusForm : FormGroup;
   boyAssignForm : FormGroup;
-  allStatus=["New Order", "Pick Up assigned", "Order picked", "Delivered", "Cancelled"];
+  allStatus=["New Order", "Pick Up assigned", "Order created", "Order picked", "Delivered","Cancelled"];
   pickId : any = '';
   submitted = false;
 
@@ -46,7 +47,7 @@ export class PickUpListComponent implements OnInit {
     }
   });
 
-  constructor(private _api : ApiService, private _loader : NgxUiLoaderService, private modalService: BsModalService, private fbuilder : FormBuilder) { 
+  constructor(private _api : ApiService, private _loader : NgxUiLoaderService, private modalService: BsModalService, private fbuilder : FormBuilder, private _route: Router) { 
     this.statusForm= this.fbuilder.group({
       status : new FormControl('',Validators.required)
     });
@@ -230,6 +231,7 @@ export class PickUpListComponent implements OnInit {
           })
           this.emptyModal();
           this.pickUpList();
+          this.submitStatus('Pick Up assigned', this.selectedPickup._id)
           this._loader.stopLoader('loader');
         },err=>{
 
@@ -357,5 +359,10 @@ export class PickUpListComponent implements OnInit {
   clearFilter() {
     this.filter = false;
     location.reload();
+  }
+
+  createOrder(pickupId:any) {
+    localStorage.setItem('pickupId',pickupId);
+    this._route.navigate(['/admin/order/add/' + pickupId]);
   }
 }

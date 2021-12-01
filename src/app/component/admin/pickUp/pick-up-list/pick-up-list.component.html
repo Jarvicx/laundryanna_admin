@@ -4,11 +4,11 @@
             <h5>Pickup List</h5>
         </div>
         <div class="float-right">
-            <a href="javascript:void(0);" class="orderbtn btn btn-sm" data-toggle="modal" data-target="#exportModal">Export Data</a>
             <a href="javascript:void(0);" class="orderbtn btn btn-sm" (click)="pickUpList()">All Orders</a>
             <a href="javascript:void(0);" class="orderbtn btn btn-sm" (click)="searchPickupByStatus()">Cancelled Orders</a>
-            <a href="javascript:void(0);" class="orderbtn btn btn-sm">Create pickup for B2B users</a>
-            <a href="javascript:void(0);" class="orderbtn btn btn-sm">Store drops</a>
+            <a href="javascript:void(0);" class="orderbtn btn btn-sm" (click)="pickUpList()">Refresh <i class="fas fa-sync"></i></a>
+            <!-- <a href="javascript:void(0);" class="orderbtn btn btn-sm">Create pickup for B2B users</a>
+            <a href="javascript:void(0);" class="orderbtn btn btn-sm">Store drops</a> -->
         </div>
         <div class="clearfix"></div>
     </div>
@@ -76,14 +76,15 @@
                     <td class="text-center">
                         <a href="javascript:void(0);" data-toggle="modal" data-target="#assignBoyModal" *ngIf="!pickup?.boyAssign && !pickup?.storeAssign" (click)="selectPickup(pickup?._id)"><i class="fas fa-user-plus" title="Assign"></i></a>
                         
-                        <a href="javascript:void(0);" *ngIf="pickup?.boyAssign && pickup?.storeAssign" routerLink="/admin/order/add/{{pickup._id}}"><i class="fas fa-cart-plus" title="Create Order" ></i></a>
+                        <!-- <a href="javascript:void(0);" *ngIf="pickup?.boyAssign && pickup?.storeAssign" routerLink="/admin/order/add/{{pickup._id}}" ><i class="fas fa-cart-plus" title="Create Order" ></i></a> -->
+                        <a href="javascript:void(0);" *ngIf="pickup?.boyAssign && pickup?.storeAssign && (pickup?.status!=='Order created')" (click)="createOrder(pickup?._id)"><i class="fas fa-cart-plus" title="Create Order" ></i></a>
                         
                         <a href="javascript:void(0);" (click)="submitStatus('Order picked', pickup?._id)"><i class="fas fa-truck-pickup" title="Order Picked"></i></a>
                         
                         <a href="javascript:void(0);" (click)="submitStatus('Cancelled', pickup?._id)"><i class="fa fa-window-close" title="Cancel Order"></i></a>
                         
                         <a href="javascript:void(0);" routerLink="/admin/pick_up/edit/{{pickup._id}}"><i class="far fa-edit" title="Edit" ></i></a>
-                        <a href="javascript:void(0);" (click)="deletePickUp(pickup._id)"><i class="far fa-trash-alt" title="Delete" ></i></a>
+                        <!-- <a href="javascript:void(0);" (click)="deletePickUp(pickup._id)"><i class="far fa-trash-alt" title="Delete" ></i></a> -->
                     </td>
                 </tr>
             </tbody>
