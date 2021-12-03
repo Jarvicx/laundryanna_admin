@@ -7,7 +7,7 @@
                         <img src="./assets/img/Total-Customers.png">
                     </div>
                     <div class="text-sec">
-                        <h3>761 <span>Total Customers</span></h3>
+                        <h3>{{dashboardData?.totalCustomer}} <span>Total Customers</span></h3>
                     </div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                         <img src="./assets/img/new-Customers.png">
                     </div>
                     <div class="text-sec">
-                        <h3>61 <span>New Customers</span></h3>
+                        <h3>{{dashboardData?.totalNewCustomer}} <span>New Customers</span></h3>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                         <img src="./assets/img/total-Products.png">
                     </div>
                     <div class="text-sec">
-                        <h3>7,461 <span>Total Products</span></h3>
+                        <h3>{{dashboardData?.totalItem}} <span>Total Products</span></h3>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                         <img src="./assets/img/new-Products.png">
                     </div>
                     <div class="text-sec">
-                        <h3>461 <span>New Products</span></h3>
+                        <h3>{{dashboardData?.totalNewItem}} <span>New Products</span></h3>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
                         <img src="./assets/img/total-tickets.png">
                     </div>
                     <div class="text-sec">
-                        <h3>261 <span>Total Orders</span></h3>
+                        <h3>{{dashboardData?.totalOrder}} <span>Total Orders</span></h3>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                         <img src="./assets/img/new-ticket.png">
                     </div>
                     <div class="text-sec">
-                        <h3>75 <span>New Orders</span></h3>
+                        <h3>{{dashboardData?.totalNewOrder}} <span>New Orders</span></h3>
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                         <img src="./assets/img/Ongoing-Tickets.png">
                     </div>
                     <div class="text-sec">
-                        <h3>30 <span>Ongoing Orders</span></h3>
+                        <h3>{{dashboardData?.totalOngoingOrder}} <span>Ongoing Orders</span></h3>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                         <img src="./assets/img/complete-ticket.png">
                     </div>
                     <div class="text-sec">
-                        <h3>90 <span>Completed Orders</span></h3>
+                        <h3>{{dashboardData?.totalCompletedOrder}} <span>Completed Orders</span></h3>
                     </div>
                 </div>
             </div>
@@ -99,42 +99,13 @@
     </div>
     <div class="row m-0 mt-3 col-12">
         <div class="card border-0 shadow-sm col-12 p-0">
-            <div class="card-header card-head border-0">
-                <!-- <h5 class="card-head-title">Latest Orders</h5> -->
-                <div class="input-group offset-0 offset-md-4 col-md-8 ml-auto justify-content-end">
-                    <div class="pr-3">
-                        <select class="form-control">
-                            <option>10 / page</option>
-                            <option>20 / page</option>
-                            <option>30 / page</option>
-                            <option>40 / page</option>
-                            <option>50 / page</option>
-                        </select>
-                    </div>
-                    <div class="d-flex">
-                        <input type="search" class="form-control" placeholder="Order Id"
-                        aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary searchbtn mr-3" type="button"
-                                id="button-addon2"><i class="fas fa-search"></i></button>
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <input type="search" class="form-control" placeholder="Customer name/email/mobile"
-                            aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary searchbtn" type="button"
-                                id="button-addon2"><i class="fas fa-search"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <div class="row justify-content-between m-0 dashboard p-2">
                 <div class="col-12 col-md-6">
                     <div class="card border-0">
                         <div class="card-header d-flex justify-content-between">
                             <h5>New Pickup Request</h5>
-                            <h5>3</h5>
+                            <h5>{{newPickUpCount}}</h5>
                         </div>
                         <div class="card-body table-responsive edit-table p-0">
                             <table class="table table-sm table-hover brand-table">
@@ -146,26 +117,19 @@
                                         <th>Picked Up Time</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1CD54</td>
-                                        <td>John Doe</td>
-                                        <td>12.08.2021</td>
-                                        <td>11:05 am</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1CD54</td>
-                                        <td>John Doe</td>
-                                        <td>12.08.2021</td>
-                                        <td>11:05 am</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1CD54</td>
-                                        <td>John Doe</td>
-                                        <td>12.08.2021</td>
-                                        <td>11:05 am</td>
+                                <tbody *ngIf="newPickUpCount > 0; else emptyBlock;">
+                                    <tr *ngFor="let item of dashboardData.newPickup">
+                                        <td>{{item?._id}}</td>
+                                        <td>{{item?.customerId?.name}}</td>
+                                        <td>{{item?.pickup_date | date:'MMM d, y'}}</td>
+                                        <td>{{item?.pickup_time}}</td>
                                     </tr>
                                 </tbody>
+                                <ng-template #emptyBlock>
+                                    <tr>
+                                        <td colspan="4">No data</td>
+                                    </tr>
+                                </ng-template>
                             </table>
                         </div>
                     </div>
@@ -174,7 +138,7 @@
                     <div class="card border-0">
                         <div class="card-header d-flex justify-content-between">
                             <h5>Ready To Be Delivered</h5>
-                            <h5>89</h5>
+                            <h5>{{deliveryCount}}</h5>
                         </div>
                         <div class="card-body table-responsive edit-table p-0">
                             <table class="table table-sm table-hover brand-table">
@@ -185,98 +149,18 @@
                                         <th>Mobile No.</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1CD54</td>
-                                        <td>John Doe</td>
-                                        <td>8800495758</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1CD54</td>
-                                        <td>John Doe</td>
-                                        <td>8800495758</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1CD54</td>
-                                        <td>John Doe</td>
-                                        <td>8800495758</td>
+                                <tbody *ngIf="deliveryCount > 0; else emptyBlock;">
+                                    <tr *ngFor="let item of dashboardData.readyToBeDelivered">
+                                        <td>{{item?._id}}</td>
+                                        <td>{{item?.customer?.name}}</td>
+                                        <td>{{item?.customer?.phone}}</td>
                                     </tr>
                                 </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="card border-0">
-                        <div class="card-header d-flex justify-content-between">
-                            <h5>Total Outstanding Amount</h5>
-                        </div>
-                        <div class="card-body table-responsive edit-table p-0">
-                            <table class="table table-sm table-hover brand-table">
-                                <thead>
+                                <ng-template #emptyBlock>
                                     <tr>
-                                        <th>Order Id</th>
-                                        <th>Customer Name</th>
-                                        <th style="width:100px">Due Amoun</th>
+                                        <td colspan="3">No data</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1CD54</td>
-                                        <td>John Doe</td>
-                                        <td>2021</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1CD54</td>
-                                        <td>John Doe</td>
-                                        <td>2021</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1CD54</td>
-                                        <td>John Doe</td>
-                                        <td>2021</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="card border-0">
-                        <div class="card-header d-flex justify-content-between">
-                            <h5>Total Washing Bags</h5>
-                            <h5>6</h5>
-                        </div>
-                        <div class="card-body table-responsive edit-table p-0">
-                            <table class="table table-sm table-hover brand-table">
-                                <thead>
-                                    <tr>
-                                        <th>Bag Id</th>
-                                        <th>Create Time</th>
-                                        <th style="width:100px">Total Orders</th>
-                                        <th style="width:100px">Total Garments</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1CD54</td>
-                                        <td>16-Jun-2017 , 10:07 am</td>
-                                        <td>2</td>
-                                        <td>22</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1CD54</td>
-                                        <td>16-Jun-2017 , 10:07 am</td>
-                                        <td>2</td>
-                                        <td>22</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1CD54</td>
-                                        <td>16-Jun-2017 , 10:07 am</td>
-                                        <td>2</td>
-                                        <td>22</td>
-                                    </tr>
-                                </tbody>
+                                </ng-template>
                             </table>
                         </div>
                     </div>

@@ -68,6 +68,11 @@ export class ApiService {
   }
 
   // *************  City Api  ***************************//
+  getDashboardData(){
+    return this._http.get<any>(_apiUrl + '/dashboard', {headers: this.header})
+  }
+
+  // *************  City Api  ***************************//
   getCityList() {
     return this._http.get<any>(_apiUrl + '/city/list');
   }
