@@ -54,7 +54,7 @@ export class CustomerAddEditComponent implements OnInit {
             phone : res.data.phone,     
             gender : res.data.gender,
             age : res.data.age,
-            wallet : res.data.wallet,
+            // wallet : res.data.wallet,
             image : res.data.image
           })
         this._loader.stopLoader('loader');
@@ -74,7 +74,7 @@ export class CustomerAddEditComponent implements OnInit {
       phone : new FormControl('',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),     
       gender :  new FormControl('', Validators.required),
       age :  new FormControl('', [Validators.required,Validators.pattern("^[0-9]{2}$")]),
-      wallet :  new FormControl(''),
+      // wallet :  new FormControl(''),
       image : new FormControl('https://media.istockphoto.com/vectors/washing-machine-with-a-wash-basin-and-cleaning-stuff-vector-id1141658592?k=20&m=1141658592&s=612x612&w=0&h=FpNfdvX28sfE17zvGl8dGuhyYJu31X3UTCusmc6Ed2o=')
     },{ 
       validator: this.isAddMode ? this.checkPasswords('password','conFirmpassword') : Validators.nullValidator
