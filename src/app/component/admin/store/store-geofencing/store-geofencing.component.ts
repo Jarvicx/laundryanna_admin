@@ -3,7 +3,7 @@ import { NgxUiLoaderService } from "ngx-ui-loader";
 import { ApiService } from "src/app/service/api.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import  Swal  from "sweetalert2";
-import { getDateFormat } from "src/app/service/globalFunction";
+declare const google: any;
 
 
 @Component({
@@ -15,7 +15,9 @@ export class StoreGeofencingComponent implements OnInit {
 
   public storeData: any = '';
   
-  public polygon: any = [];
+  public editable: boolean = false;
+  pointList: { lat: number; lng: number }[] = [];
+  selectedArea = 0;
   public locationList: any = [];
   public storeId: any = '';
   public Toast = Swal.mixin({
@@ -41,10 +43,7 @@ export class StoreGeofencingComponent implements OnInit {
         res => {
           console.log("store detail", res);
           this.storeData = res.data;
-          this.polygon = res.data?.geoFence;
-          res.data?.geoFence.forEach((val: any, index: any) => {
-            this.setLocation(val);
-          });
+          this.pointList = res.data?.geoFence;
           this._loader.stopLoader('loader')
         }
       )
@@ -56,39 +55,101 @@ export class StoreGeofencingComponent implements OnInit {
     console.log("Google location:",address);
     this.storeData.lat = address.geometry.location.lat();
     this.storeData.lon = address.geometry.location.lng();
-    this.polygon.push(
-      { lat: address.geometry.location.lat(), lng: address.geometry.location.lng() }
-    );
-    this.locationList.push(address.formatted_address)
+    
   }
   
-  markerDragEnd($event: any) {
-    console.log($event);
-    this.polygon.push(
-      { lat: $event.latLng.lat(), lng: $event.latLng.lng() }
-    );
-    this.setLocation({ lat: $event.latLng.lat(), lng: $event.latLng.lng() });
+  //from here map drawing code started
+  onMapReady(map:any) {
+    this.initDrawingManager(map);
+    
   }
 
-  setLocation(latLng : any) {
-    let geoCoder = new google.maps.Geocoder();
-    geoCoder.geocode({ 'location': latLng }, (results, status) => {
-      console.log(results);
-      console.log(status);
-      if (status === 'OK' && results) {
-        this.locationList.push(results[0].formatted_address);
-      } 
-      // else {
-      //   window.alert('Geocoder failed due to: ' + status);
-      // }
+  initDrawingManager(map: any) {
+    const options = {
+      drawingControl: true,
+      drawingControlOptions: {
+        drawingModes: ["polygon"]
+      },
+      polygonOptions: {
+        draggable: true,
+        editable: true
+      },
+      drawingMode: google.maps.drawing.OverlayType.POLYGON
+    };
 
-    });
+    const drawingManager = new google.maps.drawing.DrawingManager(options);
+    drawingManager.setMap(map);
+
+    google.maps.event.addListener(
+      drawingManager,
+      'overlaycomplete',
+      (event:any) => {
+        if (event.type === google.maps.drawing.OverlayType.POLYGON)    {
+          const paths = event.overlay.getPaths();
+          for (let p = 0; p < paths.getLength(); p++) {
+            google.maps.event.addListener(
+              paths.getAt(p),
+              'set_at',
+              () => {
+                if (!event.overlay.drag) {
+                  this.updatePointList(event.overlay.getPath());
+                }
+              }
+            );
+            google.maps.event.addListener(
+              paths.getAt(p),
+              'insert_at',
+              () => {
+                this.updatePointList(event.overlay.getPath());
+              }
+            );
+            google.maps.event.addListener(
+              paths.getAt(p),
+              'remove_at',
+              () => {
+                this.updatePointList(event.overlay.getPath());
+              }
+            );
+          }
+          this.updatePointList(event.overlay.getPath());
+        }
+        if (event.type !== google.maps.drawing.OverlayType.MARKER) {
+          // Switch back to non-drawing mode after drawing a shape.
+          drawingManager.setDrawingMode(null);
+          // To hide:
+          drawingManager.setOptions({
+            drawingControl: false,
+          });
+        }
+      }
+    );
+  }
+  
+  updatePointList(path : any) {
+    this.pointList = [];
+    const len = path.getLength();
+    for (let i = 0; i < len; i++) {
+      this.pointList.push(
+        path.getAt(i).toJSON()
+      );
+    }
+    this.selectedArea = google.maps.geometry.spherical.computeArea(
+      path
+    );
+    console.log(this.pointList, this.selectedArea);
+    
+  }
+  //map drawng end here
+
+  abc(path: any){
+    console.log(path);
+    
   }
 
   storeFormSubmit() {
-    if (this.polygon.length >= 3) {
+    if (this.pointList.length >= 3) {
       let mainForm = {
-        geoFence: this.polygon
+        geoFence: this.pointList
       }
       this._api.updateStore(this.storeId, mainForm).subscribe(
         res => {
@@ -116,9 +177,11 @@ export class StoreGeofencingComponent implements OnInit {
     }
   }
 
-  removePointer(index : any) {
-    this.polygon.splice(index, 1);
-    this.locationList.splice(index, 1);
+  editFencing() {
+    this.pointList = [];
+    this.editable = true;
   }
+
+  
 
 }

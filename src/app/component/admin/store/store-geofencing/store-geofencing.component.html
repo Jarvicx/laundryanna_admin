@@ -3,14 +3,24 @@
         <a href="javascript:void(0);" routerLink="/admin/store/list"><h5><i class="fas fa-chevron-left mr-2"></i>Geo fencing</h5></a>
     </div>
     <hr>
-    <div class="col-6 px-5 py-1">
-        <input ngx-google-places-autocomplete [options]='options'  (onAddressChange)="AddressChange($event)" name="storeLocation" required class="form-control"/>
+    <div class="d-flex justify-content-between">
+        <div class="col-8 px-5 py-1">
+            <input ngx-google-places-autocomplete [options]='options'  (onAddressChange)="AddressChange($event)" name="storeLocation" required class="form-control"/>
+        </div>
+        <div class="px-5 py-1" *ngIf="!editable">
+            <button type="submit" class="ml-2 actionbutton" (click)="editFencing()">Edit Fencing</button>
+        </div>
     </div>
-    <div class="px-5 py-1">
+    <div class="px-5 py-1" *ngIf="!editable">
         <agm-map [latitude]="storeData.lat" [longitude]="storeData.lon" [style.height.px]="300" [zoom]="15">
-            <agm-marker [latitude]="storeData.lat" [longitude]="storeData.lon" [markerDraggable]="true"
-            (dragEnd)="markerDragEnd($event)"></agm-marker>
-            <agm-polygon [paths]="polygon"></agm-polygon>
+            <agm-marker [latitude]="storeData.lat" [longitude]="storeData.lon"></agm-marker>
+            
+            <agm-polygon [paths]="pointList"></agm-polygon>
+        </agm-map>
+    </div>
+    <div class="px-5 py-1" *ngIf="editable">
+        <agm-map [latitude]="storeData.lat" [longitude]="storeData.lon" [style.height.px]="300" [zoom]="15" (mapReady)="onMapReady($event)">
+            <agm-marker [latitude]="storeData.lat" [longitude]="storeData.lon"></agm-marker>
         </agm-map>
     </div>
     <form class="edit-form">
@@ -18,33 +28,25 @@
             <table class="table table-sm table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th>Location</th>
                         <th>Latitude</th>
                         <th>Longitude</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of locationList; let i=index;">
+                    <tr *ngFor="let item of pointList; let i=index;">
                         <td>
-                            {{item}}
+                            {{item.lat}}
                         </td>
                         <td>
-                            {{polygon[i].lat}}
-                        </td>
-                        <td>
-                            {{polygon[i].lng}}
-                        </td>
-                        <td>
-                            <i class="fas fa-times pointer" (click)="removePointer(i);"></i>
+                            {{item.lng}}
                         </td>
                     </tr>
                 </tbody>
-            </table>       
-            <div class="col-lg-4">
-                <!-- <span class="text-danger">{{errorMessage}}</span> -->
-            </div>
+            </table>
 
+        </div>
+        <div class="col-6" *ngIf="selectedArea > 0">
+            <span> Selected Area: {{ selectedArea.toPrecision(5) }}m<sup>2</sup> </span>
         </div>
         <div class="form-group d-flex justify-content-end">
             <button type="submit" class="actionbutton" routerLink='/admin/store/list'>Cancel</button>

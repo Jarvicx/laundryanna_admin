@@ -150,7 +150,7 @@ import { StoreGeofencingComponent } from './component/admin/store/store-geofenci
   imports: [
     BrowserModule,AppRoutingModule,CommonModule,FormsModule,ReactiveFormsModule,HttpClientModule,BrowserAnimationsModule,NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     NgbModule,
-    ModalModule.forRoot(),MatTableModule,DataTablesModule,GooglePlaceModule,AgmCoreModule.forRoot({apiKey:'AIzaSyDPuZ9AcP4PHUBgbUsT6PdCRUUkyczJ66I'})
+    ModalModule.forRoot(),MatTableModule,DataTablesModule,GooglePlaceModule,AgmCoreModule.forRoot({apiKey:'AIzaSyDPuZ9AcP4PHUBgbUsT6PdCRUUkyczJ66I',libraries: ['drawing']})
   ],
   providers: [ConfirmationDialogService],
   bootstrap: [AppComponent]

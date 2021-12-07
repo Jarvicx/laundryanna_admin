@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgxUiLoaderService } from "ngx-ui-loader";
 import { ApiService } from "src/app/service/api.service";
 import { Router, ActivatedRoute } from "@angular/router";
-
+declare const google: any;
 
 @Component({
   selector: 'app-store-detail',
@@ -32,4 +32,5 @@ export class StoreDetailComponent implements OnInit {
     }
   }
 
+  //from here map drawing code started
 }
