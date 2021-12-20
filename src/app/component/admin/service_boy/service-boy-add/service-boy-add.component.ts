@@ -19,6 +19,8 @@ export class ServiceBoyAddComponent implements OnInit {
   show_eye = false;
   serviceBoyId : any ='';
   public serviceBoyType : any = ['Factory Boy', 'Delivery Boy']
+  public storelist : any = [];
+  public selectedStore : any = '';
 
   public Toast = Swal.mixin({
     toast: true,
@@ -31,11 +33,19 @@ export class ServiceBoyAddComponent implements OnInit {
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
   });
-  constructor( private _api: ApiService, private _loader : NgxUiLoaderService, private formBuilder : FormBuilder,
-    public _activRoute : ActivatedRoute, public _router : Router){
-    this.serviceBoyId = this._activRoute.snapshot.paramMap.get('serviceBoyId')
+  constructor( private _api: ApiService, private _loader : NgxUiLoaderService, private formBuilder : FormBuilder, public _activRoute : ActivatedRoute, public _router : Router){
+
+    this.serviceBoyId = this._activRoute.snapshot.paramMap.get('serviceBoyId');
     this.isAddMode = !this.serviceBoyId;
     console.log('**this.isAddMode value**',this.isAddMode);
+
+    this._api.getStore().subscribe(
+      res => {
+        this.storelist = res.data.map( (e: any) => ({_id: e._id, name: e.name}) );
+        console.log('Store list', this.storelist);
+        this.selectedStore = this.storelist[0]._id;
+      }, err => {}
+    )
     const passwordValidators = [Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,20}$')];
     if (this.isAddMode) {
       passwordValidators.push(Validators.required);
@@ -56,6 +66,7 @@ export class ServiceBoyAddComponent implements OnInit {
             boy_type : res.data.boy_type,
             image : res.data.image
           })
+          this.selectedStore = res.data?.store?._id;
         this._loader.stopLoader('loader');
         },err=>{
           this._loader.stopLoader('loader');
@@ -64,6 +75,7 @@ export class ServiceBoyAddComponent implements OnInit {
 
 
     this.serviceBoyform = this.formBuilder.group({
+      store: new FormControl('', Validators.required),
       name: new FormControl('', Validators.required),
       email: new FormControl('',[
         Validators.required,

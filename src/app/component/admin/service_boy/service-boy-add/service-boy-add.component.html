@@ -3,6 +3,8 @@
         <h5>{{formType}} Service Boys</h5>
     </div>
     <hr>
+
+    <!-- {{serviceBoyform.value | json}} -->
     
     <form class="edit-form" [formGroup]="serviceBoyform" (ngSubmit)="submitServiceBoy()">
         <!-- <div class="col-lg-2">
@@ -38,7 +40,7 @@
                         <label for="password">Password</label>
                         <!-- <input [type]="hide ? 
                         'password' : 'text'" placeholder="Enter password" formControlName = "password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"> -->
-                        <input type="password" placeholder="Enter password" formControlName = "password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                        <input type="password" placeholder="Enter password" formControlName = "password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" class="form-control">
                         <!-- <i [class]="show_eye ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showPassword()"></i> -->
                         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                             <div *ngIf="f.password.errors.required">Password is required</div>
@@ -49,7 +51,7 @@
                 <div class="col-lg-6" *ngIf="formType=='Add'">
                     <div class="form-group edit-box">
                         <label for="conFirmpassword">Confirm Password</label>
-                        <input type="password" placeholder="Enter confirm password" autocomplete="new-conFirmpassword" formControlName = "conFirmpassword" [ngClass]="{ 'is-invalid': submitted && f.conFirmpassword.errors }">
+                        <input type="password" placeholder="Enter confirm password" autocomplete="new-conFirmpassword" formControlName = "conFirmpassword" [ngClass]="{ 'is-invalid': submitted && f.conFirmpassword.errors }" class="form-control">
                         <div *ngIf="submitted && f.conFirmpassword.errors" class="invalid-feedback">
                             <div *ngIf="f.conFirmpassword.errors.required">Confirm Password is required</div>
                             <div *ngIf="f.conFirmpassword.errors.confirmedValidator">Password does not match.</div>
@@ -94,7 +96,7 @@
                 <div class="col-lg-6">
                     <div class="form-group edit-box">
                         <label for="wallet"> Service Boy Type  </label>
-                        <select formControlName="boy_type">
+                        <select formControlName="boy_type" class="form-control">
                             <!-- <option disabled>Select Service Boy Type</option> -->
                             <option *ngFor="let serviceBoy of serviceBoyType">{{serviceBoy}}</option>
                         </select>
@@ -103,11 +105,24 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="wallet"> Store alloted  </label>
+                        <select formControlName="store" class="form-control" [ngModel]="selectedStore">
+                            <!-- <option disabled>Select Service Boy Type</option> -->
+                            <option *ngFor="let store of storelist" [value]="store._id">{{store.name}}</option>
+                        </select>
+                        <div *ngIf="submitted && f.store.errors" class="invalid-feedback">
+                            <div *ngIf="f.store.errors.required">Select a service boy type</div>
+                        </div>
+                    </div>
+                </div>
             </div>                                               
         </div>
         <div class="form-group d-flex justify-content-end">
             <button type="submit" class="actionbutton" (click)="cancel()">Cancel</button>
-            <button type="submit" class="actionbutton">SAVE</button>
+            <button type="submit" class="ml-2 actionbutton">SAVE</button>
         </div>
     </form>
 </div>
