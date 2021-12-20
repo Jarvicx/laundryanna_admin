@@ -59,6 +59,7 @@
                     <th>Name</th>
                     <th>Mobile No</th>
                     <th>Address</th>
+                    <th>Store</th>
                     <th>Status</th>
                     <th style="width:80px" class="text-center">Action</th>
                 </tr>
@@ -72,6 +73,7 @@
                     <td>{{pickup?.customerId?.name}}</td>
                     <td>{{pickup?.customerId?.phone}}</td>
                     <td>{{pickup?.addressId?.addressLine1}}</td>
+                    <td>{{pickup?.storeAssign?.name || 'N/A'}}</td>
                     <td><span class="badge badge-warning" (click)="openModalWithClass(template,pickup._id)">{{pickup.status}}</span></td>
                     <td class="text-center">
                         <a href="javascript:void(0);" data-toggle="modal" data-target="#assignBoyModal" *ngIf="!pickup?.boyAssign && !pickup?.storeAssign" (click)="selectPickup(pickup?._id)"><i class="fas fa-user-plus" title="Assign"></i></a>

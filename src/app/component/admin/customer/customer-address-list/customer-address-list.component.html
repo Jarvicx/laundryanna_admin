@@ -24,10 +24,9 @@
             <thead>
                 <tr>
                     <th>Sl no.</th>
-                    <th>Country</th>
-                    <th>State</th>
-                    <th>City</th>
                     <th>Address</th>
+                    <th>Landmark</th>
+                    <th>City</th>
                     <th>Pin</th>
                     <th style="width: 150px;">Action</th>
                 </tr>
@@ -35,10 +34,9 @@
             <tbody *ngIf="addressListing.length > 0; else otherBlock">
                 <tr *ngFor="let address of addressListing; let i=index">
                     <td>{{i+1}}</td>
-                    <td>{{address.country}}</td>
-                    <td>{{address.state}}</td>
+                    <td>{{address.addressLine1}}</td>
+                    <td>{{address?.landmark}}</td>
                     <td>{{address.city}}</td>
-                    <td>{{address.addressLine1}} {{address.addressLine2}}</td>
                     <td>{{address.pin}}</td>
                     <td class="text-center">
                         <a routerLink="/admin/customer-address/edit/{{address.customerId}}/{{address._id}}"><i class="far fa-edit"></i></a>

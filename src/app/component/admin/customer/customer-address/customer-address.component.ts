@@ -27,6 +27,14 @@ export class CustomerAddressComponent implements OnInit {
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
   });
+  public lat: number = 0;
+  public lon: number = 0;
+  public addressLine1 : any = "";
+  public options: any = {
+    componentRestrictions:{
+      country:["IN"]
+    }
+  }
   
   constructor( private _api : ApiService, public _loader: NgxUiLoaderService, public frmBuilder : FormBuilder, 
     private activatedR : ActivatedRoute, private _router: Router) { 
@@ -37,29 +45,26 @@ export class CustomerAddressComponent implements OnInit {
         this._loader.startLoader('loader');
         this._api.getCustomerAddressById(this.addressId).subscribe(res=>{
           this.addressForm.patchValue({
-            addressLine1: res.data.addressLine1,
-            addressLine2: res.data.addressLine2,
-	          country:res.data.country,
-            state: res.data.state,
-            city: res.data.city,
-            pin: res.data.pin,
-            lat:res.data.lat,
-            lon:res.data.lon
+            addressLine2: res.data?.addressLine2,
+            landmark: res.data?.landmark,
+            city: res.data?.city,
+            pin: res.data?.pin,
+            type: res.data?.type,
           })
+          this.addressLine1 = res.data?.addressLine1
+          this.lat = res.data?.lat
+          this.lon = res.data?.lon
           this._loader.stopLoader('loader');
         },err=>{
           this._loader.stopLoader('loader');
         })
       }
     this.addressForm = this.frmBuilder.group({
-      addressLine1: new FormControl('', Validators.required),
       addressLine2: new FormControl('', Validators.required),
-	    country:new FormControl('', Validators.required),
-	    state: new FormControl('', Validators.required),
+	    landmark: new FormControl('', Validators.required),
 	    city: new FormControl('', Validators.required),
 	    pin: new FormControl('', Validators.required),
-	    lat:new FormControl('', Validators.required),
-	    lon: new FormControl('', Validators.required),
+	    type: new FormControl('', Validators.required),
     })
   }
 
@@ -73,8 +78,11 @@ export class CustomerAddressComponent implements OnInit {
     this.submitted = true;
     if (this.addressForm.valid) {
       this._loader.startLoader('loader');
+      this.addressForm.value.customerId = this.customerId;
+      this.addressForm.value.addressLine1 = this.addressLine1;
+      this.addressForm.value.lat = this.lat;
+      this.addressForm.value.lon = this.lon;
       if (this.formType === 'Add') {
-        this.addressForm.value.customerId = this.customerId;
         this._api.createAddress(this.addressForm.value).subscribe(
           res=>{
             this.Toast.fire({
@@ -92,7 +100,6 @@ export class CustomerAddressComponent implements OnInit {
           }
         )
       }else{
-        this.addressForm.value.customerId = this.customerId;
         this._api.updateAddress(this.addressId, this.addressForm.value).subscribe(
           res=>{
             this.Toast.fire({
@@ -118,6 +125,14 @@ export class CustomerAddressComponent implements OnInit {
 
   cancel(){
     this._router.navigate(['/admin/customer-address/list/'+this.customerId]);
+  }
+
+  public AddressChange(address: any) {
+    //setting address from API to local variable
+    console.log("Google location:",address);
+    this.addressLine1 = address.formatted_address;
+    this.lat = address.geometry.location.lat();
+    this.lon = address.geometry.location.lng();
   }
 
 }

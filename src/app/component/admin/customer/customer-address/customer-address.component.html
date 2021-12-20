@@ -9,10 +9,10 @@
                 <div class="col-lg-6">
                     <div class="form-group edit-box">
                         <label for="addressLine1">Address Line 1</label>
-                        <input type="text" id="addressLine1" placeholder="Enter Address Line 1" formControlName = "addressLine1" class="form-control" mdbInput [ngClass]="{ 'is-invalid': submitted && f.addressLine1.errors }" />
-                        <div *ngIf="submitted && f.addressLine1.errors" class="invalid-feedback">
-                            <div *ngIf="f.addressLine1.errors.required">Address Line1 is required</div>
-                        </div> 
+                        <!-- <input type="text" id="addressLine1" placeholder="Enter Address Line 1" formControlName = "addressLine1" class="form-control" mdbInput [ngClass]="{ 'is-invalid': submitted && f.addressLine1.errors }" /> -->
+                        <!-- <input formControlName="addressLine1"> -->
+                        <input ngx-google-places-autocomplete [options]='options'  (onAddressChange)="AddressChange($event)" [ngModel]="addressLine1" [ngModelOptions]="{standalone: true}"  class="form-control"/>
+                        
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -26,19 +26,10 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group edit-box">
-                        <label for="country"> Country </label>
-                        <input type="text" placeholder="Enter Country" class="form-control" formControlName = "country" [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
-                        <div *ngIf="submitted && f.country.errors" class="invalid-feedback">  
-                            <div *ngIf="f.country.errors.required">Country is required.</div>  
-                        </div>  
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group edit-box">
-                        <label for="state"> State </label>
-                        <input type="text" placeholder="Enter State" class="form-control" formControlName = "state" [ngClass]="{ 'is-invalid': submitted && f.state.errors }" />
-                        <div *ngIf="submitted && f.state.errors" class="invalid-feedback">  
-                            <div *ngIf="f.state.errors.required">State is required.</div>  
+                        <label for="landmark"> Landmark </label>
+                        <input type="text" placeholder="Enter landmark" class="form-control" formControlName = "landmark" [ngClass]="{ 'is-invalid': submitted && f.landmark.errors }" />
+                        <div *ngIf="submitted && f.landmark.errors" class="invalid-feedback">  
+                            <div *ngIf="f.landmark.errors.required">landmark is required.</div>  
                         </div>  
                     </div>
                 </div>
@@ -63,19 +54,16 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group edit-box">
-                        <label for="lat"> Latitude </label>
-                        <input type="number" placeholder="Enter Latitude" class="form-control" formControlName = "lat" [ngClass]="{ 'is-invalid': submitted && f.lat.errors }" />
-                        <div *ngIf="submitted && f.lat.errors" class="invalid-feedback">  
-                            <div *ngIf="f.lat.errors.required">Latitude is required.</div>  
-                        </div>  
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group edit-box">
-                        <label for="lon"> Longitude </label>
-                        <input type="number" placeholder="Enter Longitude" class="form-control" formControlName = "lon" [ngClass]="{ 'is-invalid': submitted && f.lon.errors }" />
-                        <div *ngIf="submitted && f.lon.errors" class="invalid-feedback">  
-                            <div *ngIf="f.lon.errors.required">Longitude is required.</div>  
+                        <label for="type"> Type </label>
+                        <select class="form-control" formControlName = "type" [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+                            <option value="" hidden>-select-</option>
+                            <option value="home">Home</option>
+                            <option value="work">Work</option>
+                            <option value="others">Others</option>
+                        </select>
+
+                        <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+                            <div *ngIf="f.type.errors.required">Please choose an address type.</div>  
                         </div>  
                     </div>
                 </div>
@@ -83,7 +71,7 @@
         </div>
         <div class="form-group d-flex justify-content-end">
             <button type="submit" class="actionbutton" (click)="cancel()">Cancel</button>
-            <button type="submit" class="actionbutton">SAVE</button>
+            <button type="submit" class="actionbutton ml-2">SAVE</button>
         </div>
     </form>
 </div>
