@@ -99,6 +99,7 @@ import { StoreListComponent } from './component/admin/store/store-list/store-lis
 import { StoreDetailComponent } from './component/admin/store/store-detail/store-detail.component';
 import { StoreAddEditComponent } from './component/admin/store/store-add-edit/store-add-edit.component';
 import { StoreGeofencingComponent } from './component/admin/store/store-geofencing/store-geofencing.component';
+import { ServiceBoyCalendarComponent } from './component/admin/service_boy/service-boy-calendar/service-boy-calendar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -145,7 +146,8 @@ import { StoreGeofencingComponent } from './component/admin/store/store-geofenci
     StoreListComponent,
     StoreDetailComponent,
     StoreAddEditComponent,
-    StoreGeofencingComponent
+    StoreGeofencingComponent,
+    ServiceBoyCalendarComponent
   ],
   imports: [
     BrowserModule,AppRoutingModule,CommonModule,FormsModule,ReactiveFormsModule,HttpClientModule,BrowserAnimationsModule,NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
