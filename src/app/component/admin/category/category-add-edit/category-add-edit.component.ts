@@ -50,7 +50,11 @@ export class CategoryAddEditComponent implements OnInit {
             name:  res.data.name,
             deliveryCharge: res.data.deliveryCharge,
             deliveryDuration: res.data.deliveryDuration,
-            expressDeliveryDuration: res.data.expressDeliveryDuration
+            expressDeliveryDuration: res.data.expressDeliveryDuration,
+            planName: res.data.planName,
+            planAmount: res.data.planAmount,
+            maxWeight: res.data.maxWeight,
+            priceExtraWeightPerKg: res.data.priceExtraWeightPerKg
           })
         this._loader.stopLoader('loader')
       })
@@ -60,7 +64,11 @@ export class CategoryAddEditComponent implements OnInit {
       name:  new FormControl('',Validators.required),
       deliveryCharge:  new FormControl('',Validators.required),
       deliveryDuration:  new FormControl('',Validators.required),
-      expressDeliveryDuration:  new FormControl('',Validators.required)
+      expressDeliveryDuration:  new FormControl('',Validators.required),
+      planName:  new FormControl('',Validators.required),
+      planAmount:  new FormControl('',Validators.required),
+      maxWeight:  new FormControl('',Validators.required),
+      priceExtraWeightPerKg:  new FormControl('',Validators.required)
     })
     
   }

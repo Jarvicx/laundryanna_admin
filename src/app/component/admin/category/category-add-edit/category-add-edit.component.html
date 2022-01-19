@@ -54,6 +54,42 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-6">
+                        <div class="form-group edit-box">
+                            <label for="planName">Plan Name</label>
+                            <input type="text" placeholder="Enter plan name" formControlName = "planName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.planName.errors }" />
+                            <div *ngIf="submitted && f.planName.errors" class="invalid-feedback">
+                                <div *ngIf="f.planName.errors.required">Plan Name is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group edit-box">
+                            <label for="planAmount">Plan Amount</label>
+                            <input type="number" placeholder="Enter plan Amount" formControlName = "planAmount" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.planAmount.errors }" />
+                            <div *ngIf="submitted && f.planAmount.errors" class="invalid-feedback">
+                                <div *ngIf="f.planAmount.errors.required">Plan Amount is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group edit-box">
+                            <label for="maxWeight">Maximum Weight</label>
+                            <input type="text" placeholder="Enter maximum weight (in kg)" formControlName = "maxWeight" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.maxWeight.errors }" />
+                            <div *ngIf="submitted && f.maxWeight.errors" class="invalid-feedback">
+                                <div *ngIf="f.maxWeight.errors.required">Maximum Weight is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group edit-box">
+                            <label for="priceExtraWeightPerKg">Price Extra Weight Per Kg</label>
+                            <input type="number" placeholder="Enter priceExtraWeightPerKg" formControlName = "priceExtraWeightPerKg" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.priceExtraWeightPerKg.errors }" />
+                            <div *ngIf="submitted && f.priceExtraWeightPerKg.errors" class="invalid-feedback">
+                                <div *ngIf="f.priceExtraWeightPerKg.errors.required">Price Extra Weight Per Kg is required</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>                                               
             </div>
         </div>

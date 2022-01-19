@@ -17,6 +17,10 @@
                   <th>Regular Delivery Charge</th>
                   <th>Regular Delivery in days</th>
                   <th>Express Delivery in days</th>
+                  <th>Plan Name</th>
+                  <th>Plan Amount</th>
+                  <th>Max Weight</th>
+                  <th>priceExtraWeightPerKg</th>
                   <th>Status</th>
                   <th style="width: 150px;">Action</th>
               </tr>
@@ -24,11 +28,15 @@
           <tbody>
               <tr *ngFor="let category of categoryList; let i = index;">
                   <td>{{i+1}}</td>
-                  <td>{{category.name}}</td>
+                  <td>{{category?.name}}</td>
                   <td>{{category?.motherCategory?.name}}</td>
-                  <td>{{category.deliveryCharge}}</td>
-                  <td>{{category.deliveryDuration}}</td>
-                  <td>{{category.expressDeliveryDuration}}</td>
+                  <td>{{category?.deliveryCharge}}</td>
+                  <td>{{category?.deliveryDuration}}</td>
+                  <td>{{category?.expressDeliveryDuration}}</td>
+                  <td>{{category?.planName}}</td>
+                  <td>{{category?.planAmount}}</td>
+                  <td>{{category?.maxWeight}}</td>
+                  <td>{{category?.priceExtraWeightPerKg}}</td>
                   <td style="cursor: pointer;" (click)="toggleStatus(category._id, !category.status)">{{category.status ? 'Active' : 'Inactive'}}</td>
                   <td> 
                     <a href="javascript:void(0);" routerLink="/admin/category/edit/{{category._id}}"><i class="far fa-edit" title="Edit"></i></a>
