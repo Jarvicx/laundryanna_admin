@@ -7,16 +7,17 @@ import  Swal  from "sweetalert2";
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-category-add-edit',
-  templateUrl: './category-add-edit.component.html',
-  styleUrls: ['./category-add-edit.component.css']
+  selector: 'app-mother-category-add-edit',
+  templateUrl: './mother-category-add-edit.component.html',
+  styleUrls: ['./mother-category-add-edit.component.css']
 })
-export class CategoryAddEditComponent implements OnInit {
+export class MotherCategoryAddEditComponent implements OnInit {
+
   public formType : any = 'Add';
   public categoryData : any = [];
   public errorMessage : any = '';
   public cityList : any = [];
-  public motherCategoryList : any = [];
+  public companyList : any = [];
   public categoryId : any ='';
   public companyId : any = '';
   public categoryForm : FormGroup;
@@ -42,12 +43,13 @@ export class CategoryAddEditComponent implements OnInit {
     if (this.categoryId) {
       this._loader.startLoader('loader');
       this.formType = 'Edit';
-      this._api.getCategoryById(this.categoryId).subscribe(
+      this._api.getMotherCategoryById(this.categoryId).subscribe(
         res => {
-          console.log('categoty detail',res);
+          console.log(res);
           this.categoryForm.patchValue({
-            motherCategory: res.data.motherCategory?._id,
+            city: res.data.city._id,
             name:  res.data.name,
+            minOrderVal:  res.data.minOrderVal,
             deliveryCharge: res.data.deliveryCharge,
             deliveryDuration: res.data.deliveryDuration,
             expressDeliveryDuration: res.data.expressDeliveryDuration
@@ -56,8 +58,9 @@ export class CategoryAddEditComponent implements OnInit {
       })
     }
     this.categoryForm = this.fbuilder.group({
-      motherCategory: new FormControl('',Validators.required),
+      city:  new FormControl('',Validators.required),
       name:  new FormControl('',Validators.required),
+      minOrderVal:  new FormControl('',Validators.required),
       deliveryCharge:  new FormControl('',Validators.required),
       deliveryDuration:  new FormControl('',Validators.required),
       expressDeliveryDuration:  new FormControl('',Validators.required)
@@ -66,14 +69,17 @@ export class CategoryAddEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._api.getMotherCategoryList().subscribe(
+    this._api.getCityList().subscribe(
       res => {
-        this.motherCategoryList = res.data.filter( (e:any) => e.status === true );
+        console.log(res);
+        console.log(res.data);
+        this.cityList = res.data;
         this._loader.stopLoader('loader');
       }, err => {
         console.log(err);
         this._loader.stopLoader('loader');
-    })
+      }
+    )
   }
 
   get f(){
@@ -108,13 +114,13 @@ export class CategoryAddEditComponent implements OnInit {
       this._loader.startLoader('loader');
       const mainForm = this.categoryForm.value;
       if (this.formType === 'Add') {
-        this._api.addCategory(mainForm).subscribe(
+        this._api.addMotherCategory(mainForm).subscribe(
           res => {
             this.Toast.fire({
               icon: 'success',
-              title: 'Category added successfully'
+              title: 'Mother Category added successfully'
             })
-            this._router.navigate(['/admin/category/list']);
+            this._router.navigate(['/admin/mother-category/list']);
             this._loader.stopLoader('loader');
   
           }, err => {
@@ -128,9 +134,9 @@ export class CategoryAddEditComponent implements OnInit {
           res => {
             this.Toast.fire({
               icon: 'success',
-              title: 'Category updated successfully'
+              title: 'Mother Category updated successfully'
             })
-            this._router.navigate(['/admin/category/list']);
+            this._router.navigate(['/admin/mother-category/list']);
             this._loader.stopLoader('loader');
   
           }, err => {
@@ -147,7 +153,7 @@ export class CategoryAddEditComponent implements OnInit {
   }
 
   cancel(){
-    this._router.navigate(['/admin/category/list']);
+    this._router.navigate(['/admin/mother-category/list']);
   }
 
 }

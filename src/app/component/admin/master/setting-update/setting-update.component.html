@@ -44,30 +44,125 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group edit-box">
-                                <label for="adress">Address</label>
-                                <textarea name="addrees" class="form-control w-100" formControlName = "addrees" placeholder="Enter Address" [ngClass]="{ 'is-invalid': submitted && f.addrees.errors }"></textarea>
-                                <div *ngIf="submitted && f.addrees.errors" class="invalid-feedback">
-                                    <div *ngIf="f.addrees.errors.required">Address is required</div>
+                                <label for="whatsapp"> Whatsapp </label>
+                                <input type="number" placeholder="Enter whatsapp number" class="form-control" formControlName = "whatsapp" [ngClass]="{ 'is-invalid': submitted && f.whatsapp.errors }" />
+                                <div *ngIf="submitted && f.whatsapp.errors" class="invalid-feedback">  
+                                    <div *ngIf="f.whatsapp.errors.required">whatsapp is required.</div>  
+                                    <div *ngIf="f.whatsapp.errors.pattern">Please enter 10 digit whatsapp number.</div>  
+                                </div>  
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="supportTiming"> Support Timing </label>
+                                <input type="text" placeholder="Enter supportTiming number" class="form-control" formControlName = "supportTiming" [ngClass]="{ 'is-invalid': submitted && f.supportTiming.errors }" />
+                                <div *ngIf="submitted && f.supportTiming.errors" class="invalid-feedback">  
+                                    <div *ngIf="f.supportTiming.errors.required">supportTiming is required.</div>
+                                </div>  
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="tagline">Tagline</label>
+                                <textarea name="tagline" class="form-control w-100" formControlName = "tagline" placeholder="Enter sub-category taglineriptions" [ngClass]="{ 'is-invalid': submitted && f.tagline.errors }"></textarea>
+                                <div *ngIf="submitted && f.tagline.errors" class="invalid-feedback">
+                                    <div *ngIf="f.tagline.errors.required">Tagline is required</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group edit-box">
-                                <label for="desc">Description</label>
-                                <textarea name="desc" class="form-control w-100" formControlName = "desc" placeholder="Enter sub-category descriptions" [ngClass]="{ 'is-invalid': submitted && f.desc.errors }"></textarea>
-                                <div *ngIf="submitted && f.desc.errors" class="invalid-feedback">
-                                    <div *ngIf="f.desc.errors.required">Description is required</div>
+                                <label for="termsAndCondition">Terms And Condition</label>
+                                <textarea name="termsAndCondition" class="form-control w-100" formControlName = "termsAndCondition" placeholder="Enter sub-category termsAndConditionriptions" [ngClass]="{ 'is-invalid': submitted && f.termsAndCondition.errors }"></textarea>
+                                <div *ngIf="submitted && f.termsAndCondition.errors" class="invalid-feedback">
+                                    <div *ngIf="f.termsAndCondition.errors.required">Terms And Condition is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="checkoutTerms">Checkout Terms</label>
+                                <textarea name="checkoutTerms" class="form-control w-100" formControlName = "checkoutTerms" placeholder="Enter sub-category checkoutTermsriptions" [ngClass]="{ 'is-invalid': submitted && f.checkoutTerms.errors }"></textarea>
+                                <div *ngIf="submitted && f.checkoutTerms.errors" class="invalid-feedback">
+                                    <div *ngIf="f.checkoutTerms.errors.required">Checkout Terms is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="messageSenderId">Message Sender Id</label>
+                                <input type="text" placeholder="Enter messageSenderId" class="form-control" formControlName = "messageSenderId" [ngClass]="{ 'is-invalid': submitted && f.messageSenderId.errors }" />
+                                <div *ngIf="submitted && f.messageSenderId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.messageSenderId.errors.required">Message Sender Id is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="messageTemplateId">Message Template Id</label>
+                                <input type="text" placeholder="Enter messageTemplateId" class="form-control" formControlName = "messageTemplateId" [ngClass]="{ 'is-invalid': submitted && f.messageTemplateId.errors }" />
+                                <div *ngIf="submitted && f.messageTemplateId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.messageTemplateId.errors.required">Message Template Id is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="startingOrderId">Starting Order Id</label>
+                                <input type="text" placeholder="Enter startingOrderId" class="form-control" formControlName = "startingOrderId" [ngClass]="{ 'is-invalid': submitted && f.startingOrderId.errors }" />
+                                <div *ngIf="submitted && f.startingOrderId.errors" class="invalid-feedback">
+                                    <div *ngIf="f.startingOrderId.errors.required">Starting Order Id is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="timezone">Timezone</label>
+                                <input type="text" placeholder="Enter timezone" class="form-control" formControlName = "timezone" [ngClass]="{ 'is-invalid': submitted && f.timezone.errors }" />
+                                <div *ngIf="submitted && f.timezone.errors" class="invalid-feedback">
+                                    <div *ngIf="f.timezone.errors.required">Timezone is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="cin">cin</label>
+                                <input type="text" placeholder="Enter cin" class="form-control" formControlName = "cin" [ngClass]="{ 'is-invalid': submitted && f.cin.errors }" />
+                                <div *ngIf="submitted && f.cin.errors" class="invalid-feedback">
+                                    <div *ngIf="f.cin.errors.required">cin is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="gst">gst</label>
+                                <input type="text" placeholder="Enter gst" class="form-control" formControlName = "gst" [ngClass]="{ 'is-invalid': submitted && f.gst.errors }" />
+                                <div *ngIf="submitted && f.gst.errors" class="invalid-feedback">
+                                    <div *ngIf="f.gst.errors.required">gst is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group edit-box">
+                                <label for="wallet"> Currency Type  </label>
+                                <select formControlName="currency" class="form-control">
+                                    <!-- <option disabled>Select Service Boy Type</option> -->
+                                    <option *ngFor="let item of currencyType">{{item}}</option>
+                                </select>
+                                <div *ngIf="submitted && f.currency.errors" class="invalid-feedback">
+                                    <div *ngIf="f.currency.errors.required">Select a Currency type</div>
                                 </div>
                             </div>
                         </div>
                         
-                        
                       
                     </div>                                               
                 </div>
-                <div class="form-group d-flex justify-content-end">
-                    <button type="submit" class="actionbutton" (click)="cancel()">Cancel</button>
-                    <button type="submit" class="actionbutton">SAVE</button>
+                <div class="col-12">
+                    <div class="form-group d-flex justify-content-end">
+                        <button type="submit" class="actionbutton" (click)="cancel()">Cancel</button>
+                        <button type="submit" class="ml-2 actionbutton">SAVE</button>
+                    </div>
                 </div>
             </div>
         </form>

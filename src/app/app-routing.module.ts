@@ -59,6 +59,10 @@ import { RateCardAddEditComponent } from "./component/admin/rate_card/rate-card-
 
 import { OrderListComponent } from "./component/admin/order/order-list/order-list.component";
 import { OrderAddEditComponent } from "./component/admin/order/order-add-edit/order-add-edit.component";
+import { StoreOwnerListComponent } from './component/admin/store-owner/store-owner-list/store-owner-list.component';
+import { StoreOwnerAddEditComponent } from './component/admin/store-owner/store-owner-add-edit/store-owner-add-edit.component';
+import { MotherCategoryListComponent } from './component/admin/mother-category/mother-category-list/mother-category-list.component';
+import { MotherCategoryAddEditComponent } from './component/admin/mother-category/mother-category-add-edit/mother-category-add-edit.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthCheckService] },
@@ -70,6 +74,11 @@ const routes: Routes = [
       { path: 'list', component: CityListComponent },
       { path: 'add', component: CityAddEditComponent },
       { path: 'edit/:cityId', component: CityAddEditComponent },
+    ]},
+    { path: 'mother-category', children: [
+      { path: 'list', component: MotherCategoryListComponent },
+      { path: 'add', component: MotherCategoryAddEditComponent },
+      { path: 'edit/:categoryId', component: MotherCategoryAddEditComponent },
     ]},
     { path: 'category', children: [
       { path: 'list', component: CategoryListComponent },
@@ -90,6 +99,11 @@ const routes: Routes = [
       { path: 'list', component: CompanyListComponent },
       { path: 'add', component: CompanyAddEditComponent },
       { path: 'edit/:companyId', component: CompanyAddEditComponent },
+    ]},
+    { path: 'store-owner', children: [
+      { path: 'list', component: StoreOwnerListComponent },
+      { path: 'add', component: StoreOwnerAddEditComponent },
+      { path: 'edit/:storeOwnerId', component: StoreOwnerAddEditComponent },
     ]},
     { path: 'store', children: [
       { path: 'list', component: StoreListComponent },
@@ -164,7 +178,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(routes, { useHash: false })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

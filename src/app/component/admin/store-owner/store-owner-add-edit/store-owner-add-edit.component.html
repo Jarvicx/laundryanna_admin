@@ -1,0 +1,53 @@
+<div class="dashboard-body-content">
+    <h5>Store Owner {{formType}}</h5>
+    <hr>
+    <form class="edit-form" #storeOwnerForm="ngForm" (ngSubmit)="storeOwnerFormSubmit(storeOwnerForm)">
+        <h5 class="text-blue">Basic Information</h5>
+        <div class="row m-0 pt-3">
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" #name="ngModel" [ngModel]="storeOwnerData.name" class="form-control" id="name" required [ngClass]="{'is-invalid': name?.invalid && name?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" #email="ngModel" [ngModel]="storeOwnerData.email" class="form-control" id="email" required [ngClass]="{'is-invalid': email?.invalid && email?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="contact">Contact</label>
+                    <input type="number" name="contact" #contact="ngModel" [ngModel]="storeOwnerData.contact" class="form-control" id="contact" required [ngClass]="{'is-invalid': contact?.invalid && contact?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="pan">PAN no (optional)</label>
+                    <input type="text" name="pan" #pan="ngModel" [ngModel]="storeOwnerData.pan" class="form-control" id="pan" required [ngClass]="{'is-invalid': pan?.invalid && pan?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="aadhar">Aadhar no (optional)</label>
+                    <input type="text" name="aadhar" #aadhar="ngModel" [ngModel]="storeOwnerData.aadhar" class="form-control" id="aadhar" required [ngClass]="{'is-invalid': aadhar?.invalid && aadhar?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group edit-box">
+                    <label for="bankAcNo">Bank Ac. No</label>
+                    <input type="text" name="bankAcNo" #bankAcNo="ngModel" [ngModel]="storeOwnerData.bankAcNo" class="form-control" id="bankAcNo" required [ngClass]="{'is-invalid': bankAcNo?.invalid && bankAcNo?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <span class="text-danger">{{errorMessage}}</span>
+            </div>
+        </div>
+        
+        <div class="form-group d-flex justify-content-end">
+            <button type="submit" class="actionbutton" >SAVE</button>
+            <button class="actionbutton" style="margin-left: 5px;" routerLink="/admin/store-owner/list">CANCEL</button>
+        </div>
+    </form>
+</div>

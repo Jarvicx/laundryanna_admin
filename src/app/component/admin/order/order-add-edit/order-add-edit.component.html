@@ -71,19 +71,19 @@
               </tr>
               <tr *ngFor="let cartInfo of cartItem.cart">
                 <td>{{cartInfo?.itemName}} - {{cartInfo?.categoryName}}  × {{cartInfo?.quantity}}</td>
-                <td><span>₹</span> {{cartInfo?.price}}</td>
+                <td><span>{{selectedCurrency}}</span> {{cartInfo?.price}}</td>
               </tr>
               <tr>
                 <td>SUBTOTAL</td>
-                <td><span>₹</span> {{totalCartValue}}</td>
+                <td><span>{{selectedCurrency}}</span> {{totalCartValue}}</td>
               </tr>
               <tr *ngIf="gstValue > 0">
                 <td>GST</td>
-                <td><span>₹</span> {{gstValue}}</td>
+                <td><span>{{selectedCurrency}}</span> {{gstValue}}</td>
               </tr>
               <tr>
                 <td><b>TOTAL</b></td>
-                <td><span>₹</span> {{totalCartValue + gstValue}}</td>
+                <td><span>{{selectedCurrency}}</span> {{totalCartValue + gstValue}}</td>
               </tr>
             </table>
             <button class="btn btn-success" *ngIf="totalCartValue > 0" (click)="submitCartProductInfo()">Submit cart</button>

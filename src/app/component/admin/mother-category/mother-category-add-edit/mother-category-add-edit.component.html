@@ -1,13 +1,14 @@
 <div class="dashboard-body-content">
-    <h5>{{formType}} category</h5>
+    <h5>{{formType}} mother category</h5>
     <hr>
     <form class="edit-category-form" [formGroup]="categoryForm" (ngSubmit)="submitCategoryForm()">
         <div class="row m-0 pt-3">
+            
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group edit-box">
-                            <label for="name">Category Name</label>
+                            <label for="name">Name</label>
                             <input type="text" placeholder="Enter category name" formControlName = "name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
                             <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                                 <div *ngIf="f.name.errors.required">Category Name is required</div>
@@ -16,7 +17,16 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group edit-box">
-                            <label for="deliveryCharge"> Regular Delivery Charge </label>
+                            <label for="minOrderVal">Minimum Order Value</label>
+                            <input type="text" placeholder="Enter Min Order Value" formControlName = "minOrderVal" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.minOrderVal.errors }" />
+                            <div *ngIf="submitted && f.minOrderVal.errors" class="invalid-feedback">
+                                <div *ngIf="f.minOrderVal.errors.required">Min Order Val is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group edit-box">
+                            <label for="deliveryCharge"> Delivery Charge </label>
                             <input type="number" formControlName="deliveryCharge" placeholder="Enter regular delivery charge" class="form-control" [ngClass]="{'is-invalid':submitted && f.deliveryCharge.errors}" />
                             <div *ngIf='submitted && f.deliveryCharge.errors' class="invalid-feedback">
                                 <div *ngIf="f.deliveryCharge.errors.required">Delivery Charge is required</div>
@@ -25,7 +35,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group edit-box">
-                            <label for="deliveryDuration"> Regular Delivery Duration</label>
+                            <label for="deliveryDuration"> Delivery Duration</label>
                             <input type="number" formControlName="deliveryDuration" placeholder="Enter regular delivery duration in days" class="form-control" [ngClass]="{'is-invalid': submitted && f.deliveryDuration.errors}">
                             <div *ngIf="submitted && f.deliveryDuration.errors" class="invalid-feedback">
                                 <div *ngIf="f.deliveryDuration.errors.required">Delivery Duration is required</div>
@@ -43,14 +53,14 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group edit-box">
-                            <label for="motherCategory">Mother Category</label>
-                            <select class="form-control" formControlName="motherCategory" placeholder="Select Company" class="form-control"  [ngClass]="{'is-invalid':submitted && f.motherCategory.errors}">
-                                <option *ngFor="let motherCat of motherCategoryList; let i = index" [value]="motherCat._id">
-                                    {{motherCat.name}}
+                            <label for="name">City</label>
+                            <select class="form-control" formControlName='city' placeholder="Select City" class="form-control" [ngClass]="{'is-invalid':submitted && f.city.errors}">
+                                <option *ngFor="let city of cityList" [value]="city._id">
+                                    {{city.name}}
                                 </option>
                             </select>
-                            <div *ngIf="submitted && f.motherCategory.errors" class="invalid-feedback">
-                                <div *ngIf="f.motherCategory.errors.required">Select a Mother Category</div>
+                            <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                                <div *ngIf="f.city.errors.required">Select a city</div>
                             </div>
                         </div>
                     </div>

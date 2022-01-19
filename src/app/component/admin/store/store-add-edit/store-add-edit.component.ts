@@ -17,9 +17,10 @@ export class StoreAddEditComponent implements OnInit {
   public storeData: any = {};
   public companyData: any = [];
   public rateCardData: any = [];
-  public lat: number = 0;
-  public lon: number = 0;
-  public location : any = "";
+  public storeOwnerData: any = [];
+  // public lat: number = 0;
+  // public lon: number = 0;
+  public location : any = {};
   public options: any = {
     componentRestrictions:{
       country:["IN"]
@@ -44,23 +45,21 @@ export class StoreAddEditComponent implements OnInit {
           console.log("store detail", res);
           this.storeData = res.data;
           this.storeData.rateCard = res.data?.rateCard?._id;
-          this.location = res.data.location;
-          this.lat = res.data.lat;
-          this.lon = res.data.lon;
+          this.storeData.storeOwner = res.data?.storeOwner?._id;
+          this.location = {
+            location: res.data.location,
+            lat: res.data.lat,
+            lon: res.data.lon,
+            pin: res.data.pin,
+            country: res.data.country,
+            state: res.data.state,
+          };
           
           this._loader.stopLoader('loader')
         }
       )
     }
-    this._api.getCompanyList().subscribe(
-      res => {
-        this.companyData = res.data.filter((e:any) => e.email === 'storeData.company');
-        if(!this.storeId) {
-          this.storeData.company = res?.data[0]?._id || '';
-        }
-        // console.log("company data: ",this.storeData.company);
-      }
-    )
+    
     this._api.getRateCardList().subscribe(
       res => {
         this.rateCardData = res.data;
@@ -70,18 +69,33 @@ export class StoreAddEditComponent implements OnInit {
         // console.log("rateCard data: ",this.storeData.rateCard);
       }
     )
+    
+    this._api.getStoreOwners().subscribe(
+      res => {
+        this.storeOwnerData = res.data;
+        if(!this.storeId) {
+          this.storeData.storeOwner = res?.data[0]?._id || '';
+        }
+      }
+    )
   }
 
   ngOnInit(): void {
   }
-
   
   public AddressChange(address: any) {
     //setting address from API to local variable
+    this.location = {
+      location: address.formatted_address,
+      lat: address.geometry.location.lat(),
+      lon: address.geometry.location.lng()
+    };
+    const adressLength  = address.address_components.length;
+    this.location.pin = +address.address_components[adressLength-1].long_name;
+    this.location.country = address.address_components[adressLength-2].long_name;
+    this.location.state = address.address_components[adressLength-3].long_name;
     console.log("Google location:",address);
-    this.location = address.formatted_address;
-    this.lat = address.geometry.location.lat();
-    this.lon = address.geometry.location.lng();
+    
   }
 
   storeFormSubmit(formData : any) {
@@ -91,10 +105,15 @@ export class StoreAddEditComponent implements OnInit {
     if (formData?.valid) {
       this._loader.startLoader('loader');
       const mainForm = formData.value;
-      mainForm.company = this.storeData.company;
-      mainForm.location = this.location;
-      mainForm.lat = this.lat;
-      mainForm.lon = this.lon;
+      mainForm.location = this.location.location;
+      mainForm.addressLine2 = this.location.location;
+      mainForm.lat = this.location.lat;
+      mainForm.lon = this.location.lon;
+      mainForm.country = this.location.country;
+      mainForm.state = this.location.state;
+      mainForm.pin = this.location.pin;
+      console.log("Store form", mainForm);
+      
       if (this.formType === 'Add') {
         this._api.addStore(mainForm).subscribe(
           res => {

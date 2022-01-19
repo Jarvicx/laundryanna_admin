@@ -50,7 +50,6 @@ export class CustomerAddEditComponent implements OnInit {
           console.log(res.data);
           this.customerForm.patchValue({
             name: res.data.name,
-            email: res.data.email,
             phone : res.data.phone,     
             gender : res.data.gender,
             age : res.data.age,
@@ -65,17 +64,14 @@ export class CustomerAddEditComponent implements OnInit {
 
       this.customerForm = this.fbuilder.group({
       name: new FormControl('', Validators.required),
-      email: new FormControl('',[
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      ]),
+      email: new FormControl(''),
       password:  ['', [this.isAddMode ? Validators.required : Validators.nullValidator, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,20}$')]],
       conFirmpassword: new FormControl(['',this.isAddMode ? Validators.required : Validators.nullValidator]),    
       phone : new FormControl('',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),     
       gender :  new FormControl('', Validators.required),
       age :  new FormControl('', [Validators.required,Validators.pattern("^[0-9]{2}$")]),
       // wallet :  new FormControl(''),
-      image : new FormControl('https://media.istockphoto.com/vectors/washing-machine-with-a-wash-basin-and-cleaning-stuff-vector-id1141658592?k=20&m=1141658592&s=612x612&w=0&h=FpNfdvX28sfE17zvGl8dGuhyYJu31X3UTCusmc6Ed2o=')
+      image : new FormControl('image url')
     },{ 
       validator: this.isAddMode ? this.checkPasswords('password','conFirmpassword') : Validators.nullValidator
     })

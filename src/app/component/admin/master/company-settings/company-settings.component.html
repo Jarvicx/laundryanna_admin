@@ -1,45 +1,135 @@
 <div class="dashboard-body-content">
-    <div class="row d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom row-header"> 
-        <div class="col-lg-8 d-flex justify-content-start align-items-center">
-            <h5>Settings</h5>
-        </div>
+    <div class="d-flex justify-content-between align-items-center">
+        <h5>Settings</h5>
     </div>
-    <div class="row m-0">
-        <div class="col-12 col-md-3 ml-auto mb-4">
-            <div class="input-group ">
-                
+    <hr>
+    <h5 class="text-blue">Basic Information</h5>
+    <div class="row m-0 details-page">
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" [ngModel]="settingsData.name" readonly>    
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="name" [ngModel]="settingsData.email" readonly>    
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="mobile">Mobile</label>
+                <input type="text" id="mobile" [ngModel]="settingsData.phone" readonly>    
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="whatsapp">whatsapp</label>
+                <input type="text" id="whatsapp" [ngModel]="settingsData.whatsapp" readonly>    
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="supportTiming">support Timing</label>
+                <input type="text" id="supportTiming" [ngModel]="settingsData.supportTiming" readonly>    
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="tagline">tagline</label>
+                <input type="text" id="tagline" [ngModel]="settingsData.tagline" readonly>    
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="termsAndCondition">terms And Condition</label>
+                <input type="text" id="termsAndCondition" [ngModel]="settingsData.termsAndCondition" readonly>    
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="checkoutTerms">checkout Terms</label>
+                <input type="text" id="checkoutTerms" [ngModel]="settingsData.checkoutTerms" readonly>    
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="messageSenderId">message Sender Id</label>
+                <input type="text" id="messageSenderId" [ngModel]="settingsData.messageSenderId" readonly>    
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="messageTemplateId">message Template Id</label>
+                <input type="text" id="messageTemplateId" [ngModel]="settingsData.messageTemplateId" readonly>    
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="startingOrderId">starting Order Id</label>
+                <input type="text" id="startingOrderId" [ngModel]="settingsData.startingOrderId" readonly>    
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="timezone">timezone</label>
+                <input type="text" id="timezone" [ngModel]="settingsData.timezone" readonly>    
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="currency">currency</label>
+                <input type="text" id="currency" [ngModel]="settingsData.currency" readonly>    
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="cin">cin</label>
+                <input type="text" id="cin" [ngModel]="settingsData.cin" readonly>    
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="gst">gst</label>
+                <input type="text" id="gst" [ngModel]="settingsData.gst" readonly>    
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group d-flex justify-content-end">
+                <button type="button" [routerLink]="['/admin/master-settings/edit', settingsData._id]" class="actionbutton">Edit</button>
             </div>
         </div>
     </div>
-    <div class="table-responsive edit-table card-body pt-0 pb-0">
-        <table class="table table-sm table-hover brand-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Description</th>
-                    <th>Logo</th>
-                    <th style="width:80px" class="text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let settings of settingsData; let i = index">
-                    <td>{{settings.name}}</td>
-                    <td>{{settings.addrees}}</td>
-                    <td>{{settings.phone}}</td>
-                    <td>{{settings.email}}</td>
-                    <td>{{settings.desc}}</td>
-                    <!-- <td><img src="{{(settings.logo) || ''}}" alt="settings Img"></td>                     -->
-                    <td><img src="../../../../../assets/img/blank-ticket.png" alt="settings Img"></td>                    
-                    <td class="text-center">
-                        <a routerLink="/admin/master-settings/edit/{{settings._id}}"><i class="far fa-edit"></i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <h5 class="text-blue">Change Password</h5>
+    <form class="addexecutives-form" #changePasswordForm="ngForm" (ngSubmit)="changePassword(changePasswordForm); changePasswordForm.resetForm()">
+        <div class="row m-0 pt-3">
+            <div class="col-lg-4">
+                <div class="form-group edit-box">
+                    <label for="address">Current Password</label>
+                    <input class="form-control" type="password" name="old_password" #old_password="ngModel" ngModel required [ngClass]="{'is-invalid':old_password?.invalid && old_password?.touched}">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group edit-box">
+                    <label for="landmark">New Password</label>
+                    <input class="form-control" type="password" name="password" #password="ngModel" ngModel required [ngClass]="{'is-invalid':password?.invalid && password?.touched}">
+                    
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group edit-box">
+                    <label for="pin">Confirm Password</label>
+                    <input class="form-control" type="text" #confirmPass="ngModel" name="confirmPass" [(ngModel)]="confirmPassword">
+                </div>
+            </div>
+        </div>
+        <small *ngIf="password?.invalid && password?.touched" [ngClass]="{'text-danger':password?.invalid && password?.touched}">
+            Must contain at least one number, one uppercase, lowercase letter, and at least 6 characters
+        </small>
+        <span class="text-danger">{{passwordErrorMessage}}</span>
+        <div class="mt-3 mb-3 button-container d-flex justify-content-end">
+            <button class="actionbutton" type="submit">Change Password</button>
+        </div>
+    </form>
 </div>
-
-

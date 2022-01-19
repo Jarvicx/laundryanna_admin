@@ -26,6 +26,9 @@ export class OrderAddEditComponent implements OnInit {
   public cartItem :  {cart: CARTSITEM[];};
   public pickUpId : any = '';
   public pickUpDetails : any = {};
+  public companySettings : any = {};
+  public selectedCurrency : any = '';
+
 
   public orderCreateInfo = {
     cartDetail : [], pickup : '',
@@ -41,6 +44,16 @@ export class OrderAddEditComponent implements OnInit {
       this.updateCartItemToLocalStorage();
       this.getpickUpDetails(this.pickUpId);
     }
+    this._api.getSettings().subscribe(
+      res=>{
+        this.companySettings = res.data[0];
+        console.log(this.companySettings);
+        this.selectedCurrency = (this.companySettings.currency === "INR") ? "₹" : "$"
+        this._loader.stopLoader('loader');
+      },err =>{
+        this._loader.stopLoader('loader');
+      }
+    )
   }
 
   ngOnInit(): void {

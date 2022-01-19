@@ -100,54 +100,14 @@ import { StoreDetailComponent } from './component/admin/store/store-detail/store
 import { StoreAddEditComponent } from './component/admin/store/store-add-edit/store-add-edit.component';
 import { StoreGeofencingComponent } from './component/admin/store/store-geofencing/store-geofencing.component';
 import { ServiceBoyCalendarComponent } from './component/admin/service_boy/service-boy-calendar/service-boy-calendar.component';
+import { StoreOwnerListComponent } from './component/admin/store-owner/store-owner-list/store-owner-list.component';
+import { StoreOwnerDetailComponent } from './component/admin/store-owner/store-owner-detail/store-owner-detail.component';
+import { StoreOwnerAddEditComponent } from './component/admin/store-owner/store-owner-add-edit/store-owner-add-edit.component';
+import { MotherCategoryListComponent } from './component/admin/mother-category/mother-category-list/mother-category-list.component';
+import { MotherCategoryAddEditComponent } from './component/admin/mother-category/mother-category-add-edit/mother-category-add-edit.component';
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    SidebarComponent,
-    DashboardComponent,
-    CityListComponent,
-    CityAddEditComponent,
-    ItemListComponent,
-    ItemAddEditComponent,
-    CategoryListComponent,
-    CategoryAddEditComponent,
-    LoginComponent,
-    RegistrationComponent,
-    ConfirmationDialogComponent,
-    CompanyListComponent,
-    CompanyAddEditComponent,
-    SubCategoryListComponent,
-    SubCategoryAddEditComponent,
-    CustomerListComponent,
-    CustomerAddEditComponent,
-    CustomerAddressComponent,
-    CompanySettingsComponent,
-    SettingUpdateComponent,
-    TimeSlotListComponent,
-    TimeSlotAddEditComponent,
-    CustomerAddressListComponent,
-    ServiceBoyListComponent,
-    ServiceBoyAddComponent,
-    PickUpListComponent,
-    PickUpAddEditComponent,
-    OfferListComponent,
-    OfferAddEditComponent,
-    CouponListComponent,
-    CouponAddEditComponent,
-    PlanListComponent,
-    PlanAddEditComponent,
-    PriceListComponent,
-    PriceAddEditComponent,
-    RateCardAddEditComponent,
-    RateCardListComponent,
-    OrderListComponent,
-    OrderAddEditComponent,
-    StoreListComponent,
-    StoreDetailComponent,
-    StoreAddEditComponent,
-    StoreGeofencingComponent,
-    ServiceBoyCalendarComponent
+    AppComponent,HeaderComponent,SidebarComponent,DashboardComponent,CityListComponent,CityAddEditComponent,ItemListComponent,ItemAddEditComponent,CategoryListComponent,CategoryAddEditComponent,LoginComponent,RegistrationComponent,ConfirmationDialogComponent,CompanyListComponent,CompanyAddEditComponent,SubCategoryListComponent,SubCategoryAddEditComponent,CustomerListComponent,CustomerAddEditComponent,CustomerAddressComponent,CompanySettingsComponent,SettingUpdateComponent,TimeSlotListComponent,TimeSlotAddEditComponent,CustomerAddressListComponent,ServiceBoyListComponent,ServiceBoyAddComponent,PickUpListComponent,PickUpAddEditComponent,OfferListComponent,OfferAddEditComponent,CouponListComponent,CouponAddEditComponent,PlanListComponent,PlanAddEditComponent,PriceListComponent,PriceAddEditComponent,RateCardAddEditComponent,RateCardListComponent,OrderListComponent,OrderAddEditComponent,StoreListComponent,StoreDetailComponent,StoreAddEditComponent,StoreGeofencingComponent,ServiceBoyCalendarComponent,StoreOwnerListComponent,StoreOwnerDetailComponent,StoreOwnerAddEditComponent, MotherCategoryListComponent, MotherCategoryAddEditComponent
   ],
   imports: [
     BrowserModule,AppRoutingModule,CommonModule,FormsModule,ReactiveFormsModule,HttpClientModule,BrowserAnimationsModule,NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),

@@ -14,7 +14,7 @@
                 <img [src]="previewUrl" height="100" />  
             </div> 
         </div> -->
-        <div class="col-lg-10">
+        <div class="col-lg-12">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group edit-box">
@@ -89,6 +89,27 @@
                         <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
                             <div *ngIf="f.age.errors.required">Age is required</div>
                             <div *ngIf="f.age.errors.pattern">Age must be 2digit</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="pan"> PAN  </label>
+                        <input type="text" placeholder="Enter pan no (optional)" class="form-control" formControlName = "pan" [ngClass]="{ 'is-invalid': submitted && f.pan.errors }" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="aadhar"> Aadhar </label>
+                        <input type="number" placeholder="Enter aadhar no (optional)" class="form-control" formControlName = "aadhar" [ngClass]="{ 'is-invalid': submitted && f.aadhar.errors }" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="bankAcNo"> Bank Account No.</label>
+                        <input type="text" placeholder="Enter Bank Acccount No." class="form-control" formControlName = "bankAcNo" [ngClass]="{ 'is-invalid': submitted && f.bankAcNo.errors }" />
+                        <div *ngIf="submitted && f.bankAcNo.errors" class="invalid-feedback">
+                            <div *ngIf="f.bankAcNo.errors.required">Bank Ac No. is required</div>
                         </div>
                     </div>
                 </div>

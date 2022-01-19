@@ -115,7 +115,7 @@
                 <div class="modal-body">
                     <div class="col-12">
                         <label for="storeAssign">Choose Store</label>
-                        <select name="storeAssign" id="storeAssign"  class="form-control" formControlName="storeAssign" required [ngClass]="{'is-invalid':submitted && h.storeAssign.errors}">
+                        <select name="storeAssign" id="storeAssign"  class="form-control" formControlName="storeAssign" required [ngClass]="{'is-invalid':submitted && h.storeAssign.errors}" (change)="fetchServiceBoys($event)">
                             <option value="" hidden>-select-</option>
                             <option *ngFor="let store of storeData" value="{{store._id}}">{{store.name}}</option>
                         </select>

@@ -61,7 +61,7 @@ export class PickUpListComponent implements OnInit {
     if (localStorage.getItem('accessToken')) {
       this.pickUpList();
       this.storeList();
-      this.serviceBoyList();
+      // this.serviceBoyList();
       // this.dtOptions = {
       //   pagingType: 'full_numbers',
       //   pageLength: 10
@@ -123,18 +123,7 @@ export class PickUpListComponent implements OnInit {
     )
   }
 
-  serviceBoyList(){
-    this._loader.startLoader('loader');
-    this._api.getServiceBoyList().subscribe(
-      res=>{
-        console.log(res);       
-        this.serviceBoyData = res.data.filter((e:any) => e.boy_type === 'Delivery Boy');
-        this._loader.stopLoader('loader');
-      },err=>{
-        this._loader.stopLoader('loader');
-      }
-    )
-  }
+  
 
   deletePickUp(pick_id:any){
     console.log('data',pick_id);
@@ -364,5 +353,23 @@ export class PickUpListComponent implements OnInit {
   createOrder(pickupId:any) {
     localStorage.setItem('pickupId',pickupId);
     this._route.navigate(['/admin/order/add/' + pickupId]);
+  }
+
+  fetchServiceBoys(evt: any) {
+    console.log(evt.target.value);
+    this.serviceBoyList(evt.target.value)
+  }
+
+  serviceBoyList(storeId:any){
+    this._loader.startLoader('loader');
+    this._api.getServiceBoyList().subscribe(
+      res=>{
+        console.log('serviceboy list',res);       
+        this.serviceBoyData = res.data.filter((e:any) => (e.boy_type === 'Delivery Boy') && (e?.store?._id === storeId));
+        this._loader.stopLoader('loader');
+      },err=>{
+        this._loader.stopLoader('loader');
+      }
+    )
   }
 }

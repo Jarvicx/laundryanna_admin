@@ -11,25 +11,27 @@
         <table class="table table-sm table-hover">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Sl.</th>
                     <th>Name</th>
                     <th>Email Id</th>
-                    <th>Age</th>
+                    <th>Bank Ac.</th>
                     <th>Mobile No.</th>
                     <th>Boy type</th>
                     <th>Register Date</th>
-                    <th style="width: 150px;">Action</th>
+                    <th>Store</th>
+                    <th style="width: 100px;">Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let serviceBoy of service_boyList">
-                    <td>{{serviceBoy._id}}</td>
+                <tr *ngFor="let serviceBoy of service_boyList; let i=index">
+                    <td>{{i+1}}</td>
                     <td>{{serviceBoy.name}}</td>
                     <td>{{serviceBoy.email}}</td>
-                    <td>{{serviceBoy.age}}</td>
+                    <td>{{serviceBoy.bankAcNo}}</td>
                     <td>{{serviceBoy.phone}}</td>
                     <td>{{serviceBoy.boy_type}}</td>
                     <td>{{serviceBoy.createdAt| date: 'MMM d, y'}}</td>
+                    <td>{{serviceBoy?.store?.name}}</td>
                     <td>
                         <a routerLink='/admin/service-boy/calendar/{{serviceBoy._id}}'><i class="fas fa-calendar-alt" title="Set calendar"></i></a>
                         <a routerLink='/admin/service-boy/edit/{{serviceBoy._id}}'><i class="far fa-edit" title="Edit" ></i></a>

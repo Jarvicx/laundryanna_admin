@@ -4,7 +4,7 @@
             <h5>Category List</h5>
         </div>
         <div class="col-lg-4 d-flex justify-content-end align-items-center">
-            <button class="actionbutton btn btn-sm ml-3" routerLink="/admin/category/add">Add Category</button>
+            <button class="actionbutton btn btn-sm ml-3" routerLink="/admin/mother-category/add">Add Mother Category</button>
         </div>
     </div>
     <div class="table-responsive edit-table">
@@ -13,26 +13,29 @@
               <tr>
                   <th>Sl No.</th>
                   <th>Name</th>
-                  <th>Mother Category</th>
+                  <th>Minimum Order Val.</th>
                   <th>Regular Delivery Charge</th>
                   <th>Regular Delivery in days</th>
                   <th>Express Delivery in days</th>
+                  <th>City</th>
                   <th>Status</th>
                   <th style="width: 150px;">Action</th>
               </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let category of categoryList; let i = index;">
+              <tr *ngFor="let motherCat of motherCategoryList; let i = index;">
                   <td>{{i+1}}</td>
-                  <td>{{category.name}}</td>
-                  <td>{{category?.motherCategory?.name}}</td>
-                  <td>{{category.deliveryCharge}}</td>
-                  <td>{{category.deliveryDuration}}</td>
-                  <td>{{category.expressDeliveryDuration}}</td>
-                  <td style="cursor: pointer;" (click)="toggleStatus(category._id, !category.status)">{{category.status ? 'Active' : 'Inactive'}}</td>
+                  <td>{{motherCat.name}}</td>
+                  <td>{{motherCat.minOrderVal}}</td>
+                  <td>{{motherCat.deliveryCharge}}</td>
+                  <td>{{motherCat.deliveryDuration}}</td>
+                  <td>{{motherCat.expressDeliveryDuration}}</td>
+                  <td>{{motherCat?.city?.name}}</td>
+                  <td style="cursor: pointer;" (click)="toggleStatus(motherCat._id, !motherCat.status)">{{motherCat.status ? 'Active' : 'Inactive'}}</td>
                   <td> 
-                    <a href="javascript:void(0);" routerLink="/admin/category/edit/{{category._id}}"><i class="far fa-edit" title="Edit"></i></a>
-                    <a href="javascript:void(0);" (click) = "deleteModal(category._id)"><i class="far fa-trash-alt" title="Delete"></i></a>
+                    <a href="javascript:void(0);" routerLink="/admin/mother-category/edit/{{motherCat._id}}"><i class="far fa-edit" title="Edit"></i></a>
+                    <!-- <a href="javascript:void(0);" data-toggle="modal" data-placement="left" data-target="#exampleModal"><i class="far fa-trash-alt" title="Delete"></i></a> -->
+                    <a href="javascript:void(0);" (click) = "deleteModal(motherCat._id)"><i class="far fa-trash-alt" title="Delete"></i></a>
                   </td>
               </tr>
           </tbody>

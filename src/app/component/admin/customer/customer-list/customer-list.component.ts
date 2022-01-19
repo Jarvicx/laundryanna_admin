@@ -27,7 +27,7 @@ export class CustomerListComponent implements OnInit {
       res=>{
         
         this.allCustomer = res.data;
-        console.log(this.allCustomer.length);
+        console.log('customer',this.allCustomer);
         this._loader.stopLoader('loader');
       },err=>{
         this._loader.stopLoader('loader');
@@ -108,20 +108,21 @@ export class CustomerListComponent implements OnInit {
     this.filtered = true;
     console.log(evt.target.value);
     let today = new Date();
+    today.setDate(today.getDate() + 1);
     let range = new Date();
 
     let rangeVal = evt.target.value;
     if (rangeVal === 'today') {
-      today.setDate(today.getDate() + 1);
+      // today.setDate(today.getDate() + 1);
     }
     if (rangeVal === 'week') {
       range.setDate(today.getDate() - 7);
     }
     if (rangeVal === 'month') {
-      range = new Date(today.getFullYear(), today.getMonth(), 1);
+      range.setDate(today.getDate() - 30);
     }
     if (rangeVal === 'year') {
-      range = new Date(today.getFullYear(), 0, 1);
+      range.setDate(today.getDate() - 365);
     }
     if (rangeVal === 'all') {
       return this.customerList();
@@ -145,7 +146,7 @@ export class CustomerListComponent implements OnInit {
 
   clearFilter() {
     this.filtered = false;
-    location.reload();
+    this.customerList();
   }
 }
 

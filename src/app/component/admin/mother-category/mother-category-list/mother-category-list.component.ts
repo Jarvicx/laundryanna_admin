@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxUiLoaderService } from "ngx-ui-loader";
-import { ApiService } from '../../../../service/api.service';
+import { ApiService } from 'src/app/service/api.service';
 import  Swal  from "sweetalert2";
-// import { ConfirmationDialogService } from '../../../../service/confirmation-dialog.service';
-
 @Component({
-  selector: 'app-category-list',
-  templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.css']
+  selector: 'app-mother-category-list',
+  templateUrl: './mother-category-list.component.html',
+  styleUrls: ['./mother-category-list.component.css']
 })
-export class CategoryListComponent implements OnInit {
-  public categoryList : any =[];
+export class MotherCategoryListComponent implements OnInit {
+
+  public motherCategoryList : any =[];
   public modalopen = false;
 
   constructor(private _api:ApiService, private _loader : NgxUiLoaderService){} 
@@ -18,15 +17,15 @@ export class CategoryListComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('enter');
-    this.categoryListing();
+    this.motherCategoryListing();
   }
 
-  categoryListing(){
+  motherCategoryListing(){
     this._loader.startLoader('loader');
-    this._api.getCategoryList().subscribe(
+    this._api.getMotherCategoryList().subscribe(
       res =>{
         console.log(res);
-        this.categoryList = res.data;
+        this.motherCategoryList = res.data;
         this._loader.stopLoader('loader');
       },err =>{
         this._loader.stopLoader('loader');
@@ -37,7 +36,7 @@ export class CategoryListComponent implements OnInit {
   deleteModal(d_id:any){   
     Swal.fire({
       title: 'Delete Confirmation',
-      text: 'Are you sure you want to permanently delete this category?You can not view this category in your list',
+      text: 'Are you sure you want to permanently delete this motherCategory?You can not view this motherCategory in your list',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Delete permanently',
@@ -46,7 +45,7 @@ export class CategoryListComponent implements OnInit {
       console.log(result);
       if (result.value) {
         this._loader.startLoader('loader');
-        this._api.deleteCategory(d_id).subscribe(
+        this._api.deleteMotherCategory(d_id).subscribe(
           res => {
             console.log('del',res);
             
@@ -55,7 +54,7 @@ export class CategoryListComponent implements OnInit {
               'Successfully deleted.',
               'success'
             )
-            this.categoryListing();
+            this.motherCategoryListing();
           },err =>{
            
             Swal.fire(
@@ -82,9 +81,9 @@ export class CategoryListComponent implements OnInit {
   }
 
   toggleStatus(itemId: any, status: boolean) {
-    this._api.toggleCategoryStatus(itemId, {status}).subscribe(
+    this._api.toggleMotherCategoryStatus(itemId, {status}).subscribe(
       res => {
-        this.categoryListing();
+        this.motherCategoryListing();
       }
     );
   }

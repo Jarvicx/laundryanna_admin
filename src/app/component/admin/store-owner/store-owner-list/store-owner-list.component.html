@@ -1,0 +1,57 @@
+<div class="dashboard-body-content">
+    <div class="d-block">
+        <div class="row row-header">
+            <div class="col-lg-6 d-flex justify-content-start align-items-center">
+                <h5>Store Owner</h5>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-end align-items-center">
+                <a href="javascript:void(0);" class="orderbtn btn btn-sm" routerLink="/admin/store-owner/add">Add Store Owner</a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <hr>
+        
+        <div class="table-responsive edit-table">
+            <table class="table table-sm table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>Pan</th>
+                        <th>Aadhar</th>
+                        <th>Bank Account</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="storeOwnerList.length; else emptyBlock;">
+                    <tr *ngFor="let storeOwner of storeOwnerList;">
+                        <td>{{storeOwner?.name}}</td>
+                        <td>{{storeOwner?.contact}}</td>
+                        <td>{{storeOwner?.email}}</td>
+                        <td>{{storeOwner?.pan}}</td>
+                        <td>{{storeOwner?.aadhar}}</td>
+                        <td>{{storeOwner?.bankAcNo}}</td>
+                        <td>
+                            <a href="javascript:void(0);" routerLink="/admin/store-owner/edit/{{storeOwner?._id}}"><i class="far fa-edit" title="Edit Item" ></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+                <ng-template #emptyBlock>
+                    <tr>
+                        <td colspan="7">No Data</td>
+                    </tr>
+                </ng-template>
+            </table>
+        </div>
+        <nav class="pagination-container">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="javascript:void(0);"><i class="fa fa-angle-double-left previous-img"></i></a></li>
+                <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+                <li class="page-item"><a class="page-link active" href="javascript:void(0);">2</a></li>
+                <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
+                <li class="page-item"><a class="page-link" href="javascript:void(0);"><i class="fa fa-angle-double-right next-img"></i></a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

@@ -10,7 +10,7 @@
         <div class="clearfix"></div>
     </div>
     <hr>
-    <div class="row m-0 justify-content-start align-items-center">
+    <div class="row m-0 justify-content-end align-items-center">
         <div class="input-group col-md-2 plr-2 mt-2">
             <input type="text" class="form-control" placeholder="Search name..." aria-label="Recipient's username" aria-describedby="button-addon2" (keyup)="searchCustomer($event)">
             <div class="input-group-append">
@@ -71,8 +71,8 @@
                     <!-- <td>{{customer.wallet}}</td> -->
                     <td class="text-center">
                         <a routerLink="/admin/customer-address/list/{{customer._id}}"><i class="fa fa-address-card"></i></a>
-                        <a routerLink="/admin/customer/edit/{{customer._id}}"><i class="far fa-edit"></i></a>
-                        <!-- <a href="javascript:void(0);" class="ml-2" (click)="deleteCustomer(customer._id)"><i class="far fa-trash-alt text-danger"></i></a> -->
+                        <a class="ml-2" routerLink="/admin/customer/edit/{{customer._id}}"><i class="far fa-edit"></i></a>
+                        <a href="javascript:void(0);" class="ml-2" (click)="deleteCustomer(customer._id)"><i class="far fa-trash-alt text-danger"></i></a>
                     </td>
                     <!-- <td>
                         <a href=""><i class="fa fa-truck"  data-placement="left" data-toggle="tooltip" title="Pickup request" ></i></a>

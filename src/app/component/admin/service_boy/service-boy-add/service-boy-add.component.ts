@@ -63,8 +63,10 @@ export class ServiceBoyAddComponent implements OnInit {
             phone : res.data.phone,     
             gender : res.data.gender,
             age : res.data.age,
-            boy_type : res.data.boy_type,
-            image : res.data.image
+            pan : res.data.pan,
+            aadhar : res.data.aadhar,
+            bankAcNo : res.data.bankAcNo,
+            boy_type : res.data.boy_type
           })
           this.selectedStore = res.data?.store?._id;
         this._loader.stopLoader('loader');
@@ -81,13 +83,15 @@ export class ServiceBoyAddComponent implements OnInit {
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ]),
-      password:  ['', [this.isAddMode ? Validators.required : Validators.nullValidator, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,20}$')]],
-      conFirmpassword: new FormControl(['',this.isAddMode ? Validators.required : Validators.nullValidator]),    
+      // password:  ['', [this.isAddMode ? Validators.required : Validators.nullValidator, Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,20}$')]],
+      // conFirmpassword: new FormControl(['',this.isAddMode ? Validators.required : Validators.nullValidator]),    
       phone : new FormControl('',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),     
       gender :  new FormControl('', Validators.required),
       age :  new FormControl('', [Validators.required,Validators.pattern("^[0-9]{2}$")]),
-      boy_type :  new FormControl('Factory Boy',Validators.required),
-      image : new FormControl('https://media.istockphoto.com/vectors/washing-machine-with-a-wash-basin-and-cleaning-stuff-vector-id1141658592?k=20&m=1141658592&s=612x612&w=0&h=FpNfdvX28sfE17zvGl8dGuhyYJu31X3UTCusmc6Ed2o=')
+      pan :  new FormControl(''),
+      aadhar :  new FormControl(''),
+      bankAcNo :  new FormControl('', [Validators.required]),
+      boy_type :  new FormControl('Factory Boy',Validators.required)
     },{ 
       validator: this.isAddMode ? this.checkPasswords('password','conFirmpassword') : Validators.nullValidator
     })

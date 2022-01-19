@@ -33,7 +33,7 @@ export class ApiService {
     localStorage.setItem('accessToken', data.data[1].accessToken);
     localStorage.setItem('userInfo',JSON.stringify(data.data[0]));
     window.location.href = environment.dasboardPath;
-    location.reload();
+    // location.reload();
     // this._router.navigate([(routeIntended) ? routeIntended : '/admin/dashboard']);
   }
 
@@ -63,6 +63,9 @@ export class ApiService {
   adminLoginApi(formData : any) {
     return this._http.post<any>(_apiUrl + '/admin/login', formData, {headers: this.header});
   }
+  adminChangePassword(AdminId: any, formData : any) {
+    return this._http.patch<any>(_apiUrl + '/admin/change-password/' + AdminId, formData, {headers: this.header});
+  }
   adminRegisterApi(formData : any) {
     return this._http.post<any>(_apiUrl + '/admin/create', formData, {headers: this.header});
   }
@@ -89,6 +92,25 @@ export class ApiService {
     return this._http.delete<any>(_apiUrl + '/city/delete/' + cityId,{headers: this.header});
   }
   
+  // ************* mother category ***************************//
+  getMotherCategoryList() {
+    return this._http.get<any>(_apiUrl + '/mother-category/list');
+  }
+  addMotherCategory(formData : any) {
+    return this._http.post<any>(_apiUrl + '/mother-category/create', formData, {headers: this.header});
+  }
+  getMotherCategoryById(motherCategoryId : any) {
+    return this._http.get<any>(_apiUrl + '/mother-category/detail/' + motherCategoryId);
+  }
+  updateMotherCategory(motherCategoryId : any, formData : any) {
+    return this._http.patch<any>(_apiUrl + '/mother-category/update/' + motherCategoryId, formData, {headers: this.header});
+  }
+  toggleMotherCategoryStatus(motherCategoryId : any, formData : any) {
+    return this._http.patch<any>(_apiUrl + '/mother-category/toggle-status/' + motherCategoryId, formData, {headers: this.header});
+  }
+  deleteMotherCategory(motherCategoryId : any) {
+    return this._http.delete<any>(_apiUrl + '/mother-category/delete/' + motherCategoryId,{headers: this.header});
+  }
   // ************* category ***************************//
   getCategoryList() {
     return this._http.get<any>(_apiUrl + '/category/list');
@@ -101,6 +123,9 @@ export class ApiService {
   }
   updateCategory(categoryId : any, formData : any) {
     return this._http.patch<any>(_apiUrl + '/category/update/' + categoryId, formData, {headers: this.header});
+  }
+  toggleCategoryStatus(categoryId : any, formData : any) {
+    return this._http.patch<any>(_apiUrl + '/category/toggle-status/' + categoryId, formData, {headers: this.header});
   }
   deleteCategory(categoryId : any) {
     return this._http.delete<any>(_apiUrl + '/category/delete/' + categoryId,{headers: this.header});
@@ -185,6 +210,23 @@ export class ApiService {
     return this._http.get<any>(_apiUrl + '/customer/search-by-date-range?startDate='+startDate+'&endDate='+endDate);
   }
   
+  // ********************** store ***************************//
+  getStoreOwners(){
+    return this._http.get<any>(_apiUrl + '/store-owner/list');
+  }
+  addStoreOwners(formData : any){
+    return this._http.post<any>(_apiUrl + '/store-owner/create',formData);
+  }
+  deleteStoreOwners(StoreOwnerId : any){
+    return this._http.delete<any>(_apiUrl + '/store-owner/delete/'+StoreOwnerId, {headers : this.header});
+  }
+  getStoreOwnerById(StoreOwnerId : any){
+    return this._http.get<any>(_apiUrl + '/store-owner/detail/'+StoreOwnerId);
+  }
+  updateStoreOwner(StoreOwnerId: any, formData:any){
+    return this._http.patch<any>(_apiUrl + '/store-owner/update/'+StoreOwnerId,formData, {headers : this.header} );
+  }
+
   // ********************** store ***************************//
   getStore(){
     return this._http.get<any>(_apiUrl + '/store/list');

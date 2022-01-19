@@ -16,8 +16,20 @@
                 <div class="col-lg-6">
                     <div class="form-group edit-box">
                         <label for="name">Store Location</label>
-                        <input ngx-google-places-autocomplete [options]='options'  (onAddressChange)="AddressChange($event)" [ngModel]="location" name="storeLocation" required #ctrl="ngModel"  class="form-control"/>
+                        <input ngx-google-places-autocomplete [options]='options'  (onAddressChange)="AddressChange($event)" [ngModel]="location.location" name="storeLocation" required #ctrl="ngModel"  class="form-control"/>
                         <!-- {{ location }} -->
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="name">Address</label>
+                        <input type="text" name="addressLine1" #addressLine1="ngModel" [ngModel]="storeData.addressLine1" placeholder="Enter store address" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="name">City</label>
+                        <input type="text" name="city" #city="ngModel" [ngModel]="storeData.city" placeholder="Enter store city" class="form-control" />
                     </div>
                 </div>
                 <div class="col-lg-6" *ngIf="formType === 'Add'">
@@ -46,9 +58,29 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group edit-box">
+                        <label for="name">Online Royality Percentage</label>
+                        <input type="number" name="onlineRoyalityPercentage" #onlineRoyalityPercentage="ngModel" [ngModel]="storeData.onlineRoyalityPercentage" placeholder="Enter store online Royality Percentage"  required class="form-control" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="name">Offline Royality Percentage</label>
+                        <input type="number" name="offlineRoyalityPercentage" #offlineRoyalityPercentage="ngModel" [ngModel]="storeData.offlineRoyalityPercentage" placeholder="Enter store offline Royality Percentage"  required class="form-control" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
                         <label for="wallet">Choose Rate card  </label>
                         <select name="rateCard" #password="ngModel" [ngModel]="storeData.rateCard" required class="form-control">
                             <option *ngFor="let rateCard of rateCardData" value="{{rateCard._id}}">{{rateCard.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group edit-box">
+                        <label for="wallet">Choose Store Owner</label>
+                        <select name="storeOwner" #password="ngModel" [ngModel]="storeData.storeOwner" required class="form-control">
+                            <option *ngFor="let storeOwner of storeOwnerData" value="{{storeOwner._id}}">{{storeOwner.name}}</option>
                         </select>
                     </div>
                 </div>
