@@ -48,12 +48,12 @@ export class PickUpListComponent implements OnInit {
   });
 
   constructor(private _api : ApiService, private _loader : NgxUiLoaderService, private modalService: BsModalService, private fbuilder : FormBuilder, private _route: Router) { 
-    this.statusForm= this.fbuilder.group({
+    this.statusForm = this.fbuilder.group({
       status : new FormControl('',Validators.required)
     });
-    this.boyAssignForm= this.fbuilder.group({
-      boyAssign : new FormControl('',Validators.required),
-      storeAssign : new FormControl('',Validators.required)
+    this.boyAssignForm = this.fbuilder.group({
+      boyAssign : new FormControl(undefined),
+      storeAssign : new FormControl(undefined,Validators.required)
     });
   }
 
@@ -69,7 +69,7 @@ export class PickUpListComponent implements OnInit {
       // this._api.getPickUpList().subscribe(
       //   res=>{
       //     console.log(res);       
-      //     this.pickUpData = res.data;
+      //     this.pickUpData = res.data.reverse();
       //     this.dtTrigger.next();
       //     this._loader.stopLoader('loader');
       //   },err=>{
@@ -88,8 +88,16 @@ export class PickUpListComponent implements OnInit {
     this.selectedPickup = [];
     this._api.getPickID(pickupId).subscribe(
       res => {
+        console.log('Pickup Data', res.data);
+        
         this.selectedPickup = res.data;
-        console.log(this.selectedPickup);
+        if (res.data?.storeAssign?._id) {
+          this.serviceBoyList(res.data?.storeAssign?._id);
+        }
+        this.boyAssignForm = this.fbuilder.group({
+          boyAssign : res.data?.boyAssign?._id || undefined,
+          storeAssign : res.data?.storeAssign?._id || undefined
+        });
         
       }, err => {}
     )
@@ -101,7 +109,7 @@ export class PickUpListComponent implements OnInit {
     this._api.getPickUpList().subscribe(
       res=>{
         console.log(res);       
-        this.pickUpData = res.data;
+        this.pickUpData = res.data.reverse();
         // this.dtTrigger.next();
         this._loader.stopLoader('loader');
       },err=>{
@@ -209,6 +217,7 @@ export class PickUpListComponent implements OnInit {
   } 
   
   submitAssignBoy(){
+    console.log('Boy assign form',this.boyAssignForm.value)
     this.submitted=true;
     this._loader.startLoader('loader');
     if ( this.boyAssignForm.valid) {
@@ -220,7 +229,9 @@ export class PickUpListComponent implements OnInit {
           })
           this.emptyModal();
           this.pickUpList();
-          this.submitStatus('Pick Up assigned', this.selectedPickup._id)
+          if (this.boyAssignForm.value.boyAssign && this.boyAssignForm.value.storeAssign) {
+            this.submitStatus('Pick Up assigned', this.selectedPickup._id)
+          }
           this._loader.stopLoader('loader');
         },err=>{
 
@@ -244,11 +255,11 @@ export class PickUpListComponent implements OnInit {
     this.filter = true;
     console.log(evt.target.value);
     let today = new Date();
+    today.setDate(today.getDate() + 1);
     let range = new Date();
 
     let rangeVal = evt.target.value;
     if (rangeVal === 'today') {
-      today.setDate(today.getDate() + 1);
     }
     if (rangeVal === 'week') {
       range.setDate(today.getDate() - 7);
@@ -257,7 +268,7 @@ export class PickUpListComponent implements OnInit {
       range.setDate(today.getDate() - 30);
     }
     if (rangeVal === 'year') {
-      range = new Date(today.getFullYear(), 0, 1);
+      range.setDate(today.getDate() - 365);
     }
     if (rangeVal === 'all') {
       return this.pickUpList();
@@ -271,7 +282,7 @@ export class PickUpListComponent implements OnInit {
     this._api.pickupSearchByDateRange(startDate, endDate).subscribe(
       res => {
         console.log(res);
-        this.pickUpData = res.data;
+        this.pickUpData = res.data.reverse();
         this._loader.stopLoader('loader');
       }, err => {
         this._loader.stopLoader('loader');
@@ -288,7 +299,7 @@ export class PickUpListComponent implements OnInit {
     this._api.pickupSearchByDate(selectedDate).subscribe(
       res => {
         console.log(res);
-        this.pickUpData = res.data;
+        this.pickUpData = res.data.reverse();
         this._loader.stopLoader('loader');
       }, err => {
         this._loader.stopLoader('loader');
@@ -302,7 +313,7 @@ export class PickUpListComponent implements OnInit {
     this._api.pickupSearchByStatus(status).subscribe(
       res => {
         console.log(res);
-        this.pickUpData = res.data;
+        this.pickUpData = res.data.reverse();
     
         this._loader.stopLoader('loader');
       }, err => {
@@ -319,7 +330,7 @@ export class PickUpListComponent implements OnInit {
     this._api.pickupCustomerSearch(keyWord).subscribe(
       res => {
         console.log(res);
-        this.pickUpData = res.data;
+        this.pickUpData = res.data.reverse();
         this._loader.stopLoader('loader');
       }, err => {
         this._loader.stopLoader('loader');
@@ -336,7 +347,7 @@ export class PickUpListComponent implements OnInit {
       this._api.pickupCustomerSearchMobile(keyWord).subscribe(
         res => {
           console.log(res);
-          this.pickUpData = res.data;
+          this.pickUpData = res.data.reverse();
           this._loader.stopLoader('loader');
         }, err => {
           this._loader.stopLoader('loader');
@@ -344,10 +355,21 @@ export class PickUpListComponent implements OnInit {
       )
     }
   }
-
+  public input = {
+    val1: '',
+    val2: '',
+    val3: '',
+    val4: 'all'
+  }
   clearFilter() {
     this.filter = false;
-    location.reload();
+    this.pickUpList();
+    this.input = {
+      val1: '',
+      val2: '',
+      val3: '',
+      val4: 'all'
+    }
   }
 
   createOrder(pickupId:any) {

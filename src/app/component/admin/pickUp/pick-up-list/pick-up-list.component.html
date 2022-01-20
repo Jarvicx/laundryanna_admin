@@ -16,22 +16,16 @@
     <div class="row m-0">
         <div class="col-12 col-md-10 ml-auto mb-4 row m-0 d-flex justify-content-end p-0">
             <div class="input-group col-md-2 plr-2">
-                <input type="text" class="form-control" placeholder="Search name..." aria-label="Recipient's username" aria-describedby="button-addon2" (keyup)="searchCustomer($event)">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary searchbtn" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
-                </div>
+                <input type="text" class="form-control" placeholder="Search name..." aria-label="Recipient's username" aria-describedby="button-addon2" (keyup)="searchCustomer($event)" name="name" [(ngModel)]="input.val1">
             </div>
             <div class="input-group col-md-2 plr-2">
-                <input type="text" class="form-control" placeholder="Search mobile..." aria-label="Recipient's username" aria-describedby="button-addon2" (keyup)="searchCustomerByMobile($event)">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary searchbtn" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
-                </div>
+                <input type="text" class="form-control" placeholder="Search mobile..." aria-label="Recipient's username" aria-describedby="button-addon2" (keyup)="searchCustomerByMobile($event)" name="mobile" [(ngModel)]="input.val2">
+            </div>
+            <div class="col-12 col-md-3 plr-2">
+                <input type="date" class="form-control" (change)="searchPickupDate($event)" name="date" [(ngModel)]="input.val3">
             </div>
             <div class="col-12 col-md-2 plr-2">
-                <input type="date" class="form-control" (change)="searchPickupDate($event)">
-            </div>
-            <div class="col-12 col-md-2 plr-2">
-                <select class="form-control" (change)="searchPickupDateRange($event)">
+                <select class="form-control" (change)="searchPickupDateRange($event)" name="dateRange" [(ngModel)]="input.val4">
                     <option value="all">All</option>
                     <option value="today">Today</option>
                     <option value="week">Last 7 days</option>
@@ -39,11 +33,10 @@
                     <option value="year">Last 1 year</option>
                 </select>
             </div>
-            <div class="col-12 col-md-1 pl-2 pr-0 d-flex justify-content-end align-items-center">
+            <!-- <div class="col-12 col-md-1 pl-2 pr-0 d-flex justify-content-end align-items-center">
                 <a href="javascript:void(0);" class="orderbtn btn btn-sm" data-toggle="modal" data-target="#showModal">Show</a>
-                
-            </div>
-            <div class="col-12 col-md-1 pl-0 pr-0 d-flex align-items-center" *ngIf="filter">
+            </div> -->
+            <div class="col-12 col-md-1 pl-0 pr-0 d-flex justify-content-end align-items-center" *ngIf="filter">
                 <a href="javascript:void(0);" class="orderbtn btn btn-sm" (click)="clearFilter()">Clear</a>
             </div>
         </div>
@@ -52,7 +45,7 @@
         <table class="table table-sm table-hover brand-table">
             <thead>
                 <tr>
-                    <th></th>
+                    <!-- <th></th> -->
                     <th>Pickup Id</th>
                     <th>Pickup Date</th>
                     <th>Pickup Time</th>
@@ -64,9 +57,9 @@
                     <th style="width:80px" class="text-center">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="pickUpData.length; else emptyBlock;">
                 <tr *ngFor="let pickup of pickUpData; let i=index">
-                    <td><input type="checkbox" class="form-check-input" id="exampleCheck{{i}}"></td>
+                    <!-- <td><input type="checkbox" class="form-check-input" id="exampleCheck{{i}}"></td> -->
                     <td>{{pickup._id}}</td>
                     <td>{{pickup.pickup_date | date:'d MMM, Y'}}</td>
                     <td>{{pickup.pickup_time}}</td>
@@ -76,20 +69,25 @@
                     <td>{{pickup?.storeAssign?.name || 'N/A'}}</td>
                     <td><span class="badge badge-warning" (click)="openModalWithClass(template,pickup._id)">{{pickup.status}}</span></td>
                     <td class="text-center">
-                        <a href="javascript:void(0);" data-toggle="modal" data-target="#assignBoyModal" *ngIf="!pickup?.boyAssign && !pickup?.storeAssign" (click)="selectPickup(pickup?._id)"><i class="fas fa-user-plus" title="Assign"></i></a>
+                        <a href="javascript:void(0);" data-toggle="modal" data-target="#assignBoyModal" *ngIf="(!pickup?.boyAssign || !pickup?.storeAssign) && (pickup?.status!=='Cancelled')" (click)="selectPickup(pickup?._id)"><i class="fas fa-user-plus" title="Assign"></i></a>
                         
                         <!-- <a href="javascript:void(0);" *ngIf="pickup?.boyAssign && pickup?.storeAssign" routerLink="/admin/order/add/{{pickup._id}}" ><i class="fas fa-cart-plus" title="Create Order" ></i></a> -->
-                        <a href="javascript:void(0);" *ngIf="pickup?.boyAssign && pickup?.storeAssign && (pickup?.status!=='Order created')" (click)="createOrder(pickup?._id)"><i class="fas fa-cart-plus" title="Create Order" ></i></a>
+                        <a href="javascript:void(0);" *ngIf="pickup?.boyAssign && pickup?.storeAssign && (pickup?.status!=='Order created') && (pickup?.status!=='Cancelled')" (click)="createOrder(pickup?._id)"><i class="fas fa-cart-plus" title="Create Order" ></i></a>
                         
-                        <a href="javascript:void(0);" (click)="submitStatus('Order picked', pickup?._id)"><i class="fas fa-truck-pickup" title="Order Picked"></i></a>
+                        <a href="javascript:void(0);" (click)="submitStatus('Order picked', pickup?._id)" *ngIf="(pickup?.status!=='Order picked') && (pickup?.status!=='Order created') && (pickup?.status!=='Cancelled')"><i class="fas fa-truck-pickup" title="Order Picked"></i></a>
+
+                        <a href="javascript:void(0);" (click)="submitStatus('Cancelled', pickup?._id)" *ngIf="(pickup?.status!=='Order picked') && (pickup?.status!=='Order created') && (pickup?.status!=='Cancelled')"><i class="fa fa-window-close" title="Cancel Order"></i></a>
                         
-                        <a href="javascript:void(0);" (click)="submitStatus('Cancelled', pickup?._id)"><i class="fa fa-window-close" title="Cancel Order"></i></a>
-                        
-                        <a href="javascript:void(0);" routerLink="/admin/pick_up/edit/{{pickup._id}}"><i class="far fa-edit" title="Edit" ></i></a>
+                        <a  *ngIf="(pickup?.status!=='Order picked') && (pickup?.status!=='Order created') && (pickup?.status!=='Cancelled')" href="javascript:void(0);" routerLink="/admin/pick_up/edit/{{pickup._id}}"><i class="far fa-edit" title="Edit" ></i></a>
                         <!-- <a href="javascript:void(0);" (click)="deletePickUp(pickup._id)"><i class="far fa-trash-alt" title="Delete" ></i></a> -->
                     </td>
                 </tr>
             </tbody>
+            <ng-template #emptyBlock>
+                <tr>
+                    <td colspan="9">No data</td>
+                </tr>
+            </ng-template>
         </table>
     </div>
     <nav class="pagination-container mt-3">
@@ -122,7 +120,7 @@
                     </div>
                     <div class="col-12">
                         <label for="boyAssign">Choose Service Boy</label>
-                        <select name="boyAssign" id="boyAssign"  class="form-control" formControlName="boyAssign" required [ngClass]="{'is-invalid':submitted && h.boyAssign.errors}">
+                        <select name="boyAssign" id="boyAssign"  class="form-control" formControlName="boyAssign" [ngClass]="{'is-invalid':submitted && h.boyAssign.errors}">
                             <option value="" hidden>-select-</option>
                             <option *ngFor="let serviceBoy of serviceBoyData" value="{{serviceBoy._id}}">{{serviceBoy.name}}</option>
                         </select>
