@@ -93,7 +93,7 @@ export class ServiceBoyAddComponent implements OnInit {
       bankAcNo :  new FormControl('', [Validators.required]),
       boy_type :  new FormControl('Factory Boy',Validators.required)
     },{ 
-      validator: this.isAddMode ? this.checkPasswords('password','conFirmpassword') : Validators.nullValidator
+      // validator: this.isAddMode ? this.checkPasswords('password','conFirmpassword') : Validators.nullValidator
     })
   }
 
@@ -104,22 +104,22 @@ export class ServiceBoyAddComponent implements OnInit {
     return this.serviceBoyform.controls;
   }
 
-  checkPasswords(controlName : any, matchingControlName : any){
-    return(group:FormGroup)=>{
-      const pass = group.controls[controlName];
-      const confirmPass = group.controls[matchingControlName];
-      if (confirmPass.errors && !confirmPass.errors.mustMatch) {
-        return;
-      }
-      // set error on matchingControl if validation fails
-      if (pass.value !== confirmPass.value) {
-        confirmPass.setErrors({ confirmedValidator: true });   
-      } else {
-        confirmPass.setErrors(null);
+  // checkPasswords(controlName : any, matchingControlName : any){
+  //   return(group:FormGroup)=>{
+  //     const pass = group.controls[controlName];
+  //     const confirmPass = group.controls[matchingControlName];
+  //     if (confirmPass.errors && !confirmPass.errors.mustMatch) {
+  //       return;
+  //     }
+  //     // set error on matchingControl if validation fails
+  //     if (pass.value !== confirmPass.value) {
+  //       confirmPass.setErrors({ confirmedValidator: true });   
+  //     } else {
+  //       confirmPass.setErrors(null);
           
-      }
-    }
-  }
+  //     }
+  //   }
+  // }
 
   submitServiceBoy(){
     console.log('mainForm',this.serviceBoyform.value);

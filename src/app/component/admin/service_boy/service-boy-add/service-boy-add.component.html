@@ -35,13 +35,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6" *ngIf="formType=='Add'">
+                <!-- <div class="col-lg-6" *ngIf="formType=='Add'">
                     <div class="form-group edit-box">
                         <label for="password">Password</label>
-                        <!-- <input [type]="hide ? 
-                        'password' : 'text'" placeholder="Enter password" formControlName = "password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"> -->
                         <input type="password" placeholder="Enter password" formControlName = "password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" class="form-control">
-                        <!-- <i [class]="show_eye ? 'fa fa-eye' : 'fa fa-eye-slash'" (click)="showPassword()"></i> -->
                         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                             <div *ngIf="f.password.errors.required">Password is required</div>
                             <div *ngIf="f.password.errors.pattern">Password must be have at least 8 characters long 1 uppercase, 1 lowercase, 1 special character & 1 number</div> 
@@ -57,7 +54,7 @@
                             <div *ngIf="f.conFirmpassword.errors.confirmedValidator">Password does not match.</div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-lg-6">
                     <div class="form-group edit-box">
                         <label for="phone"> Phone </label>
