@@ -13,7 +13,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Location</th>
+                    <th style="width: 490px;">Location</th>
                     <th style="width: 150px;">Action</th>
                 </tr>
             </thead>
@@ -21,7 +21,7 @@
                 <tr *ngFor="let store of storeList">
                     <td>{{store.name}}</td>
                     <td>{{store.email}}</td>
-                    <td>{{store.location}}</td>
+                    <td><p>{{store.location}}</p><a href="" class="text-primary" data-toggle="modal" data-target="#exampleModal">More...</a></td>
                     <td>
                         <a routerLink='/admin/store/geo-fence/{{store._id}}'><i class="far fa-map" title="Geo fencing"></i></a>
                         <a routerLink='/admin/store/detail/{{store._id}}'><i class="far fa-eye" title="Detail"></i></a>
@@ -49,3 +49,19 @@
         </ul>
     </nav>
 </div>
+
+<!-- Location-Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <p>full Location</p>
+        </div>
+      </div>
+    </div>
+  </div>

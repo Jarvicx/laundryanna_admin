@@ -51,10 +51,10 @@
                     <th>Pickup Time</th>
                     <th>Name</th>
                     <th>Mobile No</th>
-                    <th>Address</th>
+                    <th style="width: 220px;">Address</th>
                     <th>Store</th>
                     <th>Status</th>
-                    <th style="width:80px" class="text-center">Action</th>
+                    <th style="width:135px" class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody *ngIf="pickUpData.length; else emptyBlock;">
@@ -65,7 +65,7 @@
                     <td>{{pickup.pickup_time}}</td>
                     <td>{{pickup?.customerId?.name}}</td>
                     <td>{{pickup?.customerId?.phone}}</td>
-                    <td>{{pickup?.addressId?.addressLine1}}</td>
+                    <td><p>{{pickup?.addressId?.addressLine1}}</p> <a href="" class="text-primary" data-toggle="modal" data-target="#exampleModal">More...</a></td>
                     <td>{{pickup?.storeAssign?.name || 'N/A'}}</td>
                     <td><span class="badge badge-warning" (click)="openModalWithClass(template,pickup._id)">{{pickup.status}}</span></td>
                     <td class="text-center">
@@ -159,4 +159,20 @@
             <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>  
         </div>  
     </form>
-</ng-template>  
+</ng-template> 
+
+<!-- Addres-Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <p>full address</p>
+        </div>
+      </div>
+    </div>
+  </div>

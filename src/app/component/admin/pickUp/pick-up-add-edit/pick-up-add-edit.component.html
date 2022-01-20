@@ -33,17 +33,18 @@
                     </div>
                 </div> -->
                 <br>
-                <div class="row" *ngIf="addressListing.length > 0">
+                <div class="row m-0" *ngIf="addressListing.length > 0">
                     <div class="col-lg-4 py-2" *ngFor="let address of addressListing">
                         <div class="package-container recommend">
+                            <label>
                             <!-- <input type="checkbox" formControlName = "addressId" (change)="onChecklistChange($event, address)" value="{{address._id}}" >  -->
-                            <input id="{{address._id}}" type="radio" value="{{address._id}}" name="addressId" formControlName="addressId">
-                            <h6 class="mb-2"><span>{{address.addressLine1}}</span></h6>
-                            <h6>{{address.addressLine2}}</h6>
-                            <p class="m-0">{{address.location}}</p>
-                            <p class="m-0">{{address.city}}, {{address.state}}, {{address.country}}</p>
-                            <p class="m-0">{{address.pin}}</p>
-                        
+                                <input id="{{address._id}}" type="radio" value="{{address._id}}" name="addressId" formControlName="addressId">
+                                <h6 class="mb-2"><span>{{address.addressLine1}}</span></h6>
+                                <h6>{{address.addressLine2}}</h6>
+                                <p class="m-0">{{address.location}}</p>
+                                <p class="m-0">{{address.city}}, {{address.state}}, {{address.country}}</p>
+                                <p class="m-0">{{address.pin}}</p>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -69,7 +70,7 @@
             </div>                                               
         </div>
         <div class="form-group d-flex justify-content-end">
-            <button type="submit" class="actionbutton" (click)="cancel()">Cancel</button>
+            <button type="submit" class="actionbutton mr-2" (click)="cancel()">Cancel</button>
             <button type="submit" class="actionbutton">SAVE</button>
         </div>
     </form>

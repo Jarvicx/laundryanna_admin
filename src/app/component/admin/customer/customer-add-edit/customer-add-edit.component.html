@@ -64,14 +64,16 @@
                 </div>
                 <div class="col-lg-6">
                     <label>Select Gender</label>
-                    <label>
-                        <input id="male" type="radio" value="male" name="gender" formControlName="gender">
-                        <span>Male</span>
-                    </label>
-                    <label>
-                        <input id="female" type="radio" value="female" name="gender" formControlName="gender">
-                        <span>Female</span>
-                    </label>
+                    <div class="d-flex mt-2">
+                        <label class="mr-2">
+                            <input id="male" type="radio" value="male" name="gender" formControlName="gender">
+                            <span> Male</span>
+                        </label>
+                        <label>
+                            <input id="female" type="radio" value="female" name="gender" formControlName="gender">
+                            <span> Female</span>
+                        </label>
+                    </div>
                     <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
                         <div *ngIf="f.gender.errors.required">Gender is required</div>
                     </div>
